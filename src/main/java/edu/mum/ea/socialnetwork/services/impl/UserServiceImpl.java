@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         String pass = user.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(pass));
-        user.setJoinDate(LocalDate.now());
+        user.getProfile().setJoinDate(LocalDate.now());
         return userRepository.save(user);
     }
 }

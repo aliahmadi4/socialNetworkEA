@@ -103,22 +103,22 @@
                                         <div class="row">
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="sn-field">
-                                                    <form:input type="text" path="firstName"  placeholder="First Name"/>
-                                                    <form:errors path="firstName"/>
+                                                    <form:input type="text" path="profile.firstName"  placeholder="First Name"/>
+                                                    <form:errors path="profile.firstName"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="sn-field">
-                                                    <form:input type="text" path="lastName"  placeholder="Last Name"/>
-                                                    <form:errors path="lastName"/>
+                                                    <form:input type="text" path="profile.lastName"  placeholder="Last Name"/>
+                                                    <form:errors path="profile.lastName"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="sn-field">
-                                                    <form:input type="email" path="email" placeholder="email" />
-                                                    <form:errors path="email"/>
+                                                    <form:input type="email" path="profile.email" placeholder="email" />
+                                                    <form:errors path="profile.email"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
@@ -140,8 +140,8 @@
                                             </div>
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="sn-field">
-                                                    <form:input type="date" path="dateOfBirth" />
-                                                    <form:errors path="dateOfBirth"/>
+                                                    <form:input type="date" path="profile.dateOfBirth" />
+                                                    <form:errors path="profile.dateOfBirth"/>
 
                                                     <i class="la la-lock"></i>
                                                 </div>
@@ -150,9 +150,9 @@
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="custom-radio">
 
-                                                    <form:radiobutton  path="gender" value="Male" style="display: inline;width: 10px"/> Male <br/>
-                                                    <form:radiobutton  path="gender" value="Female" style="display: inline;width: 10px"/> Female
-                                                    <form:errors path="gender"/>
+                                                    <form:radiobutton  path="profile.gender" value="Male" style="display: inline;width: 10px"/> Male <br/>
+                                                    <form:radiobutton  path="profile.gender" value="Female" style="display: inline;width: 10px"/> Female
+                                                    <form:errors path="profile.gender"/>
 
                                                 </div>
                                             </div>
