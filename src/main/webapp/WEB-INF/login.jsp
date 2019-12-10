@@ -39,7 +39,7 @@
                             <div class="cm-logo">
                                 <img style="width: 200px; height: 200px" src="images/logo.png" alt="">
                             </div><!--cm-logo end-->
-                            <img src="images/cm-main-img.png" alt="">
+
                         </div><!--cmp-info end-->
                     </div>
                     <div class="col-lg-6">
@@ -124,8 +124,8 @@
                                             </div>
                                             <div class="col-lg-12 no-pdd">
                                                 <div class="sn-field">
-                                                    <form:input type="text" path="userName" placeholder="Username" />
-                                                    <form:errors path="userName"/>
+                                                    <form:input type="text" path="username" placeholder="Username" />
+                                                    <form:errors path="username"/>
 
                                                     <i class="la la-user"></i>
                                                 </div>

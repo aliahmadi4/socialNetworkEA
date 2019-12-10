@@ -20,7 +20,7 @@ public class User {
     private long id;
 
     @NotBlank
-    private String userName;
+    private String username;
     @NotBlank
     private String password;
 
