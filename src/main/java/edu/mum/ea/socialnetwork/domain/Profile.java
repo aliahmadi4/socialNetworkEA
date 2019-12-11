@@ -34,6 +34,7 @@ public class Profile {
     @NotBlank
     private String lastName;
 
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     @Past
@@ -41,6 +42,8 @@ public class Profile {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
+
+    private boolean isMalicious = false;
 
     @OneToOne(mappedBy = "profile")
     private User user;

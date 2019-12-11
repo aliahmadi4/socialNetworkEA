@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>edu.mum.ea</groupId>
-    <artifactId>socialnetwork</artifactId>
+    <artifactId>ASAL</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>socialnetwork</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Graduation project for EA - Prof. Rujuan Xing</description>
 
     <properties>
         <java.version>1.8</java.version>
