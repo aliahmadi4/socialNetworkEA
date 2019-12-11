@@ -18,49 +18,49 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    private AdminService adminService;
-
-    @Autowired
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
-    }
-
-    @GetMapping("/maliciousUsers")
-    public String getMaliciousUsers(Model model) {
-        model.addAttribute("userList", adminService.getMaliciousUsers());
-        return "userList";
-    }
-
-    @PostMapping("/deactivateUsers")
-    public String deactivateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
-        List<Long> userIds = new ArrayList<>();
-        for (User u : users) {
-            userIds.add(u.getId());
-        }
-        adminService.deactivateUsers(userIds);
-        redirectAttributes.addFlashAttribute(userIds);
-        return "redirect:/confirmProcessedUsers";
-    }
-
-    @GetMapping("/deactivatedUsers")
-    public String getDeactivatedUsers(Model model) {
-        model.addAttribute(adminService.getDeactivatedUsers());
-        return "userList";
-    }
-
-    @PostMapping("/activateUsers")
-    public String activateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
-        List<Long> userIds = new ArrayList<>();
-        for (User u : users) {
-            userIds.add(u.getId());
-        }
-        adminService.activateUsers(userIds);
-        redirectAttributes.addFlashAttribute(userIds);
-        return "redirect:/confirmProcessedUsers";
-    }
-
-    @GetMapping("/confirmProcessedUsers")
-    public String confirmProcessedUsers(Model model) {
-        return "processedUsers";
-    }
+//    private AdminService adminService;
+//
+//    @Autowired
+//    public AdminController(AdminService adminService) {
+//        this.adminService = adminService;
+//    }
+//
+//    @GetMapping("/maliciousUsers")
+//    public String getMaliciousUsers(Model model) {
+//        model.addAttribute("userList", adminService.getMaliciousUsers());
+//        return "userList";
+//    }
+//
+//    @PostMapping("/deactivateUsers")
+//    public String deactivateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
+//        List<Long> userIds = new ArrayList<>();
+//        for (User u : users) {
+//            userIds.add(u.getId());
+//        }
+//        adminService.deactivateUsers(userIds);
+//        redirectAttributes.addFlashAttribute(userIds);
+//        return "redirect:/confirmProcessedUsers";
+//    }
+//
+//    @GetMapping("/deactivatedUsers")
+//    public String getDeactivatedUsers(Model model) {
+//        model.addAttribute(adminService.getDeactivatedUsers());
+//        return "userList";
+//    }
+//
+//    @PostMapping("/activateUsers")
+//    public String activateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
+//        List<Long> userIds = new ArrayList<>();
+//        for (User u : users) {
+//            userIds.add(u.getId());
+//        }
+//        adminService.activateUsers(userIds);
+//        redirectAttributes.addFlashAttribute(userIds);
+//        return "redirect:/confirmProcessedUsers";
+//    }
+//
+//    @GetMapping("/confirmProcessedUsers")
+//    public String confirmProcessedUsers(Model model) {
+//        return "processedUsers";
+//    }
 }
