@@ -5,10 +5,13 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 @Data
@@ -20,17 +23,24 @@ public class User {
     private long id;
 
     @NotBlank
-    private String userName;
+    private String username;
     @NotBlank
     private String password;
 
     private boolean enabled;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @Valid
     private Profile profile;
+
 
     public void addRole(Role role){
         roles.add(role);

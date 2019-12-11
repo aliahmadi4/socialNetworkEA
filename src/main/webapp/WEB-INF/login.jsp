@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 
@@ -22,6 +23,12 @@
     <link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+    <style>
+        .sn-field{
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 
@@ -54,106 +61,125 @@
                                 <div id="error">
                                     ${errorMessage}
                                 </div>
-                                <form method="post" action="login" >
+                                <security:authorize access="isAnonymous()">
+                                    Anonymous
+                                </security:authorize>
+                                <security:authorize access="isAuthenticated()">
+                                    Authenticated
+                                </security:authorize>
+<%--                                <form:form method="post" action="login" modelAttribute="login">--%>
+<%--                                    <div class="row">--%>
+<%--                                        <div class="col-lg-12 no-pdd">--%>
+<%--                                            <c:if test="${param.error!=null}">Error</c:if>--%>
+
+<%--                                            <form:errors path="username" cssStyle="color : red;" />--%>
+<%--                                            <div class="sn-field">--%>
+<%--                                                <form:input type="text" path="username" placeholder="username" />--%>
+<%--                                                <i class="la la-user"></i>--%>
+<%--                                            </div><!--sn-field end-->--%>
+<%--                                        </div>--%>
+<%--                                        <div class="col-lg-12 no-pdd">--%>
+<%--                                            <form:errors path="password" cssStyle="color : red;" />--%>
+<%--                                            <div class="sn-field">--%>
+<%--                                                <form:input type="password" path="password" placeholder="Password" />--%>
+<%--                                                <i class="la la-lock"></i>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+
+
+<%--                                        <div class="col-lg-12 no-pdd">--%>
+<%--                                            <button type="submit" value="submit">Sign in</button>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </form:form>--%>
+
+                                <form method="post" action="login">
                                     <div class="row">
                                         <div class="col-lg-12 no-pdd">
+                                            <c:if test="${param.error!=null}">Error</c:if>
+
+
                                             <div class="sn-field">
-                                                <input type="text" name="username" placeholder="Username" required>
+                                                <input type="text" name="username" placeholder="username" />
                                                 <i class="la la-user"></i>
                                             </div><!--sn-field end-->
                                         </div>
                                         <div class="col-lg-12 no-pdd">
+
                                             <div class="sn-field">
-                                                <input type="password" name="password" placeholder="Password" required>
+                                                <input type="password" name="password" placeholder="Password" />
                                                 <i class="la la-lock"></i>
                                             </div>
                                         </div>
-<%--                                        <div class="col-lg-12 no-pdd">--%>
-<%--                                            <div class="checky-sec">--%>
-<%--                                                <div class="fgt-sec">--%>
-<%--                                                    <input type="checkbox" name="cc" id="c1">--%>
-<%--                                                    <label for="c1">--%>
-<%--                                                        <span></span>--%>
-<%--                                                    </label>--%>
-<%--                                                    <small>Remember me</small>--%>
-<%--                                                </div><!--fgt-sec end-->--%>
-<%--                                                <a href="#" title="">Forgot Password?</a>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
+
 
                                         <div class="col-lg-12 no-pdd">
                                             <button type="submit" value="submit">Sign in</button>
                                         </div>
                                     </div>
                                 </form>
-                                <%--<div class="login-resources">
-                                    <h4>Login Via Social Account</h4>
-                                    <ul>
-                                        <li><a href="#" title="" class="fb"><i class="fa fa-facebook"></i>Login Via Facebook</a></li>
-                                        <li><a href="#" title="" class="tw"><i class="fa fa-twitter"></i>Login Via Twitter</a></li>
-                                    </ul>
-                                </div><!--login-resources end-->--%>
+
                             </div><!--sign_in_sec end-->
+
+
+
+
+
+
+
+
                             <div class="sign_in_sec" id="tab-2">
-
                                 <div class="dff-tab current" id="tab-3">
-
                                     <form:form method="post" action="register" modelAttribute="newUser">
-                                        <form:errors path="*"/>
                                         <div class="row">
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="profile.firstName" cssStyle="color : red;" />
                                                 <div class="sn-field">
                                                     <form:input type="text" path="profile.firstName"  placeholder="First Name"/>
-                                                    <form:errors path="profile.firstName"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="profile.lastName" cssStyle="color : red;"/>
                                                 <div class="sn-field">
                                                     <form:input type="text" path="profile.lastName"  placeholder="Last Name"/>
-                                                    <form:errors path="profile.lastName"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="profile.email" cssStyle="color : red;"/>
                                                 <div class="sn-field">
                                                     <form:input type="email" path="profile.email" placeholder="email" />
-                                                    <form:errors path="profile.email"/>
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="username" cssStyle="color : red;"/>
                                                 <div class="sn-field">
-                                                    <form:input type="text" path="userName" placeholder="Username" />
-                                                    <form:errors path="userName"/>
-
+                                                    <form:input type="text" path="username" placeholder="username" />
                                                     <i class="la la-user"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="password" cssStyle="color : red;"/>
                                                 <div class="sn-field">
                                                     <form:input type="password" path="password" placeholder="Password" />
-                                                    <form:errors path="password"/>
-
                                                     <i class="la la-lock"></i>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="profile.dateOfBirth" cssStyle="color : red;"/>
                                                 <div class="sn-field">
                                                     <form:input type="date" path="profile.dateOfBirth" />
-                                                    <form:errors path="profile.dateOfBirth"/>
-
                                                     <i class="la la-lock"></i>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 no-pdd">
+                                                <form:errors path="profile.gender" cssStyle="color : red;"/>
                                                 <div class="custom-radio">
-
                                                     <form:radiobutton  path="profile.gender" value="Male" style="display: inline;width: 10px"/> Male <br/>
                                                     <form:radiobutton  path="profile.gender" value="Female" style="display: inline;width: 10px"/> Female
-                                                    <form:errors path="profile.gender"/>
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 no-pdd">
