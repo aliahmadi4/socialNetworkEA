@@ -56,4 +56,9 @@ public class UserController {
     public String welcome(){
         return "index";
     }
+
+    @GetMapping("/error")
+    public String showErrorPage(){
+        return "error";
+    }
 }
