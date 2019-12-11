@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public AdminServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> getDeactivatedUsers() {
