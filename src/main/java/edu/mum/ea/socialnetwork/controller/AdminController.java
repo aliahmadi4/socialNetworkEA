@@ -54,7 +54,7 @@ public class AdminController {
     }
 
     @GetMapping("/confirmProcessedUsers")
-    public String confirmProcessedUsers() {
+    public String confirmProcessedUsers(Model model) {
         return "processedUsers";
     }
 }
