@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,23 @@ public class AdminController {
 
     @GetMapping("/deactivatedUsers")
     public String getDeactivatedUsers(Model model) {
-        model.addAttribute(adminService.getDeactivatedUsers());
+        model.addAttribute("userList", adminService.getDeactivatedUsers());
         return "userList";
     }
 
     @PostMapping("/activateUser/{userId}")
     public void activateUsers(@PathVariable("userId") Long userId) {
         adminService.activateUser(userId);
+    }
+
+    @GetMapping("/manageUserRoles")
+    public String getUserRoles(Model model) {
+        model.addAttribute("userList", adminService.getUsers());
+        return "userList";
+    }
+
+    @PostMapping("/setUserRole/{userId}")
+    public void setUserRole(@PathVariable("userId") Long userId, Role role) {
+        adminService.setUserRole(userId, role);
     }
 }

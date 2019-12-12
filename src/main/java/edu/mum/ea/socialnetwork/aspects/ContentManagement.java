@@ -25,8 +25,7 @@ public class ContentManagement {
 //        String[] postWords = postText.split(" ");
 //        for (String word : postWords) {
 //            if (unhealthyWordService.wordExists(word)) {
-//                /* disable the post, increase no. of malicious posts for that user, if no. of malicious posts > 20
-//                then disable the user and send email.*/
+//                set post unhealthy.
 //            }
 //        }
 //    }
