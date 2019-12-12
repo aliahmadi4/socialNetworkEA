@@ -1,7 +1,6 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
 import edu.mum.ea.socialnetwork.domain.Role;
-import edu.mum.ea.socialnetwork.domain.RoleClass;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.UserService;
