@@ -14,11 +14,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
-    @Query("select u from User u join u.profile p where p.isMalicious=true and u.enabled=true")
-    List<User> findUsersByMaliciousAndEnabled();
-
     List<User> findUsersByEnabled(boolean enabled);
 
     @Query("update User u set u.enabled =: enabled where u.id =: userId")
     void setUserActive(@Param("userId") Long userId, @Param("enabled") boolean enabled);
+
+
 }

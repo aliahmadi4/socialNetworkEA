@@ -33,24 +33,4 @@ public class UserController {
         userService.save(user);
         return "index";
     }
-
-//    @PostMapping("/custom")
-//    public String home(){
-//        if (bindingResult.hasErrors()){
-//            System.out.println("Erorr");
-//            return "login";
-//        }
-//        System.out.println(user.getUserName() + " " + user.getPassword());
-//        UserDetails userDetails = userService.loadUserByUsername(user.getUserName());
-//        System.out.println("this is the user name: " + userDetails.getUsername());
-//        if(userDetails != null){
-//
-//            System.out.println("this is the user name: " + userDetails.getUsername());
-//            return "index";
-//        }
-//        System.out.println("inside of the methodS");
-//        return "login";
-//    }
-
-
 }

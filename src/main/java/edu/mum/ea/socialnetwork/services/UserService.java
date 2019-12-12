@@ -4,5 +4,7 @@ import edu.mum.ea.socialnetwork.domain.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
-    public User save(User user);
+    User save(User user);
+
+    User findUserById(Long id);
 }
