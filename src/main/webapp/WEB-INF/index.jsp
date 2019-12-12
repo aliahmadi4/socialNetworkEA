@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title><IndexPage.title></title>
-
+    <jsp:include page="layout/head.jsp"/>
 </head>
 <body>
-   <h1><IndexPage.header><h1>
+<jsp:include page="layout/navbar.jsp"/>
+
 
    <h1>INDEX</h1>
 </body>

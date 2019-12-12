@@ -20,7 +20,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/login")
-    public String login(@ModelAttribute("newUser") User user, @ModelAttribute("login")User user2){
+    public String login(@ModelAttribute("newUser") User user){
         return "login";
     }
 
@@ -31,6 +31,6 @@ public class UserController {
         }
         user.setRole(Role.ROLE_USER);
         userService.save(user);
-        return "index";
+        return "redirect:/login";
     }
 }

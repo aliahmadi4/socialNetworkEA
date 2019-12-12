@@ -22,11 +22,6 @@ public class User {
 
     private boolean enabled;
 
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -34,14 +29,12 @@ public class User {
     @Valid
     private Profile profile;
 
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
-//    public void addRole(RoleClass role){
-//        roles.add(role);
-//    }
-//
-//    public void removeRole(RoleClass role){
-//        roles.remove(role);
-//    }
+
 
 
 }
