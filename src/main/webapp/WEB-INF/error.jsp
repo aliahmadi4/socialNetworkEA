@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hello</title>
+    <title><ErrorPage.title></title>
 </head>
 <body>
-   <h1>Error Occured!</h1>
+   <h1><ErrorPage.header></h1>
+<div><ErrorPage.bodyText></div>
 </body>
 </html>
