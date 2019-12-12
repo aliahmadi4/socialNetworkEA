@@ -1,7 +1,9 @@
 package edu.mum.ea.socialnetwork.domain;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class User {

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,5 +41,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(pass));
         user.getProfile().setJoinDate(LocalDate.now());
         return userRepository.save(user);
+    }
+
+    @Override
+    public User findUserByName(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(
+                ()-> new UsernameNotFoundException("Username:" + username + " not found!"));
+        return user;
     }
 }
