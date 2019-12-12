@@ -43,4 +43,5 @@ public class UserServiceImpl implements UserService {
         user.getProfile().setJoinDate(LocalDate.now());
         return userRepository.save(user);
     }
+
 }

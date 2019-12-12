@@ -44,9 +44,9 @@
                     <div class="col-lg-6">
                         <div class="cmp-info">
                             <div class="cm-logo">
-                                <img style="width: 200px; height: 200px" src="images/logo.png" alt="">
+                                <img style="width: 200px; height: 200px" src="media/images/logo.png" alt="">
                             </div><!--cm-logo end-->
-                            <img src="images/cm-main-img.png" alt="">
+<%--                            <img src="images/cm-main-img.png" alt="">--%>
                         </div><!--cmp-info end-->
                     </div>
                     <div class="col-lg-6">
@@ -65,7 +65,7 @@
                                     Anonymous
                                 </security:authorize>
                                 <security:authorize access="isAuthenticated()">
-                                    Authenticated
+                                    <security:authentication property="principal.username"/>
                                 </security:authorize>
                                 <form:form method="post" action="login" modelAttribute="login">
                                     <div class="row">

@@ -52,13 +52,5 @@ public class UserController {
 //        return "login";
 //    }
 
-    @GetMapping("/")
-    public String welcome(){
-        return "index";
-    }
 
-    @GetMapping("/error")
-    public String showErrorPage(){
-        return "error";
-    }
 }
