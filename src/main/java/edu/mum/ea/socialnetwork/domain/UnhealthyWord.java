@@ -1,14 +1,16 @@
 package edu.mum.ea.socialnetwork.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UnhealthyWord {
     @Id

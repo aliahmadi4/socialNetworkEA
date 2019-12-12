@@ -1,7 +1,8 @@
 package edu.mum.ea.socialnetwork.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class Address {
     @Id

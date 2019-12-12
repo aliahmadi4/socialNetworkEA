@@ -1,7 +1,8 @@
 package edu.mum.ea.socialnetwork.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +13,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Profile {
@@ -23,7 +25,7 @@ public class Profile {
 
 
     @NotNull
-    private String gender;
+    private String gender;  //values: Male & Female
 
     @NotBlank
     @Email
