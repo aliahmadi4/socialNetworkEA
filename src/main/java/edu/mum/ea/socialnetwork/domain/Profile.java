@@ -48,6 +48,11 @@ public class Profile {
     @OneToOne(mappedBy = "profile")
     private User user;
 
+    @OneToOne
+    private Address address;
+
+
+
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,
                    @NotBlank String lastName, @NotNull @Past LocalDate dateOfBirth, LocalDate joinDate) {
         this.gender = gender;

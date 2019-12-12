@@ -41,7 +41,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="images/profile/${user.profilePic.length()>4 ? user.profilePic : "user.jpg"}" alt="">
+                                        <img src="images/profile/${user.profilePic.length()>4 ? user.profilePic : "media/images/user.jpg"}" alt="">
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -60,10 +60,10 @@
 <%--                                        </ul>--%>
 <%--                                    </div><!--user_pro_status end-->--%>
                                     <ul class="social_links">
-                                        <li><i class="la la-globe"></i> From <b>${user.country}</b></li>
-                                        <li><i class="la la-globe"></i> Lives in <b>${user.state}, ${user.city}</b></li>
-                                        <li><i class="la la-globe"></i> Gender <b>${user.gender}</b></li>
-                                        <li><i class="la la-globe"></i> Email <b>${user.email}</b></li>
+                                        <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
+                                        <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${user.city}</b></li>
+                                        <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
+                                        <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
                                         <c:if test="${loginedUser.userId==user.userId}">
                                         <li><a href="editProfile">Edit Profile</a></li>
                                         </c:if>
@@ -77,7 +77,7 @@
                         <div class="col-lg-6">
                             <div class="main-ws-sec">
                                 <div class="user-tab-sec rewivew">
-                                    <h3>${user.firstName} ${user.lastName}</h3>
+                                    <h3>${profile.firstName} ${profile.lastName}</h3>
                                     <div class="star-descp">
                                         <span>${user.description}</span>
                                         <ul>

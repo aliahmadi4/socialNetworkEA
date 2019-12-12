@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hellow worlddfdkjf</title>
+    <title>hello</title>
 </head>
 <body>
-   <h1>Error Occured!<h1>
+   <h1>Error Occured!</h1>
 </body>
 </html>
