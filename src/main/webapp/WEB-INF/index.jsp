@@ -6,10 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>hellow worlddfdkjf</title>
+    <jsp:include page="layout/head.jsp"/>
 </head>
 <body>
-   <h1>INDEX<h1>
+<jsp:include page="layout/navbar.jsp"/>
+
+
+   <h1>INDEX</h1>
 </body>
 </html>

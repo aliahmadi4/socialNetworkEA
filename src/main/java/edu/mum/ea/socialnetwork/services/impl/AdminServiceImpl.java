@@ -1,11 +1,11 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
+import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,26 +20,41 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public List<User> getDeactivatedUsers() {
         return userRepository.findUsersByEnabled(false);
     }
 
     @Override
-    public List<User> getMaliciousUsers() {
-        return userRepository.findUsersByMaliciousAndEnabled();
+    public void activateUser(Long userId) {
+        userRepository.setUserActive(userId, true);
     }
 
     @Override
-    public void activateUsers(List<Long> userIds) {
-        for (Long userId : userIds) {
-            userRepository.setUserActive(userId, true);
-        }
+    public void deactivateUser(Long userId) {
+        userRepository.setUserActive(userId, false);
     }
 
     @Override
-    public void deactivateUsers(List<Long> userIds) {
-        for (Long userId : userIds) {
-            userRepository.setUserActive(userId, false);
-        }
+    public void setUserRole(Long userId, Role role) {
+        User user = userRepository.getOne(userId);
+//        user.setRoles(role);
+        userRepository.save(user);
     }
+
+    @Override
+    public void setNoOfUnhealthyPosts(Long userId, Integer num) {
+        userRepository.setNumberOfUnhealthyPosts(userId, num);
+    }
+
+    @Override
+    public Integer getNoOfUnhealthyPosts(Long userId) {
+        User user = userRepository.getOne(userId);
+        return user.getProfile().getNoOfUnhealthyPosts();
+    }
+
 }

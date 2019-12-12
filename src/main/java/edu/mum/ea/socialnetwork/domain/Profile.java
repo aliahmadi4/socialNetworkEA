@@ -1,10 +1,10 @@
 package edu.mum.ea.socialnetwork.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,11 +21,11 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 
     @NotNull
-    private String gender;
+    private String gender;  //values: Male & Female
 
     @NotBlank
     @Email
@@ -46,10 +46,27 @@ public class Profile {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
-    private boolean isMalicious = false;
+    private Integer noOfUnhealthyPosts = 0;
 
     @OneToOne(mappedBy = "profile")
     private User user;
+
+    @OneToOne
+    private Address address;
+
+    @Transient
+    private MultipartFile image;
+
+    private String profilePhoto;
+
+
+
+
+
+
+
+
+
 
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,
                    @NotBlank String lastName, @NotNull @Past LocalDate dateOfBirth, LocalDate joinDate) {

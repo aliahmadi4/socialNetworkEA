@@ -44,9 +44,9 @@
                     <div class="col-lg-6">
                         <div class="cmp-info">
                             <div class="cm-logo">
-                                <img style="width: 200px; height: 200px" src="images/logo.png" alt="">
+                                <img style="width: 200px; height: 200px" src="media/images/logo.png" alt="">
                             </div><!--cm-logo end-->
-                            <img src="images/cm-main-img.png" alt="">
+<%--                            <img src="images/cm-main-img.png" alt="">--%>
                         </div><!--cmp-info end-->
                     </div>
                     <div class="col-lg-6">
@@ -65,49 +65,23 @@
                                     Anonymous
                                 </security:authorize>
                                 <security:authorize access="isAuthenticated()">
-                                    Authenticated
+                                    <security:authentication property="principal.username"/>
                                 </security:authorize>
-                                <form:form method="post" action="login" modelAttribute="login">
-                                    <div class="row">
-                                        <div class="col-lg-12 no-pdd">
-                                            <c:if test="${param.error!=null}">Error</c:if>
-
-                                            <form:errors path="username" cssStyle="color : red;" />
-                                            <div class="sn-field">
-                                                <form:input type="text" path="username" placeholder="username" />
-                                                <i class="la la-user"></i>
-                                            </div><!--sn-field end-->
-                                        </div>
-                                        <div class="col-lg-12 no-pdd">
-                                            <form:errors path="password" cssStyle="color : red;" />
-                                            <div class="sn-field">
-                                                <form:input type="password" path="password" placeholder="Password" />
-                                                <i class="la la-lock"></i>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-lg-12 no-pdd">
-                                            <button type="submit" value="submit">Sign in</button>
-                                        </div>
-                                    </div>
-                                </form:form>
-
-<%--                                <form method="post" action="login">--%>
+<%--                                <form:form method="post" action="login" modelAttribute="login">--%>
 <%--                                    <div class="row">--%>
 <%--                                        <div class="col-lg-12 no-pdd">--%>
 <%--                                            <c:if test="${param.error!=null}">Error</c:if>--%>
 
-
+<%--                                            <form:errors path="username" cssStyle="color : red;" />--%>
 <%--                                            <div class="sn-field">--%>
-<%--                                                <input type="text" name="username" placeholder="username" />--%>
+<%--                                                <form:input type="text" path="username" placeholder="username" />--%>
 <%--                                                <i class="la la-user"></i>--%>
 <%--                                            </div><!--sn-field end-->--%>
 <%--                                        </div>--%>
 <%--                                        <div class="col-lg-12 no-pdd">--%>
-
+<%--                                            <form:errors path="password" cssStyle="color : red;" />--%>
 <%--                                            <div class="sn-field">--%>
-<%--                                                <input type="password" name="password" placeholder="Password" />--%>
+<%--                                                <form:input type="password" path="password" placeholder="Password" />--%>
 <%--                                                <i class="la la-lock"></i>--%>
 <%--                                            </div>--%>
 <%--                                        </div>--%>
@@ -117,7 +91,33 @@
 <%--                                            <button type="submit" value="submit">Sign in</button>--%>
 <%--                                        </div>--%>
 <%--                                    </div>--%>
-<%--                                </form>--%>
+<%--                                </form:form>--%>
+
+                                <form method="post" action="login">
+                                    <div class="row">
+                                        <div class="col-lg-12 no-pdd">
+                                            <c:if test="${param.error!=null}">Error</c:if>
+
+
+                                            <div class="sn-field">
+                                                <input type="text" name="username" placeholder="username" />
+                                                <i class="la la-user"></i>
+                                            </div><!--sn-field end-->
+                                        </div>
+                                        <div class="col-lg-12 no-pdd">
+
+                                            <div class="sn-field">
+                                                <input type="password" name="password" placeholder="Password" />
+                                                <i class="la la-lock"></i>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12 no-pdd">
+                                            <button type="submit" value="submit">Sign in</button>
+                                        </div>
+                                    </div>
+                                </form>
 
                             </div><!--sign_in_sec end-->
 

@@ -20,7 +20,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/login")
-    public String login(@ModelAttribute("newUser") User user, @ModelAttribute("login")User user2){
+    public String login(@ModelAttribute("newUser") User user){
         return "login";
     }
 
@@ -29,36 +29,8 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "login";
         }
-        user.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+        user.setRole(Role.ROLE_USER);
         userService.save(user);
-        return "index";
-    }
-
-//    @PostMapping("/custom")
-//    public String home(){
-//        if (bindingResult.hasErrors()){
-//            System.out.println("Erorr");
-//            return "login";
-//        }
-//        System.out.println(user.getUserName() + " " + user.getPassword());
-//        UserDetails userDetails = userService.loadUserByUsername(user.getUserName());
-//        System.out.println("this is the user name: " + userDetails.getUsername());
-//        if(userDetails != null){
-//
-//            System.out.println("this is the user name: " + userDetails.getUsername());
-//            return "index";
-//        }
-//        System.out.println("inside of the methodS");
-//        return "login";
-//    }
-
-    @GetMapping("/")
-    public String welcome(){
-        return "index";
-    }
-
-    @GetMapping("/error")
-    public String showErrorPage(){
-        return "error";
+        return "redirect:/login";
     }
 }

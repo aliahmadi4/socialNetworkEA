@@ -1,18 +1,12 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -25,42 +19,47 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/maliciousUsers")
-    public String getMaliciousUsers(Model model) {
-        model.addAttribute("userList", adminService.getMaliciousUsers());
-        return "userList";
-    }
-
-    @PostMapping("/deactivateUsers")
-    public String deactivateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
-        List<Long> userIds = new ArrayList<>();
-        for (User u : users) {
-            userIds.add(u.getId());
-        }
-        adminService.deactivateUsers(userIds);
-        redirectAttributes.addFlashAttribute(userIds);
-        return "redirect:/confirmProcessedUsers";
-    }
-
     @GetMapping("/deactivatedUsers")
     public String getDeactivatedUsers(Model model) {
-        model.addAttribute(adminService.getDeactivatedUsers());
+        model.addAttribute("userList", adminService.getDeactivatedUsers());
         return "userList";
     }
 
-    @PostMapping("/activateUsers")
-    public String activateUsers(@ModelAttribute("userList") List<User> users, Model model, RedirectAttributes redirectAttributes) {
-        List<Long> userIds = new ArrayList<>();
-        for (User u : users) {
-            userIds.add(u.getId());
-        }
-        adminService.activateUsers(userIds);
-        redirectAttributes.addFlashAttribute(userIds);
-        return "redirect:/confirmProcessedUsers";
+    @PostMapping("/activateUser/{userId}")
+    public void activateUsers(@PathVariable("userId") Long userId) {
+        adminService.activateUser(userId);
     }
 
-    @GetMapping("/confirmProcessedUsers")
-    public String confirmProcessedUsers(Model model) {
-        return "processedUsers";
+    @GetMapping("/manageUserRoles")
+    public String getUserRoles(Model model) {
+        model.addAttribute("userList", adminService.getUsers());
+        return "userList";
+    }
+
+    @PostMapping("/setUserRole/{userId}")
+    public void setUserRole(@PathVariable("userId") Long userId, Role role) {
+        adminService.setUserRole(userId, role);
+    }
+
+    @GetMapping("/unhealthyPosts")
+    public String getUnhealthyPosts(Model model) {
+//        model.addAttribute("postList", postService.finAll());
+        return "unhealthyPosts";
+    }
+
+    @PostMapping("/approvePost/{postId}")
+    public void approvePost(@PathVariable("postId") Long postId) {
+//        postService.approvePost(postId);
+    }
+
+    @PostMapping("/disapprovePost/{postId}")
+    public void disapprovePost(@PathVariable("postId") Long postId) {
+//        postService.disapprovePost(postId);
+//        Long userId = adminService.getUserByPostId(postId).getId();
+//        adminService.setNoOfUnhealthyPosts(userId, adminService.getNoOfUnhealthyPosts(userId) + 1);
+//        if(adminService.getNoOfUnhealthyPosts(userId) >= 20) {
+//            adminService.deactivateUser(userId);
+//            send email
+//        }
     }
 }

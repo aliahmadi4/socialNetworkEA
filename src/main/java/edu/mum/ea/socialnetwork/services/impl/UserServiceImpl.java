@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
+import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.UserService;
@@ -12,7 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,12 +30,16 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(
                 ()-> new UsernameNotFoundException("Username:" + username + " not found!"));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
+
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user) );
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(User user){
-        String[] userRoles = user.getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);
-        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
+//        String[] userRoles = user.getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);
+        String[] roles = new String[1];
+        roles[0]= user.getRole().toString();
+        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles);
         return authorities;
     }
 
@@ -42,6 +50,12 @@ public class UserServiceImpl implements UserService {
         user.getProfile().setJoinDate(LocalDate.now());
         return userRepository.save(user);
     }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.getOne(id);
+    }
+
 
     @Override
     public User findUserByName(String username) {
