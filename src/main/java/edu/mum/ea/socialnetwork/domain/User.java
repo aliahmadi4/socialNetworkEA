@@ -18,6 +18,7 @@ public class User {
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String username;
     @NotBlank
     private String password;
@@ -30,13 +31,4 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @Valid
     private Profile profile;
-
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
-
-
-
 }
