@@ -7,9 +7,8 @@ public interface AdminService {
 
     List<User> getDeactivatedUsers();
 
-    List<User> getMaliciousUsers();
+    void activateUser(Long userId);
 
-    void activateUsers(List<Long> userIds);
+    void deactivateUser(Long userId);
 
-    void deactivateUsers(List<Long> userIds);
 }

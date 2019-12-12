@@ -24,21 +24,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<User> getMaliciousUsers() {
-        return userRepository.findUsersByMaliciousAndEnabled();
+    public void activateUser(Long userId) {
+        userRepository.setUserActive(userId, true);
     }
 
     @Override
-    public void activateUsers(List<Long> userIds) {
-        for (Long userId : userIds) {
-            userRepository.setUserActive(userId, true);
-        }
+    public void deactivateUser(Long userId) {
+        userRepository.setUserActive(userId, false);
     }
 
-    @Override
-    public void deactivateUsers(List<Long> userIds) {
-        for (Long userId : userIds) {
-            userRepository.setUserActive(userId, false);
-        }
-    }
 }
