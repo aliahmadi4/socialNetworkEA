@@ -36,8 +36,9 @@ public class UnhealthyWordController {
     }
 
     @GetMapping("/wordAdded")
-    public String unhealthyWordList(@ModelAttribute("unhealthyWordList") List<UnhealthyWord> unhealthyWordList, Model model) {
-        unhealthyWordList = unhealthyWordService.getUnhealthyWordList();
+    public String unhealthyWordList(Model model) {
+        List<UnhealthyWord> unhealthyWordList = unhealthyWordService.getUnhealthyWordList();
+        model.addAttribute(unhealthyWordList);
         return "/unhealthyWords";
     }
 

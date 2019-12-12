@@ -4,9 +4,11 @@ import edu.mum.ea.socialnetwork.domain.UnhealthyWord;
 import edu.mum.ea.socialnetwork.repository.UnhealthyWordRepository;
 import edu.mum.ea.socialnetwork.services.UnhealthyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UnhealthyWordsServiceImpl implements UnhealthyWordService {
 
     private UnhealthyWordRepository unhealthyWordRepository;

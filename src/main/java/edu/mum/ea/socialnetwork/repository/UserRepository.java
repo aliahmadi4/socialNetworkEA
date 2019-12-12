@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("update User u set u.enabled =: enabled where u.id =: userId")
     void setUserActive(@Param("userId") Long userId, @Param("enabled") boolean enabled);
+
+
 }
