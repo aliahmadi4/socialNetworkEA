@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
+import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.AdminService;
@@ -19,6 +20,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public List<User> getDeactivatedUsers() {
         return userRepository.findUsersByEnabled(false);
     }
@@ -31,6 +37,24 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deactivateUser(Long userId) {
         userRepository.setUserActive(userId, false);
+    }
+
+    @Override
+    public void setUserRole(Long userId, Role role) {
+        User user = userRepository.getOne(userId);
+//        user.setRoles(role);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void setNoOfUnhealthyPosts(Long userId, Integer num) {
+        userRepository.setNumberOfUnhealthyPosts(userId, num);
+    }
+
+    @Override
+    public Integer getNoOfUnhealthyPosts(Long userId) {
+        User user = userRepository.getOne(userId);
+        return user.getProfile().getNoOfUnhealthyPosts();
     }
 
 }
