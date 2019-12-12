@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -51,6 +53,20 @@ public class Profile {
 
     @OneToOne
     private Address address;
+
+    @Transient
+    private MultipartFile image;
+
+    private String profilePhoto;
+
+
+
+
+
+
+
+
+
 
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,
                    @NotBlank String lastName, @NotNull @Past LocalDate dateOfBirth, LocalDate joinDate) {
