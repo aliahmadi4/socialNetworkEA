@@ -1,6 +1,7 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Role;
+import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,5 +39,27 @@ public class AdminController {
     @PostMapping("/setUserRole/{userId}")
     public void setUserRole(@PathVariable("userId") Long userId, Role role) {
         adminService.setUserRole(userId, role);
+    }
+
+    @GetMapping("/unhealthyPosts")
+    public String getUnhealthyPosts(Model model) {
+//        model.addAttribute("postList", postService.finAll());
+        return "unhealthyPosts";
+    }
+
+    @PostMapping("/approvePost/{postId}")
+    public void approvePost(@PathVariable("postId") Long postId) {
+//        postService.approvePost(postId);
+    }
+
+    @PostMapping("/disapprovePost/{postId}")
+    public void disapprovePost(@PathVariable("postId") Long postId) {
+//        postService.disapprovePost(postId);
+//        Long userId = adminService.getUserByPostId(postId).getId();
+//        adminService.setNoOfUnhealthyPosts(userId, adminService.getNoOfUnhealthyPosts(userId) + 1);
+//        if(adminService.getNoOfUnhealthyPosts(userId) >= 20) {
+//            adminService.deactivateUser(userId);
+//            send email
+//        }
     }
 }

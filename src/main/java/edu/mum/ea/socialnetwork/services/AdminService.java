@@ -16,4 +16,7 @@ public interface AdminService {
 
     void setUserRole(Long userId, Role role);
 
+    void setNoOfUnhealthyPosts(Long userId, Integer num);
+
+    Integer getNoOfUnhealthyPosts(Long userId);
 }

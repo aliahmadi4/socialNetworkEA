@@ -46,4 +46,15 @@ public class AdminServiceImpl implements AdminService {
         userRepository.save(user);
     }
 
+    @Override
+    public void setNoOfUnhealthyPosts(Long userId, Integer num) {
+        userRepository.setNumberOfUnhealthyPosts(userId, num);
+    }
+
+    @Override
+    public Integer getNoOfUnhealthyPosts(Long userId) {
+        User user = userRepository.getOne(userId);
+        return user.getProfile().getNoOfUnhealthyPosts();
+    }
+
 }
