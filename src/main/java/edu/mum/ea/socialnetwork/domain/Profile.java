@@ -43,6 +43,8 @@ public class Profile {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
+    private Integer noOfUnhealthyPosts = 0;
+
     private boolean isMalicious = false;
 
     @OneToOne(mappedBy = "profile")

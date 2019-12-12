@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hellow worlddfdkjf</title>
+    <title><IndexPage.title></title>
 </head>
 <body>
-   <h1>INDEX<h1>
+   <h1><IndexPage.header><h1>
 </body>
 </html>
