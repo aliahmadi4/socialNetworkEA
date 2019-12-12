@@ -29,7 +29,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "login";
         }
-        user.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+        user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "index";
     }

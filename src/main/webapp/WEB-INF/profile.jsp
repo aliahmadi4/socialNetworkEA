@@ -15,7 +15,7 @@
 
 
     <section class="cover-sec">
-        <img src="images/resources/cover-img.jpg" alt="">
+        <img src="/images/cover-img.jpg" alt="">
         <div class="add-pic-box">
             <div class="container">
                 <div class="row no-gutters">

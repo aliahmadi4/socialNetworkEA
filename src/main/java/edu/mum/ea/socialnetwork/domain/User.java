@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -28,21 +27,21 @@ public class User {
         this.password = password;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @Valid
     private Profile profile;
 
 
-    public void addRole(Role role) {
-        roles.add(role);
-    }
-
-    public void removeRole(Role role) {
-        roles.remove(role);
-    }
+//    public void addRole(RoleClass role){
+//        roles.add(role);
+//    }
+//
+//    public void removeRole(RoleClass role){
+//        roles.remove(role);
+//    }
 
 
 }
