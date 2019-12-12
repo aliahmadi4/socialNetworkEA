@@ -1,6 +1,7 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Role;
+import edu.mum.ea.socialnetwork.domain.RoleClass;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "login";
         }
-        user.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+        user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "index";
     }

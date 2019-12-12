@@ -14,4 +14,9 @@ public class HomeController {
     public String showErrorPage(){
         return "error";
     }
+
+    @GetMapping("/index")
+    public String showIndex(){
+        return "index";
+    }
 }
