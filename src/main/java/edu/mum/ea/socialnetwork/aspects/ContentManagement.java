@@ -15,22 +15,22 @@ import java.util.List;
 @Aspect
 @Component
 public class ContentManagement {
-    @Autowired
-    private UnhealthyWordService unhealthyWordService;
+//    @Autowired
+//    private UnhealthyWordService unhealthyWordService;
+//
+//    @Around("execution(* edu.mum.ea.socialnetwork.controller.*.*(..))")//PostController.doPost(..))")
+//    public Object filterUnhealthyContent(ProceedingJoinPoint pjp) throws Throwable {
+//        String postText = (String) pjp.getArgs()[0];
+//        String[] postWords = postText.split(" ");
+//        for (String word : postWords) {
+//            if (unhealthyWordService.wordExists(word)) {
+////                (Post) pjp.getTarget().setEnabled(false);
+////                (Profile) pjp.getTarget().getUser().getProfile.setNoOfUnhealthyPosts(getNoOfUnhealthyPosts()++);
+//                return null;
+//            }
+//        }
+//        return pjp.proceed();
+//    }
 
-    @Around("execution(* edu.mum.ea.socialnetwork.controller.*.*(..))")//PostController.doPost(..))")
-    public Object filterUnhealthyContent(ProceedingJoinPoint pjp) throws Throwable {
-        String postText = (String) pjp.getArgs()[0];
-        String[] postWords = postText.split(" ");
-        for (String word : postWords) {
-            if (unhealthyWordService.wordExists(word)) {
-//                (Post) pjp.getTarget().setEnabled(false);
-//                (Profile) pjp.getTarget().getUser().getProfile.setNoOfUnhealthyPosts(getNoOfUnhealthyPosts()++);
-                return null;
-            }
-        }
-        return pjp.proceed();
-    }
-
-    @After(("execution(* edu.mum.ea.socialnetwork.controller.*.*(..))")//
+//    @After(("execution(* edu.mum.ea.socialnetwork.controller.*.*(..))")//
 }
