@@ -65,7 +65,7 @@
                                         <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
                                         <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
                                         <c:if test="${loginedUser.userId==user.userId}">
-                                        <li><a href="editProfile">Edit Profile</a></li>
+                                        <li><a href="/profile/editProfile">Edit Profile</a></li>
                                         </c:if>
 
 
@@ -1350,7 +1350,7 @@
                             <div class="right-sidebar">
                                 <c:if test="${loginedUser.userId==user.userId}">
                                 <div class="message-btn">
-                                    <a href="<c:url value='/editProfile'/>" title=""><i class="fas fa-cog"></i>
+                                    <a href="<c:url value='/profile/editProfile'/>" title=""><i class="fas fa-cog"></i>
                                         Edit Profile</a>
                                 </div>
                                 </c:if>

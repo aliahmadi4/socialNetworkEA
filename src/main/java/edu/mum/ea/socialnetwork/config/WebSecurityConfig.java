@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -30,7 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
+        //with no encoder
+//        return NoOpPasswordEncoder.getInstance();
     }
 
     @Autowired
@@ -38,6 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
+
+        //using im memmory
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("{noop}123456").roles("user").and().withUser("admin").password("123").roles("Admin").passwordEncoder(passwordEncoder());
+        //using in
+//        auth.jdbcAuthentication()
+
     }
 
     @Override
@@ -48,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**" , "/register/**").permitAll()
-            .antMatchers("/", "/index", "/profile/**").hasRole("USER")
+            .antMatchers("/", "/index", "/profile/**", "/profile/editProfile").hasRole("USER")
             .antMatchers( ).hasRole("ADMIN")
 
 
@@ -58,6 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .loginPage("/login")
             .defaultSuccessUrl("/")
             .failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
             .permitAll()
             .and()
             .logout()
@@ -66,6 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll()
             .and()
             .csrf().disable()
-            .exceptionHandling();
+            .exceptionHandling()
+                .accessDeniedPage("/denied");
     }
 }

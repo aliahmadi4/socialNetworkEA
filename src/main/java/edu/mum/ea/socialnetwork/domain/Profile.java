@@ -57,7 +57,7 @@ public class Profile {
 
     private String profilePhoto;
 
-
+    private String occupation;
 
 
 
