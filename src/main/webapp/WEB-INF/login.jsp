@@ -44,7 +44,7 @@
                     <div class="col-lg-6">
                         <div class="cmp-info">
                             <div class="cm-logo">
-                                <img style="width: 200px; height: 200px" src="media/images/logo.png" alt="">
+                                <img style="width: 200px; height: 200px" src="media2/images/logo.png" alt="">
                             </div><!--cm-logo end-->
 <%--                            <img src="images/cm-main-img.png" alt="">--%>
                         </div><!--cmp-info end-->

@@ -41,7 +41,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/media/images/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "media/images/user.jpg"}" alt="">
+                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "/media/user.jpg"}" alt="">
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -119,7 +119,7 @@
 											<div class="post-bar">
 												<div class="post_topbar">
 													<div class="usy-dt">
-														<img src="<c:url value='/images/profile/${i.user.profilePic.length()>4 ? i.user.profilePic : "user.jpg"}'/>" alt="" width="45px" height="45px">
+														<img src="<c:url value='/images/profile/${i.user.profilePic.length()>4 ? i.user.profilePic : "/images/profile/user.jpg"}'/>" alt="profile" width="45px" height="45px">
 														<div class="usy-name">
 															<h3>${i.user.firstName} ${i.user.lastName}</h3>
 															<span><img src="../../images/clock.png" alt="">${i.user.description}</span>

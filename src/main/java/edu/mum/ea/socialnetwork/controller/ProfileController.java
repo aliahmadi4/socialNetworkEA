@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,10 +28,14 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-    private static String UPLOADED_FOLDER = "C://temp//";
+    String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/media/profile/";
+//    String rootDirectory = req.getSession().getServletContext().getRealPath("/")+"\\media\\post\\";
 
     @GetMapping("/profile/{id}")
     public ModelAndView showProfile(@PathVariable("id")Long id){
+
+
+
         Profile profile = profileService.findById(id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("profile", profile);
@@ -41,7 +46,7 @@ public class ProfileController {
     @GetMapping("/profile/editProfile")
     public String showEditProfile(Model model, Principal principal){
         System.out.println(principal.getName());
-        Profile profile1 = userService.findByUsername(principal.getName()).getProfile();
+        Profile profile1 = userService.findUserByName(principal.getName()).getProfile();
         model.addAttribute("profile",profile1);
         return "editProfile";
     }
@@ -55,10 +60,9 @@ public class ProfileController {
         }
 
         try {
-
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Path path = Paths.get(uploadDirectory + file.getOriginalFilename());
             Files.write(path, bytes);
 
             redirectAttributes.addFlashAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");

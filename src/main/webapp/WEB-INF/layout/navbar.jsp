@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
-                        <a href="<c:url value='/'/>" ><img src="<c:url value='/media/images/logo.png'/>" alt=""></a>
+                        <a href="<c:url value='/'/>" ><img src="<c:url value='/images/logo.png'/>" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
                     <%--<form>
@@ -53,7 +53,7 @@
                         <div class="user-info" style="width: 150px">
 <%--                        <img src=" <c:url value='/media/images/profile/${loginedUser.profilePic.length()>4 ? loginedUser.profilePic : "/media/images/user.jpg"}'/>--%>
 <%--                        " alt="" height="40px" width="40px">--%>
-        <img src=" <c:url value='/media/images/profile/ali.jpg"}'/>  " alt="" height="40px" width="40px">
+        <img src=" <c:url value='/media2/images/profile/ali.jpg"}'/>  " alt="" height="40px" width="40px">
                                 <a href="#" title=""><security:authentication property="principal.username"/></a>
                                 <i class="la la-sort-down"></i>
                                 </div>
