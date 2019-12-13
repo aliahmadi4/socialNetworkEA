@@ -25,12 +25,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("newUser") User user , BindingResult bindingResult){
+    public String register(@Valid @ModelAttribute("newUser") User user ,  BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "login";
         }
         user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "redirect:/login";
+    }
+
+    // this method redirect request to the login page with get method which happen after changing the language
+    @GetMapping("/register")
+    public String redirect(@Valid @ModelAttribute("newUser") User user ,  BindingResult bindingResult){
+        return "login";
     }
 }
