@@ -43,29 +43,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .headers()
-            .frameOptions().sameOrigin()
-            .and()
-            .authorizeRequests()
-            .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**" ,"/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
-            .antMatchers("/", "/index", "/profile/**").hasRole("USER")
-            .antMatchers( ).hasRole("ADMIN")
+                .headers()
+                .frameOptions().sameOrigin()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/css/**", "/fonts/**", "/js/**", "/lib/**", "/vendor/**", "/media/**", "/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
+                .antMatchers("/", "/index", "/profile/**").hasRole("USER")
+                .antMatchers().hasRole("ADMIN")
 
 
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .defaultSuccessUrl("/")
-            .failureUrl("/login?error")
-            .permitAll()
-            .and()
-            .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/login?logout")
-            .permitAll()
-            .and()
-            .csrf().disable()
-            .exceptionHandling();
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .csrf().disable()
+                .exceptionHandling();
     }
 }

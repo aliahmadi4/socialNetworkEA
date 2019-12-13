@@ -26,7 +26,7 @@ public class Comments {
     private String postId;
 
     @DateTimeFormat(pattern = "YYYY-MM-dd")
-    private LocalDate creationDate  = LocalDate.now();
+    private LocalDate creationDate = LocalDate.now();
 
     @JsonBackReference
     @ManyToOne
@@ -36,7 +36,7 @@ public class Comments {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Post post;
 
-    public void addPost(Post p){
+    public void addPost(Post p) {
         this.setPost(p);
         p.addComment(this);
     }
