@@ -13,5 +13,7 @@ public interface UnhealthyWordService {
 
     void addWord(String word);
 
+    void deleteWord(String word);
+
     List<UnhealthyWord> getUnhealthyWordList();
 }

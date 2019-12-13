@@ -24,8 +24,8 @@ public class AdminController {
         return "userList";
     }
 
-    @PostMapping("/activateUser/{userId}")
-    public void activateUsers(@PathVariable("userId") Long userId) {
+    @PostMapping("/activateUser")
+    public void activateUsers(@RequestBody Long userId) {
         adminService.activateUser(userId);
     }
 
@@ -35,8 +35,8 @@ public class AdminController {
         return "userList";
     }
 
-    @PostMapping("/setUserRole/{userId}")
-    public void setUserRole(@PathVariable("userId") Long userId, Role role) {
+    @PostMapping("/setUserRole")
+    public void setUserRole(@RequestBody Long userId, Role role) {
         adminService.setUserRole(userId, role);
     }
 
@@ -46,13 +46,8 @@ public class AdminController {
         return "unhealthyPosts";
     }
 
-    @PostMapping("/approvePost/{postId}")
-    public void approvePost(@PathVariable("postId") Long postId) {
-        adminService.setPostEnabled(postId, true);
-    }
-
-    @PostMapping("/disapprovePost/{postId}")
-    public void disapprovePost(@PathVariable("postId") Long postId) {
-        adminService.setPostEnabled(postId, false);
+    @PostMapping("/postApproval")
+    public void processPost(@RequestBody Long postId, boolean isApproved) {
+        adminService.setPostEnabled(postId, isApproved);
     }
 }
