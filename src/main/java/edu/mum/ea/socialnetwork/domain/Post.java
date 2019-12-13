@@ -31,6 +31,9 @@ public class Post {
     private String text;
     private String photo;
     private String video;
+
+//    @DateTimeFormat(pattern = "YYYY-MM-dd")
+//    private LocalDate creationDate  = LocalDate.now();
     private Date creationDate  = new Date();
     private LocalDate deletionDate;
     private Integer likeCount = 0;
@@ -44,7 +47,13 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Likes> likes = new ArrayList<Likes>();
 
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
+    @OrderBy("desc")
+    private List<Comments> comments = new ArrayList<Comments>();
+
     public void addLike(Likes like){ likes.add(like); this.likeCount++;}
+    public void addComment(Comments comment){ comments.add(comment); this.commentCount++;}
 //    public void removeLike(Likes like){
 //        likes.remove(like);
 //    }
