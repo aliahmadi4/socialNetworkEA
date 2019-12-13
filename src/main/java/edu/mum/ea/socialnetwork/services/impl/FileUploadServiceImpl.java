@@ -19,7 +19,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 //      Create a folder
         File directory = new File(uploadDirectory);
-        if (! directory.exists()){
+        if (!directory.exists()) {
             directory.mkdirs();
         }
 

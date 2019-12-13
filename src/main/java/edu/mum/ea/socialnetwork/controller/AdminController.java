@@ -1,7 +1,6 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Role;
-import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,41 +24,30 @@ public class AdminController {
         return "userList";
     }
 
-    @PostMapping("/activateUser/{userId}")
-    public void activateUsers(@PathVariable("userId") Long userId) {
+    @PostMapping("/activateUser")
+    public void activateUsers(@RequestBody Long userId) {
         adminService.activateUser(userId);
     }
 
     @GetMapping("/manageUserRoles")
-    public String getUserRoles(Model model) {
+    public String getUsers(Model model) {
         model.addAttribute("userList", adminService.getUsers());
         return "userList";
     }
 
-    @PostMapping("/setUserRole/{userId}")
-    public void setUserRole(@PathVariable("userId") Long userId, Role role) {
+    @PostMapping("/setUserRole")
+    public void setUserRole(@RequestBody Long userId, Role role) {
         adminService.setUserRole(userId, role);
     }
 
     @GetMapping("/unhealthyPosts")
     public String getUnhealthyPosts(Model model) {
-//        model.addAttribute("postList", postService.finAll());
+        model.addAttribute("postList", adminService.getUnhealthyPosts());
         return "unhealthyPosts";
     }
 
-    @PostMapping("/approvePost/{postId}")
-    public void approvePost(@PathVariable("postId") Long postId) {
-//        postService.approvePost(postId);
-    }
-
-    @PostMapping("/disapprovePost/{postId}")
-    public void disapprovePost(@PathVariable("postId") Long postId) {
-//        postService.disapprovePost(postId);
-//        Long userId = adminService.getUserByPostId(postId).getId();
-//        adminService.setNoOfUnhealthyPosts(userId, adminService.getNoOfUnhealthyPosts(userId) + 1);
-//        if(adminService.getNoOfUnhealthyPosts(userId) >= 20) {
-//            adminService.deactivateUser(userId);
-//            send email
-//        }
+    @PostMapping("/postApproval")
+    public void processPost(@RequestBody Long postId, boolean isApproved) {
+        adminService.setPostEnabled(postId, isApproved);
     }
 }

@@ -106,7 +106,7 @@
                                 <h1>Add text</h1>
                                 <div class="col-lg-12 no-pdd">
                                     <div class="sn-field">
-                                        <form:input path="text" style="width: 100%" />
+                                        <form:input path="text" style="width: 100%" required="true" />
                                     </div><!--sn-field end-->
                                 </div>
 
@@ -160,7 +160,7 @@
                                     <div class="col-lg-12 no-pdd">
                                         <div class="sn-field no-margin">
                                             <form class="post-comment" data-id="${post.id}" data-post="${post}">
-                                                <input type="text" name="text" class="comment-text ${post.id}-text"   />
+                                                <input type="text" name="text" class="comment-text ${post.id}-text" required   />
                                                 <input type="submit" class="comment-submit" value="Submit" >
                                             </form>
                                         </div><!--sn-field end-->

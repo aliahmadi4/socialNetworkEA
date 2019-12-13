@@ -32,7 +32,7 @@ public class PostController {
     UserService userService;
 
     @GetMapping(value = "/post")
-    public String post(@ModelAttribute("addPost") Post post, Model model){
+    public String post(@ModelAttribute("addPost") Post post, Model model) {
         List<Post> allPost = postService.findPost();
         model.addAttribute("allPost", allPost);
         System.out.println("POST PAGE: " + allPost.size());
@@ -42,12 +42,12 @@ public class PostController {
 
     @PostMapping(value = "/post")
     public String addPost(@ModelAttribute("addPost") Post post, BindingResult result, @RequestParam("imageFile") MultipartFile imageFile,
-                          @RequestParam("videoFile") MultipartFile videoFile, RedirectAttributes redirectAttributes, Principal principal){
-        if(result.hasErrors()){
+                          @RequestParam("videoFile") MultipartFile videoFile, RedirectAttributes redirectAttributes, Principal principal) {
+        if (result.hasErrors()) {
             return "/post";
         }
 
-        if(!imageFile.isEmpty()){
+        if (!imageFile.isEmpty()) {
             try {
                 String imagePath = fileUploadService.saveImage(imageFile);
                 post.setPhoto(imagePath);
@@ -57,7 +57,7 @@ public class PostController {
             }
         }
 
-        if(!videoFile.isEmpty()){
+        if (!videoFile.isEmpty()) {
             try {
                 String videoPath = fileUploadService.saveImage(videoFile);
                 post.setVideo(videoPath);

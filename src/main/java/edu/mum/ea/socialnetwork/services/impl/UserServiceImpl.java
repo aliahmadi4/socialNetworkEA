@@ -17,6 +17,7 @@ import java.util.Collection;
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -25,21 +26,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(
-                ()-> new UsernameNotFoundException("Username:" + username + " not found!"));
+                () -> new UsernameNotFoundException("Username:" + username + " not found!"));
 
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user) );
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
     }
 
-    private static Collection<? extends GrantedAuthority> getAuthorities(User user){
+    private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
 //        String[] userRoles = user.getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);
         String[] roles = new String[1];
-        roles[0]= user.getRole().toString();
+        roles[0] = user.getRole().toString();
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles);
         return authorities;
     }
 
-    public User save(User user){
+    public User save(User user) {
         String pass = user.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(pass));
@@ -53,11 +54,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.getOne(id);
     }
 
-
     @Override
     public User findUserByName(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(
-                ()-> new UsernameNotFoundException("Username:" + username + " not found!"));
+                () -> new UsernameNotFoundException("Username:" + username + " not found!"));
         return user;
     }
 

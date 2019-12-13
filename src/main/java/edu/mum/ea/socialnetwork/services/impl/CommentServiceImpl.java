@@ -1,7 +1,6 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
 import edu.mum.ea.socialnetwork.domain.Comments;
-import edu.mum.ea.socialnetwork.domain.Likes;
 import edu.mum.ea.socialnetwork.repository.CommentRepository;
 import edu.mum.ea.socialnetwork.services.CommentsService;
 import org.springframework.beans.factory.annotation.Autowired;

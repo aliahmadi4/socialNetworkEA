@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 
 @Controller
 public class UserController {
@@ -20,13 +19,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/login")
-    public String login(@ModelAttribute("newUser") User user){
+    public String login(@ModelAttribute("newUser") User user) {
         return "login";
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("newUser") User user ,  BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String register(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "login";
         }
         user.setRole(Role.ROLE_USER);
@@ -37,7 +36,7 @@ public class UserController {
 
     // this method redirect request to the login page with get method which happen after changing the language
     @GetMapping("/register")
-    public String redirect(@Valid @ModelAttribute("newUser") User user ,  BindingResult bindingResult){
+    public String redirect(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult) {
         return "login";
     }
 }

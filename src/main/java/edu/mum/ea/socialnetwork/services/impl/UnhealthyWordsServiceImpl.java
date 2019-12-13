@@ -31,6 +31,11 @@ public class UnhealthyWordsServiceImpl implements UnhealthyWordService {
     }
 
     @Override
+    public void deleteWord(String word) {
+        unhealthyWordRepository.deleteByWordIs(word);
+    }
+
+    @Override
     public List<UnhealthyWord> getUnhealthyWordList() {
         return unhealthyWordRepository.findAll();
     }

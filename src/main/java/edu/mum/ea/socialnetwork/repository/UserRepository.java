@@ -3,7 +3,6 @@ package edu.mum.ea.socialnetwork.repository;
 import edu.mum.ea.socialnetwork.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +16,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUsersByEnabled(boolean enabled);
 
     @Query("update User u set u.enabled =: enabled where u.id =: userId")
-    void setUserActive(@Param("userId") Long userId, @Param("enabled") boolean enabled);
+    void setUserEnabled(@Param("userId") Long userId, @Param("enabled") boolean enabled);
 
-    @Query("update User u set u.profile.noOfUnhealthyPosts =: updatedVal where u.id =: userId")
-    void setNumberOfUnhealthyPosts(@Param("userId") Long userId, @Param("updatedVal") Integer newValue);
+    @Query("update User u set u.profile.noOfDisapprovedPosts =: updatedVal where u.id =: userId")
+    void setNumberOfDisapprovedPosts(@Param("userId") Long userId, @Param("updatedVal") Integer newValue);
 }
