@@ -27,7 +27,7 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String text;
     private String photo;
     private String video;
@@ -35,6 +35,7 @@ public class Post {
     private LocalDate deletionDate;
     private Integer likeCount = 0;
     private Integer commentCount = 0;
+    private boolean unhealthy = false;
     private boolean enabled;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

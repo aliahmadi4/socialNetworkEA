@@ -7,9 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface PostService {
-    public Post save(Post post);
+    Post save(Post post);
 
-    public List<Post> findPost();
+    List<Post> findPost();
 
-    public Post findPostById(Long id);
+    Post findPostById(Long id);
+
 }

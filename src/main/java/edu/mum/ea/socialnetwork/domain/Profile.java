@@ -46,7 +46,7 @@ public class Profile {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
-    private Integer noOfUnhealthyPosts = 0;
+    private Integer noOfDisapprovedPosts = 0;
 
     @OneToOne(mappedBy = "profile")
     private User user;
@@ -58,15 +58,6 @@ public class Profile {
     private MultipartFile image;
 
     private String profilePhoto;
-
-
-
-
-
-
-
-
-
 
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,
                    @NotBlank String lastName, @NotNull @Past LocalDate dateOfBirth, LocalDate joinDate) {
