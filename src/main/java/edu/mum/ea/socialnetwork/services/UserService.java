@@ -8,4 +8,6 @@ public interface UserService extends UserDetailsService {
     User findUserById(Long id);
 
     User findUserByName(String name);
+
+    User update(User user);
 }

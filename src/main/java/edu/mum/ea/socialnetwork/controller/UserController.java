@@ -30,6 +30,7 @@ public class UserController {
             return "login";
         }
         user.setRole(Role.ROLE_USER);
+
         userService.save(user);
         return "redirect:/login";
     }

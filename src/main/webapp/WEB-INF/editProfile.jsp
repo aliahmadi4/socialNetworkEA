@@ -1,8 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
 <html>
-
 <head>
     <jsp:include page="layout/head.jsp"/>
 </head>
@@ -215,7 +217,7 @@
                                     <h3>Change Profile Picture</h3>
                                     <div class="notifications-list">
                                         <div class="notfication-details">
-                                            <form action="<c:url value="/profilePhotoUpload"/>" method="post"
+                                            <form action="<c:url value='/profile/profilePhotoUpload'/>" method="post"
                                                   enctype="multipart/form-data">
                                                 <input type="file" id="changeProfilePic" name="file">
                                                 <div class="save-stngs pd2">
@@ -240,75 +242,101 @@
                                 <div class="acc-setting">
                                     <h3 style="margin-left: 10px">Change Info</h3>
                                     <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
-                                    <form method="POST" action="<c:url value='/profile' />">
+
+                                    <form:form method="post" action="/profile" modelAttribute="profile">
+
 
                                         <div class="cp-field">
                                             <h5>First Name</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="firstName" id="firstName"
-                                                       value="${profile.firstName}" required>
+                                                <form:input type="text" path="firstName" id="firstName" value="${profile.firstName}" />
+                                                <form:errors path="firstName" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Last Name</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="lastName" id="lastName"
-                                                       value="${profile.lastName}" required>
+                                                <form:input type="text" path="lastName" id="lastName" value="${profile.lastName}" />
+                                                <form:errors path="lastName" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Occupation</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="occupation" id="occupation"
-                                                       value="${profile.occupation}" required>
+                                                <form:input type="text" path="occupation" id="occupation" value="${profile.occupation}" />
+                                                <form:errors path="occupation" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Email</h5>
                                             <div class="cpp-fiel">
-                                                <input type="email" name="email" id="email"
-                                                       value="${profile.email}" required>
+                                                <form:input type="email" path="email" id="email" value="${profile.email}" />
+                                                <form:errors path="email" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Country</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="country" id="country"
-                                                       value="${profile.address.country}" required>
+                                                <form:input type="text" path="address.country" id="country" value="${profile.address.country}" />
+                                                <form:errors path="address.country" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>State</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="state" id="state"
-                                                       value="${profile.address.state}" required>
+                                                <form:input type="text" path="address.state" id="state" value="${profile.address.state}" />
+                                                <form:errors path="address.state" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>City</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="city" id="city"
-                                                       value="${profile.address.city}" required>
+                                                <form:input type="text" path="address.city" id="city" value="${profile.address.city}" />
+                                                <form:errors path="address.city" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
 
+                                        <form:input type="hidden" path="id" id="id" value="${profile.id}" />
+                                        <form:errors path="id" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth" value="${profile.dateOfBirth}" />
+                                        <form:errors path="dateOfBirth" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="joinDate" id="joinDate" value="${profile.joinDate}" />
+                                        <form:errors path="joinDate" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="gender" id="gender" value="${profile.gender}" readonly="true"/>
+                                        <form:errors path="gender" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="noOfUnhealthyPosts" id="noOfUnhealthyPosts" value="${profile.noOfUnhealthyPosts}" />
+                                        <form:errors path="noOfUnhealthyPosts" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="profilePhoto" id="profilePhoto" value="${profile.profilePhoto}" />
+                                        <form:errors path="profilePhoto" cssStyle="color : red;" />
+
+                                        <form:input type="hidden" path="address.id" id="profilePhoto" value="${profile.address.id}" />
+                                        <form:errors path="address.id" cssStyle="color : red;" />
+
+
+
+
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li>
-                                                    <button type="submit" id="saveInfo">Save</button>
+                                                    <button type="submit">Save</button>
                                                 </li>
 
                                             </ul>
                                         </div><!--save-stngs end-->
 
-                                    </form>
+                                    </form:form>
                                 </div><!--acc-setting end-->
                             </div>
 
@@ -811,12 +839,6 @@
 </div><!--theme-layout end-->
 
 
-<%--<script type="text/javascript" src="js/jquery.min.js"></script>--%>
-<%--<script type="text/javascript" src="js/popper.js"></script>--%>
-<%--<script type="text/javascript" src="js/bootstrap.min.js"></script>--%>
-<%--<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>--%>
-<%--<script type="text/javascript" src="lib/slick/slick.min.js"></script>--%>
-<%--<script type="text/javascript" src="js/script.js"></script>--%>
 <jsp:include page="layout/footerScript.jsp"/>
 
 </body>

@@ -15,7 +15,13 @@ public class ProfileServiceImpl implements ProfileService {
     ProfileRepository profileRepository;
 
     @Override
+    public Profile save(Profile profile) {
+        return profileRepository.save(profile);
+    }
+
+    @Override
     public Profile findById(Long id) {
+
         return profileRepository.findById(id).orElse(null);
     }
 }

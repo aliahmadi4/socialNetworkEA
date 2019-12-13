@@ -1,19 +1,20 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Profile;
-import edu.mum.ea.socialnetwork.repository.ProfileRepository;
+import edu.mum.ea.socialnetwork.domain.User;
+import edu.mum.ea.socialnetwork.services.ProfileImageUploadService;
 import edu.mum.ea.socialnetwork.services.ProfileService;
 import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,14 +28,18 @@ public class ProfileController {
     ProfileService profileService;
     @Autowired
     UserService userService;
+    @Autowired
+    ProfileImageUploadService profileImageUploadService;
 
-    String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/media/profile/";
-//    String rootDirectory = req.getSession().getServletContext().getRealPath("/")+"\\media\\post\\";
+    @ModelAttribute("profilePhoto")
+    public String profilePic(Principal principal){
+        User user = userService.findUserByName(principal.getName());
+        return user.getProfile().getProfilePhoto();
+
+    }
 
     @GetMapping("/profile/{id}")
     public ModelAndView showProfile(@PathVariable("id")Long id){
-
-
 
         Profile profile = profileService.findById(id);
         ModelAndView mav = new ModelAndView();
@@ -45,42 +50,58 @@ public class ProfileController {
 
     @GetMapping("/profile/editProfile")
     public String showEditProfile(Model model, Principal principal){
-        System.out.println(principal.getName());
-        Profile profile1 = userService.findUserByName(principal.getName()).getProfile();
-        model.addAttribute("profile",profile1);
+
+        Profile profile = userService.findUserByName(principal.getName()).getProfile();
+        model.addAttribute("profile",profile);
         return "editProfile";
     }
 
-    @PostMapping("/profilePhotoUpload")
-    public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    @PostMapping("/profile/profilePhotoUpload")
+    public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Principal principal) {
 
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
+            return "redirect:/profile/myProfile";
         }
 
-        try {
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(uploadDirectory + file.getOriginalFilename());
-            Files.write(path, bytes);
+        String filename = profileImageUploadService.uploadImage(file);
+        User user = userService.findUserByName(principal.getName());
+        user.getProfile().setProfilePhoto(filename);
+        userService.update(user);
 
-            redirectAttributes.addFlashAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "redirect:/uploadStatus";
+        return "redirect:/profile/myProfile";
     }
 
-    @GetMapping("/uploadStatus")
-    public String uploadStatus() {
-        return "uploadStatus";
-    }
 
     @PostMapping("/profile")
-    public String updateProfile(){
-        return "index";
+    public String updateProfile(@Valid @ModelAttribute Profile profile, BindingResult bindingResult, Principal principal){
+        if(bindingResult.hasErrors()){
+            return "editProfile";
+        }
+        User user = userService.findUserByName(principal.getName());
+        user.setProfile(profile);
+        userService.update(user);
+        return "redirect:/profile/myProfile";
     }
+
+    @GetMapping("/profile/myProfile")
+    public String showMyProfile(Model model,Principal principal){
+        User me = userService.findUserByName(principal.getName());
+        model.addAttribute("profile", me.getProfile());
+        return "myProfile";
+    }
+
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
+
+    @PostMapping("/test")
+    public String test3(){
+
+        return "redirect:/index";
+    }
+
+
 }

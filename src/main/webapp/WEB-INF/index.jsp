@@ -13,5 +13,6 @@
 
 
    <h1>INDEX</h1>
+<jsp:include page="layout/footerScript.jsp"/>
 </body>
 </html>

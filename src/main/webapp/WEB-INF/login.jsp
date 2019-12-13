@@ -44,7 +44,7 @@
                     <div class="col-lg-6">
                         <div class="cmp-info">
                             <div class="cm-logo">
-                                <img style="width: 200px; height: 200px" src="media2/images/logo.png" alt="">
+                                <img style="width: 200px; height: 200px" src="/images/logo.png" alt="">
                             </div><!--cm-logo end-->
 <%--                            <img src="images/cm-main-img.png" alt="">--%>
                         </div><!--cmp-info end-->
@@ -269,12 +269,7 @@
 </div><!--theme-layout end-->
 
 
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<jsp:include page="layout/footerScript.jsp"/>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:27 GMT -->

@@ -24,9 +24,9 @@
                         </li>
 
                         <li>
-                            <a href="<c:url value='/profile'/>" title="">
+                            <a href="<c:url value='/profile/myProfile'/>" title="">
                                 <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
-                                Profiles
+                                Profile
                             </a>
                         </li>
 
@@ -53,7 +53,7 @@
                         <div class="user-info" style="width: 150px">
 <%--                        <img src=" <c:url value='/media/images/profile/${loginedUser.profilePic.length()>4 ? loginedUser.profilePic : "/media/images/user.jpg"}'/>--%>
 <%--                        " alt="" height="40px" width="40px">--%>
-        <img src=" <c:url value='/media2/images/profile/ali.jpg"}'/>  " alt="" height="40px" width="40px">
+        <img src="<c:url value='/media/profile/${profilePhoto}'/>" alt="ss" height="40px" width="40px">
                                 <a href="#" title=""><security:authentication property="principal.username"/></a>
                                 <i class="la la-sort-down"></i>
                                 </div>
@@ -62,9 +62,9 @@
 
                                 <h3>Setting</h3>
                                 <ul class="us-links">
-                                <li><a href="<c:url value="/editProfile"/>" title="">Edit Profile</a></li>
+                                <li><a href="<c:url value="/profile/editProfile"/>" title="">Edit Profile</a></li>
                                 </ul>
-                                <h3 class="tc"><a href="logout" title="">Logout</a></h3>
+                                <h3 class="tc"><a href="<c:url value="/logout"/>" title="">Logout</a></h3>
                                 </div><!--user-account-settingss end-->
                             </div>
 
