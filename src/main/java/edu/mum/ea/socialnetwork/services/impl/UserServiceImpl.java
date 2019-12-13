@@ -1,6 +1,5 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
-import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.UserService;
@@ -13,10 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .frameOptions().sameOrigin()
             .and()
             .authorizeRequests()
-            .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**" , "/register/**").permitAll()
+            .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**" ,"/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
             .antMatchers("/", "/index", "/profile/**").hasRole("USER")
             .antMatchers( ).hasRole("ADMIN")
 

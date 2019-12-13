@@ -23,7 +23,6 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @NotNull
     private String gender;  //values: Male & Female
 
@@ -36,7 +35,6 @@ public class Profile {
 
     @NotBlank
     private String lastName;
-
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
