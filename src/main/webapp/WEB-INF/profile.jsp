@@ -62,7 +62,14 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "user.jpg"}" alt="">
+                                        <c:choose>
+                                            <c:when test="${profile.profilePhoto.length()>4}">
+                                                <img src="/media/profile/${profile.profilePhoto}" alt="">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="<c:url value='/images/user.jpg'/>" alt="">
+                                            </c:otherwise>
+                                        </c:choose>
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -143,8 +150,14 @@
 
                                                 <div class="post_topbar">
                                                     <div class="usy-dt">
-                                                        <img src="<c:url value='/media/profile/${post.user.profile.profilePhoto.length()>4 ? post.user.profile.profilePhoto : "user.jpg"}'/>"
-                                                             alt="" width="45px" height="45px">
+                                                        <c:choose>
+                                                            <c:when test="${post.user.profile.profilePhoto.length()>4}">
+                                                                <img src="/media/profile/${post.user.profile.profilePhoto}" alt="" width="45px" height="45px">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <img src="<c:url value='/images/user.jpg'/>" alt="" width="45px" height="45px">
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <div class="usy-name">
                                                             <a href="<c:url value='/profile/${post.user.id}' />">
                                                                 <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>

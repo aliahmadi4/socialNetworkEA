@@ -55,8 +55,14 @@
                                     <div class="user-profile">
                                         <div class="username-dt">
                                             <div class="usr-pic">
-                                                <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto : "user.jpg"}' />"
-                                                     alt="" height="120px" width="120px"/>
+                                                <c:choose>
+                                                    <c:when test="${currentUser.profilePhoto.length()>4}">
+                                                        <img src="/media/profile/${currentUser.profilePhoto}" alt=""  height="120px" width="120px">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="<c:url value='/images/user.jpg'/>" alt=""  height="120px" width="120px">
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div><!--username-dt end-->
                                         <div class="user-specs">
@@ -114,9 +120,14 @@
                             <div class="main-ws-sec">
                                 <div class="post-topbar">
                                     <div class="user-picy">
-                                        <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto: "user.jpg"}'/>"
-                                             alt=""
-                                             height="50px" width="50px">
+                                        <c:choose>
+                                            <c:when test="${currentUser.profilePhoto.length()>4}">
+                                                <img src="/media/profile/${currentUser.profilePhoto}" alt="" height="50px" width="50px">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="<c:url value='/images/user.jpg'/>" alt="" height="50px" width="50px">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="post-st">
                                         <ul>
@@ -132,8 +143,14 @@
 
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
-                                                    <img src="<c:url value='/media/profile/${post.user.profile.profilePhoto.length()>4 ? post.user.profile.profilePhoto : "user.jpg"}'/>"
-                                                         alt="" width="45px" height="45px">
+                                                    <c:choose>
+                                                        <c:when test="${post.user.profile.profilePhoto.length()>4}">
+                                                            <img src="/media/profile/${post.user.profile.profilePhoto}" alt="" width="45px" height="45px">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="<c:url value='/images/user.jpg'/>" alt="" width="45px" height="45px">
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                     <div class="usy-name">
                                                         <a href="<c:url value='/profile/${post.user.id}' />">
                                                             <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>
