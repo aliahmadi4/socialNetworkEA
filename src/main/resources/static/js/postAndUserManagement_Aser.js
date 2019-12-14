@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $(".setUserRole").click(function () {
         let userId = $.data("id");
+        let newRole = $.data("role");
         setUserRole(userId, newRole);
     });
 
@@ -54,24 +55,34 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/admin/setUserRole",
-            contentType: "application/json",
-            data: "{userId: " + JSON.stringify(userId) + ", role: " + JSON.stringify(newUserRole) + "}",
-            headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+            data: {
+                "userId": userId,
+                "role": newUserRole
+            },
+            headers: {
+                "X-CSRF-TOKEN":
+                    $("meta[name='_csrf']").attr("content")
+            }
+            ,
             success: function (data) {
                 alert(newUserRole + "role set to " + userId + " successfully.");
-            },
+            }
+            ,
             error: function (error) {
                 alert("Unable to update user role.");
             }
-        });
+        })
+        ;
     }
 
     function setPostEnabled(postId, isEnabled) {
         $.ajax({
             type: "POST",
             url: "/admin/postApproval",
-            contentType: "application/json",
-            data: "{postId: " + JSON.stringify(postId) + ", isApproved: " + JSON.stringify(isEnabled) + "}",
+            data: {
+                "postId": postId,
+                "isApproved": isEnabled
+            },
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function (data) {
                 alert("Post approved.");
