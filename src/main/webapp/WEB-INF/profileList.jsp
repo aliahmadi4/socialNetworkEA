@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from gambolthemes.net/workwise-new/profileList.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:02 GMT -->
 <head>
 	<jsp:include page="layout/head.jsp"/>
 
@@ -22,13 +21,8 @@
 	</style>
 </head>
 
-
 <body>
 	<div class="wrapper">
-
-
-
-
 		<section class="companies-info">
 			<div class="container">
 				<div class="company-title">
@@ -49,7 +43,7 @@
 								<div class="company-up-info">
 									<img src="/media/profile/<c:out value="${i.profilePhoto}"/>" alt="profile photo">
 									<h3><c:out value="${i.firstName}  ${i.lastName}" /></h3>
-									<h4>${i.firstName}</h4>
+									<h4>${i.occupation}</h4>
 									<ul>
 										<li><a href="javascript:" class="follow" id="<c:out value="${i.id}" />">Follow</a></li>
 									</ul>
@@ -58,23 +52,6 @@
 							</div><!--company_profile_info end-->
 						</div>
 						</c:forEach>
-
-
-<%--						<div class="col-lg-3 col-md-4 col-sm-6 col-12">--%>
-<%--							<div class="company_profile_info">--%>
-<%--								<div class="company-up-info">--%>
-<%--									<img src="images/resources/pf-icon2.png" alt="">--%>
-<%--									<h3 id="names"></h3>--%>
-<%--									<h4>Graphic Designer</h4>--%>
-<%--									<ul>--%>
-<%--										<li><a href="#" title="" class="follow">Follow</a></li>--%>
-<%--										<li><a href="#" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>--%>
-<%--										<li><a href="#" title="" class="hire-us">Hire</a></li>--%>
-<%--									</ul>--%>
-<%--								</div>--%>
-<%--								<a href="user-profile.html" title="" class="view-more-pro">View Profile</a>--%>
-<%--							</div><!--company_profile_info end-->--%>
-<%--						</div>--%>
 					</div>
 
 
@@ -110,17 +87,7 @@
 				</div>
 			</div>
 		</footer>
-
 	</div><!--theme-layout end-->
-
-
-
-<%--<script type="text/javascript" src="../../resources/static/js/jquery.min.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/static/js/popper.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/static/js/bootstrap.min.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/static/js/flatpickr.min.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/static/lib/slick/slick.min.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/static/js/script.js"></script>--%>
 
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/popper.js"></script>
@@ -128,7 +95,6 @@
 	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script>
-
 		//	this function is for following other users
 		$(function(){
 			$(document).on('click', ".follow", (function(){
@@ -158,7 +124,7 @@
 
 		//this function is for unfollowing the followed users
 		$(function() {
-			$(".unfollowing").click(function () {
+			$(document).on('click', ".unfollowing", (function(){
 				let userId = $(this).attr('id');
 				let userClass = $(this).attr('class');
 				$.ajax({
@@ -176,7 +142,7 @@
 						alert("You are not following this user so you can't un-follow him/her!");
 					}
 				})
-			})
+			}))
 		});
 
 		//this function is for instance searching the users
@@ -198,9 +164,9 @@
 								'<div class="col-lg-3 col-md-4 col-sm-6 col-12">' +
 									'<div class="company_profile_info">' +
 										'<div class="company-up-info">' +
-											'<img src="/media/profile/' + value.email + '" alt="profile photo">' +
+											'<img src="/media/profile/' + value.profilePhoto + '" alt="profile photo">' +
 											'<h3>' + value.firstName + ' ' + value.lastName + '</h3>' +
-											'<h4>' + value.email + '</h4>' +
+											'<h4>' + value.occupation + '</h4>' +
 											'<ul>' +
 												'<li><a href="javascript:" class="follow" id="' + value.id + '">Follow</a></li>' +
 											'</ul>' +
@@ -220,6 +186,4 @@
 		})
 	</script>
 </body>
-
-<!-- Mirrored from gambolthemes.net/workwise-new/profileList.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:15 GMT -->
 </html>

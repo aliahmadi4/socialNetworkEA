@@ -59,7 +59,8 @@ public class FollowingController {
     public ModelAndView showProfile(Principal principal){
         User currentUser = userService.findUserByName(principal.getName());
         List<Profile> profiles = profileService.unfollowedUsers(currentUser.getId());
-
+        System.out.println(currentUser.getUsername());
+        System.out.println("list" + profiles);
         ModelAndView mav = new ModelAndView();
         mav.addObject("profiles", profiles);
         mav.setViewName("profileList");

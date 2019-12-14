@@ -4,6 +4,7 @@ import edu.mum.ea.socialnetwork.services.ProfileImageUploadService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +19,13 @@ public class ProfileImageUploadServiceImpl implements ProfileImageUploadService 
 
     @Override
     public String uploadImage(MultipartFile file) {
+        // Create a folder
+        File directory = new File(uploadDirectory);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
         try {
+
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadDirectory + file.getOriginalFilename());

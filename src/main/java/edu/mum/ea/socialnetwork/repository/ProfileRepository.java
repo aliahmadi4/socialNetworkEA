@@ -15,12 +15,13 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     // this query used in Following Controller to search profiles according to their first name
 //    @Query("from Profile p where p.firstName like :name%")
-    @Query(value = "SELECT * FROM profile JOIN user_following WHERE profile.id != :id AND profile.id NOT IN " +
-            "(SELECT following FROM  user_following WHERE user = :id)" +
+    @Query(value = "SELECT * FROM `profile` left JOIN `user_following` on profile.id = user_following.user WHERE " +
+            "profile.id != :id AND profile.id NOT IN (SELECT following FROM  `user_following` WHERE user = :id) " +
             " and profile.first_name LIKE :name% GROUP BY profile.id", nativeQuery = true)
     List<Profile> searchProfiles(@Param("id") Long id, @Param("name") String name);
 
-    @Query(value = "SELECT * FROM profile JOIN user_following WHERE profile.id != :id AND profile.id NOT IN " +
-            "(SELECT following FROM  user_following WHERE user = :id) GROUP BY profile.id", nativeQuery = true)
+    @Query(value = "SELECT * FROM `profile` left JOIN `user_following` on profile.id = user_following.user WHERE " +
+            "profile.id != :id AND profile.id NOT IN (SELECT following FROM  `user_following` WHERE user = :id) " +
+            "GROUP BY profile.id", nativeQuery = true)
     List<Profile> unfollowedUsers(@Param("id") Long id);
 }
