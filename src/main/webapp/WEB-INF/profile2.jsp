@@ -41,7 +41,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "user.jpg"}" alt="">
+                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "/media/user.jpg"}" alt="">
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -1548,6 +1548,7 @@
     </div><!--overview-box end-->
 
 </div><!--theme-layout end-->
+
 
 <jsp:include page="layout/footerScript.jsp"/>
 </body>

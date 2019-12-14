@@ -172,36 +172,35 @@
                                 <div class="acc-setting">
                                     <h3 style="margin-left: 10px">Account Setting</h3>
                                     <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
-                                    <form method="POST" action="<c:url value='/changePassword' />">
-                                        <div class="cp-field">
-                                            <h5>Old Password</h5>
-                                            <div class="cpp-fiel">
-                                                <input type="text" name="old-password" id="old-password"
-                                                       placeholder="Old Password" required>
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
+                                    <form method="POST" action="<c:url value='/profile/changePassword' />">
+<%--                                        <div class="cp-field">--%>
+<%--                                            <h5>Old Password</h5>--%>
+<%--                                            <div class="cpp-fiel">--%>
+<%--                                                <input type="text" name="old-password" id="old-password"--%>
+<%--                                                       placeholder="Old Password" required>--%>
+<%--                                                <i class="fa fa-lock"></i>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
                                         <div class="cp-field">
                                             <h5>New Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="new-password" id="new-password"
-                                                       placeholder="New Password" required>
+                                                <input type="text" name="new-password" id="new-password" placeholder="New Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Repeat Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="repeat-password" id="repeat-password"
-                                                       placeholder="Repeat Password" required>
+                                                <input type="text" name="repeat-password" id="repeat-password" placeholder="Repeat Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
+                                        ${passwordError}
 
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li>
-                                                    <button type="submit" id="changePasswordBtn">Change Password
+                                                    <button type="submit">Change Password
                                                     </button>
                                                 </li>
 
@@ -249,7 +248,7 @@
                                         <div class="cp-field">
                                             <h5>First Name</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="firstName" id="firstName" value="${profile.firstName}" />
+                                                <form:input type="text" path="firstName" id="firstName" value="${currentUser.firstName}" />
                                                 <form:errors path="firstName" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -257,7 +256,7 @@
                                         <div class="cp-field">
                                             <h5>Last Name</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="lastName" id="lastName" value="${profile.lastName}" />
+                                                <form:input type="text" path="lastName" id="lastName" value="${currentUser.lastName}" />
                                                 <form:errors path="lastName" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -265,7 +264,7 @@
                                         <div class="cp-field">
                                             <h5>Occupation</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="occupation" id="occupation" value="${profile.occupation}" />
+                                                <form:input type="text" path="occupation" id="occupation" value="${currentUser.occupation}" />
                                                 <form:errors path="occupation" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -273,7 +272,7 @@
                                         <div class="cp-field">
                                             <h5>Email</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="email" path="email" id="email" value="${profile.email}" />
+                                                <form:input type="email" path="email" id="email" value="${currentUser.email}" />
                                                 <form:errors path="email" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -281,7 +280,7 @@
                                         <div class="cp-field">
                                             <h5>Country</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="address.country" id="country" value="${profile.address.country}" />
+                                                <form:input type="text" path="address.country" id="country" value="${currentUser.address.country}" />
                                                 <form:errors path="address.country" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -289,7 +288,7 @@
                                         <div class="cp-field">
                                             <h5>State</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="address.state" id="state" value="${profile.address.state}" />
+                                                <form:input type="text" path="address.state" id="state" value="${currentUser.address.state}" />
                                                 <form:errors path="address.state" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -297,31 +296,31 @@
                                         <div class="cp-field">
                                             <h5>City</h5>
                                             <div class="cpp-fiel">
-                                                <form:input type="text" path="address.city" id="city" value="${profile.address.city}" />
+                                                <form:input type="text" path="address.city" id="city" value="${currentUser.address.city}" />
                                                 <form:errors path="address.city" cssStyle="color : red;" />
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
 
-                                        <form:input type="hidden" path="id" id="id" value="${profile.id}" />
+                                        <form:input type="hidden" path="id" id="id" value="${currentUser.id}" />
                                         <form:errors path="id" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth" value="${profile.dateOfBirth}" />
+                                        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth" value="${currentUser.dateOfBirth}" />
                                         <form:errors path="dateOfBirth" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="joinDate" id="joinDate" value="${profile.joinDate}" />
+                                        <form:input type="hidden" path="joinDate" id="joinDate" value="${currentUser.joinDate}" />
                                         <form:errors path="joinDate" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="gender" id="gender" value="${profile.gender}" readonly="true"/>
+                                        <form:input type="hidden" path="gender" id="gender" value="${currentUser.gender}" readonly="true"/>
                                         <form:errors path="gender" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="noOfUnhealthyPosts" id="noOfUnhealthyPosts" value="${profile.noOfUnhealthyPosts}" />
-                                        <form:errors path="noOfUnhealthyPosts" cssStyle="color : red;" />
+                                        <form:input type="hidden" path="noOfDisapprovedPosts" id="noOfUnhealthyPosts" value="${currentUser.noOfDisapprovedPosts}" />
+                                        <form:errors path="noOfDisapprovedPosts" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="profilePhoto" id="profilePhoto" value="${profile.profilePhoto}" />
+                                        <form:input type="hidden" path="profilePhoto" id="profilePhoto" value="${currentUser.profilePhoto}" />
                                         <form:errors path="profilePhoto" cssStyle="color : red;" />
 
-                                        <form:input type="hidden" path="address.id" id="profilePhoto" value="${profile.address.id}" />
+                                        <form:input type="hidden" path="address.id" id="profilePhoto" value="${currentUser.address.id}" />
                                         <form:errors path="address.id" cssStyle="color : red;" />
 
 

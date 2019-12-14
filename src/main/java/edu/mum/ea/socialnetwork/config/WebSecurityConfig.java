@@ -47,7 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("user").password("{noop}123456").roles("user").and().withUser("admin").password("123").roles("Admin").passwordEncoder(passwordEncoder());
         //using in
 //        auth.jdbcAuthentication()
-
     }
 
     @Override
@@ -59,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
 
             .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**","/images/**" ,"/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
-                .antMatchers("/", "/index", "/profile/**", "/profile").hasRole("USER")
+                .antMatchers("/", "/index", "/profile/**").hasRole("USER")
 
             .antMatchers( ).hasRole("ADMIN")
 

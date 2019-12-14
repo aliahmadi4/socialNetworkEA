@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -48,6 +49,7 @@ public class Profile {
     @OneToOne(mappedBy = "profile")
     private User user;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 

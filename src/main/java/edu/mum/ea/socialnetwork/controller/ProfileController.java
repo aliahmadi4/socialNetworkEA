@@ -1,7 +1,9 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
+import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.ProfileImageUploadService;
 import edu.mum.ea.socialnetwork.services.ProfileService;
 import edu.mum.ea.socialnetwork.services.UserService;
@@ -20,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ProfileController {
@@ -30,12 +33,13 @@ public class ProfileController {
     UserService userService;
     @Autowired
     ProfileImageUploadService profileImageUploadService;
+    @Autowired
+    PostService postService;
 
-    @ModelAttribute("profilePhoto")
-    public String profilePic(Principal principal){
+    @ModelAttribute("currentUser")
+    public Profile profilePic(Principal principal){
         User user = userService.findUserByName(principal.getName());
-        return user.getProfile().getProfilePhoto();
-
+        return user.getProfile();
     }
 
     @GetMapping("/profile/{id}")
@@ -44,15 +48,17 @@ public class ProfileController {
         Profile profile = profileService.findById(id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("profile", profile);
+        List<Post> posts = postService.findPost();
+        mav.addObject("posts", posts);
         mav.setViewName("profile");
         return mav;
     }
 
     @GetMapping("/profile/editProfile")
-    public String showEditProfile(Model model, Principal principal){
+    public String showEditProfile(@ModelAttribute("profile") Profile profile, Principal principal){
 
-        Profile profile = userService.findUserByName(principal.getName()).getProfile();
-        model.addAttribute("profile",profile);
+//        Profile profile = userService.findUserByName(principal.getName()).getProfile();
+//        model.addAttribute("profile",profile);
         return "editProfile";
     }
 
@@ -87,8 +93,25 @@ public class ProfileController {
     @GetMapping("/profile/myProfile")
     public String showMyProfile(Model model,Principal principal){
         User me = userService.findUserByName(principal.getName());
-        model.addAttribute("profile", me.getProfile());
-        return "myProfile";
+//        model.addAttribute("profile", me.getProfile());
+        return "redirect:/profile/"+me.getId();
+    }
+
+    @PostMapping("/profile/changePassword")
+    public String changePassword(@ModelAttribute Profile profile, @RequestParam("new-password") String password, @RequestParam("repeat-password") String repeat, Model model, Principal principal){
+        if(!password.equals(repeat)){
+            model.addAttribute("passwordError", "Password does not match!");
+            return "editProfile";
+        }
+        if(password.equals("")){
+            model.addAttribute("passwordError", "Password can not be empty!");
+            return "editProfile";
+        }
+
+        User currentUser = userService.findUserByName(principal.getName());
+        currentUser.setPassword(password);
+        userService.save(currentUser);
+        return "redirect:/profile/myProfile";
     }
 
 

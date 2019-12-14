@@ -24,7 +24,7 @@
                         </li>
 
                         <li>
-                            <a href="<c:url value='/profile/myProfile'/>" title="">
+                            <a href="<c:url value='/profile/${currentUser.id}'/>" title="">
                                 <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
                                 Profile
                             </a>
@@ -51,9 +51,8 @@
 
                     <div class="user-account">
                         <div class="user-info" style="width: 150px">
-<%--                        <img src=" <c:url value='/media/images/profile/${loginedUser.profilePic.length()>4 ? loginedUser.profilePic : "/media/images/user.jpg"}'/>--%>
-<%--                        " alt="" height="40px" width="40px">--%>
-        <img src="<c:url value='/media/profile/${profilePhoto}'/>" alt="ss" height="40px" width="40px">
+
+        <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto : "user.jpg"}'/>" alt="ss" height="40px" width="40px">
                                 <a href="#" title=""><security:authentication property="principal.username"/></a>
                                 <i class="la la-sort-down"></i>
                                 </div>

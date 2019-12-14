@@ -19,7 +19,7 @@
         <div class="add-pic-box">
             <div class="container">
                 <div class="row no-gutters">
-                    <c:if test="${loginedUser.userId}==${user.userId}">
+                    <c:if test="${currentUser.id}==${profile.id}">
                         <div class="col-lg-12 col-sm-12">
                             <input type="file" id="file">
                             <label for="file">Change Image</label>
@@ -41,7 +41,7 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "/media/user.jpg"}" alt="">
+                                        <img src="/media/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "user.jpg"}" alt="">
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -64,7 +64,7 @@
                                         <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
                                         <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
                                         <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
-                                        <c:if test="${loginedUser.userId==user.userId}">
+                                        <c:if test="${currentUser.id==profile.id}">
                                         <li><a href="/profile/editProfile">Edit Profile</a></li>
                                         </c:if>
 
@@ -79,7 +79,7 @@
                                 <div class="user-tab-sec rewivew">
                                     <h3>${profile.firstName} ${profile.lastName}</h3>
                                     <div class="star-descp">
-                                        <span>${user.description}</span>
+                                        <span>${profile.occupation}</span>
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -115,36 +115,73 @@
                                 </div>
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
-										<c:forEach var="i" items="${posts}">
-											<div class="post-bar">
-												<div class="post_topbar">
-													<div class="usy-dt">
-														<img src="<c:url value='/images/profile/${i.user.profilePic.length()>4 ? i.user.profilePic : "/images/profile/user.jpg"}'/>" alt="profile" width="45px" height="45px">
-														<div class="usy-name">
-															<h3>${i.user.firstName} ${i.user.lastName}</h3>
-															<span><img src="../../images/clock.png" alt="">${i.user.description}</span>
-														</div>
-													</div>
+                                        <c:forEach var="i" items="${posts}">
+                                            <div class="post-bar">
 
-												</div>
-												<div class="epi-sec">
+                                                <div class="post_topbar">
+                                                    <div class="usy-dt">
+                                                        <img src="<c:url value='/media/profile/${i.user.profile.profilePhoto.length()>4 ? i.user.profile.profilePhoto : "user.jpg"}'/>"
+                                                             alt="" width="45px" height="45px">
+                                                        <div class="usy-name">
+                                                            <a href="<c:url value='/profile/${i.user.id}' />">
+                                                                <h3>${i.user.profile.firstName} ${i.user.profile.lastName}</h3></a>
+                                                            <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${i.creationDate}"/></span>
+                                                        </div>
+                                                    </div>
 
-													&nbsp
-												</div>
-												<div class="job_descp">
+                                                </div>
+                                                <div class="epi-sec">
 
-													<p>${i.description}</p>
+                                                    &nbsp
+                                                </div>
+                                                <div class="job_descp">
 
-												</div>
-												<c:if test="${i.postPic.length() >3}" >
-													<div class="job_descp">
-														<img src="<c:url value='/images/post/${i.postPic}' />"/>
-													</div>
-												</c:if>
+                                                    <p>${i.text}</p>
 
-											</div>
-											<!--post-bar end-->
-										</c:forEach>
+                                                </div>
+                                                <c:if test="${i.photo.length() >3}">
+                                                    <div class="job_descp">
+                                                        <img src="<c:url value='/media/post/${i.photo}' />"/>
+                                                    </div>
+                                                </c:if>
+
+                                                <c:if test="${i.video.length() >3}">
+                                                    <div class="job_descp">
+                                                            <%--                                                    <img src="<c:url value='/media/post/${i.video}' />"/>--%>
+                                                        <video width="100%" controls>
+                                                            <source src="/media/post/${i.video}" type="video/mp4">
+                                                            Your browser does not support HTML5 video.
+                                                        </video>
+                                                    </div>
+
+
+                                                </c:if>
+                                                <div class="job-status-bar">
+                                                    <ul class="like-com">
+                                                        <li>
+                                                            <a href="#"><i class="fas fa-heart"></i> Like ${i.likeCount}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" ><i class="fas fa-comment-alt"></i> Comments ${i.commentCount}</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                                <div>
+                                                    <form class="post-comment" data-id="${post.id}" data-post="${post}">
+                                                        <input type="text" name="text" class="comment-text ${post.id}-text" required   />
+                                                        <input type="submit" class="comment-submit" value="Submit" >
+                                                    </form>
+                                                </div>
+                                                <div class="job-status-bar">
+                                                    <c:forEach items="${i.comments}" var="comment">
+                                                        <li> ${comment.text}</li>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+
+                                            <!--post-bar end-->
+                                        </c:forEach>
 <%--                                        <div class="process-comm">--%>
 <%--                                            <div class="spinner">--%>
 <%--                                                <div class="bounce1"></div>--%>
@@ -1348,7 +1385,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="right-sidebar">
-                                <c:if test="${loginedUser.userId==user.userId}">
+                                <c:if test="${currentUser.id==profile.id}">
                                 <div class="message-btn">
                                     <a href="<c:url value='/profile/editProfile'/>" title=""><i class="fas fa-cog"></i>
                                         Edit Profile</a>
@@ -1548,7 +1585,6 @@
     </div><!--overview-box end-->
 
 </div><!--theme-layout end-->
-
 
 <jsp:include page="layout/footerScript.jsp"/>
 </body>

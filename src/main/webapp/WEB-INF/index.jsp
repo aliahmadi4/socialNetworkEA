@@ -2,17 +2,424 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<security:csrfMetaTags />
+<html>
+
 <head>
     <jsp:include page="layout/head.jsp"/>
+<%--    <script type="text/javascript" src="<c:url value='/js/scroll.js' />"></script>--%>
+
 </head>
+
 <body>
-<jsp:include page="layout/navbar.jsp"/>
+
+<div class="wrapper">
+
+    <jsp:include page="layout/navbar.jsp"/>
+
+    <main>
+        <div class="main-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
 
 
-   <h1>INDEX</h1>
+                        <%--Left Sidebar--%>
+                        <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+                            <div class="main-left-sidebar no-margin">
+                                <div class="user-data full-width">
+                                    <div class="user-profile">
+                                        <div class="username-dt">
+                                            <div class="usr-pic">
+                                                <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto : "user.jpg"}' />"
+                                                     alt="" height="120px" width="120px"/>
+                                            </div>
+                                        </div><!--username-dt end-->
+                                        <div class="user-specs">
+                                            <h3>${currentUser.firstName} ${currentUser.lastName}</h3>
+                                            <span>${currentUser.occupation}</span>
+                                        </div>
+                                    </div><!--user-profile end-->
+                                    <ul class="user-fw-status">
+                                        <%--<li>
+                                            <h4>Following</h4>
+                                            <span>34</span>
+                                        </li>
+                                        <li>
+                                            <h4>Followers</h4>
+                                            <span>155</span>
+                                        </li>--%>
+                                        <li>
+                                            <a href="<c:url value='/profile/myProfile' />" title="">View Profile</a>
+                                        </li>
+                                    </ul>
+                                </div><!--user-data end-->
+
+                                <div class="suggestions full-width">
+                                    <div class="sd-title">
+                                        <h3>Suggestions</h3>
+                                        <%--                                        <i class="la la-ellipsis-v"></i>--%>
+                                    </div><!--sd-title end-->
+                                    <div id="follow" class="suggestions-list">
+
+                                        <c:forEach var="u" items="${userList}">
+                                            <div class="suggestion-usd">
+                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"
+                                                     alt=""
+                                                     width="45px" height="45px">
+                                                <div class="sgt-text">
+                                                    <h4>${u.firstName}</h4>
+                                                    <span>${u.lastName}</span>
+                                                </div>
+                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>
+
+                                            </div>
+                                        </c:forEach>
+
+                                    </div><!--suggestions-list end-->
+                                </div><!--suggestions end-->
+
+                            </div><!--main-left-sidebar end-->
+                        </div>
+
+
+                        <%--Middle Area--%>
+
+
+                        <div class="col-lg-6 col-md-8 no-pd">
+                            <div class="main-ws-sec">
+                                <div class="post-topbar">
+                                    <div class="user-picy">
+                                        <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto: "user.jpg"}'/>"
+                                             alt=""
+                                             height="50px" width="50px">
+                                    </div>
+                                    <div class="post-st">
+                                        <ul>
+                                            <li><a class="post_project" href="#" title="">Post</a></li>
+
+                                        </ul>
+                                    </div><!--post-st end-->
+                                </div><!--post-topbar end-->
+                                <div class="posts-section">
+
+                                    <c:forEach var="post" items="${allPost}">
+                                        <div class="post-bar">
+
+                                            <div class="post_topbar">
+                                                <div class="usy-dt">
+                                                    <img src="<c:url value='/media/profile/${post.user.profile.profilePhoto.length()>4 ? post.user.profile.profilePhoto : "user.jpg"}'/>"
+                                                         alt="" width="45px" height="45px">
+                                                    <div class="usy-name">
+                                                        <a href="<c:url value='/profile/${post.user.id}' />">
+                                                            <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>
+                                                        <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${post.creationDate}"/></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="epi-sec">
+
+                                                &nbsp
+                                            </div>
+                                            <div class="job_descp">
+
+                                                <p>${post.text}</p>
+
+                                            </div>
+                                            <c:if test="${post.photo.length() >3}">
+                                                <div class="job_descp">
+                                                    <img src="<c:url value='/media/post/${post.photo}' />"/>
+                                                </div>
+                                            </c:if>
+
+                                            <c:if test="${post.video.length() >3}">
+                                                <div class="job_descp">
+<%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
+                                                    <video width="100%" controls>
+                                                        <source src="/media/post/${post.video}" type="video/mp4">
+                                                        Your browser does not support HTML5 video.
+                                                    </video>
+                                                </div>
+
+
+                                            </c:if>
+                                            <div class="job-status-bar">
+                                                <ul class="like-com">
+                                                    <li>
+
+                                                        <a href="javascript:;" class="addlike" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
+
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                            <div>
+                                                <form class="post-comment" data-id="${post.id}" data-post="${post}">
+                                                    <input type="text" name="text" class="comment-text ${post.id}-text" required   />
+                                                    <input type="submit" class="comment-submit" value="Submit" >
+                                                </form>
+                                            </div>
+                                            <div class="job-status-bar">
+                                                <ul class="comments-list ${post.id}-commentlist">
+                                                <c:forEach items="${post.comments}" var="comment">
+
+                                                    <li> ${comment.text}</li>
+                                                </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!--post-bar end-->
+                                    </c:forEach>
+
+
+                                    <div class="process-comm">
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </div><!--process-comm end-->
+
+
+                                </div><!--posts-section end-->
+                            </div><!--main-ws-sec end-->
+                        </div>
+
+
+                        <%--Right Sidebar--%>
+
+
+                        <div class="col-lg-3 pd-right-none no-pd">
+                            <div class="right-sidebar">
+
+                                <div class="widget widget-ads">
+                                    <div>${ads.adsTitle}</div>
+                                    <img src="${ads.imageURL}"/>
+                                </div><!--widget-jobs end-->
+                                <div class="widget widget-weather">
+                                    <a style="width: 200px; margin-left: auto; margin-right: auto"
+                                       class="weatherwidget-io" href="https://forecast7.com/en/41d01n91d96/fairfield/"
+                                       data-label_1="FAIRFIELD"
+                                       data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated"
+                                       data-theme="clear">FAIRFIELD
+                                        WEATHER</a>
+                                </div><!--widget-about end-->
+                            </div><!--right-sidebar end-->
+                        </div>
+
+
+                    </div>
+                </div><!-- main-section-data end-->
+            </div>
+        </div>
+    </main>
+
+
+    <%--Modal--%>
+
+    <div class="post-popup pst-pj">
+        <div class="post-project">
+            <h3>New Post</h3>
+            <div class="post-project-fields">
+                <form:form modelAttribute="addPost" action="post" enctype="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form:textarea path="text" placeholder="Write here"></form:textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <ul>
+                                <li>
+                                    <button class="active" type="submit" value="post">Post</button>
+                                </li>
+                                <div class="add-pic-box">
+
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <input type="file" name="imageFile" id="image">
+                                            <label for="image">Select Image</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <input type="file" name="videoFile" id="video">
+                                            <label for="video">Select Video</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </form:form>
+            </div><!--post-project-fields end-->
+            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+        </div><!--post-project end-->
+    </div><!--post-project-popup end-->
+
+
+    <%--    <div class="post-popup job_post">--%>
+    <%--        <div class="post-project">--%>
+    <%--            <h3>Post a job</h3>--%>
+    <%--            <div class="post-project-fields">--%>
+    <%--                <form>--%>
+    <%--                    <div class="row">--%>
+    <%--                        <div class="col-lg-12">--%>
+    <%--                            <input type="text" name="title" placeholder="Title">--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-12">--%>
+    <%--                            <div class="inp-field">--%>
+    <%--                                <select>--%>
+    <%--                                    <option>Category</option>--%>
+    <%--                                    <option>Category 1</option>--%>
+    <%--                                    <option>Category 2</option>--%>
+    <%--                                    <option>Category 3</option>--%>
+    <%--                                </select>--%>
+    <%--                            </div>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-12">--%>
+    <%--                            <input type="text" name="skills" placeholder="Skills">--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-6">--%>
+    <%--                            <div class="price-br">--%>
+    <%--                                <input type="text" name="price1" placeholder="Price">--%>
+    <%--                                <i class="la la-dollar"></i>--%>
+    <%--                            </div>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-6">--%>
+    <%--                            <div class="inp-field">--%>
+    <%--                                <select>--%>
+    <%--                                    <option>Full Time</option>--%>
+    <%--                                    <option>Half time</option>--%>
+    <%--                                </select>--%>
+    <%--                            </div>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-12">--%>
+    <%--                            <textarea name="description" placeholder="Description"></textarea>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="col-lg-12">--%>
+    <%--                            <ul>--%>
+    <%--                                <li>--%>
+    <%--                                    <button class="active" type="submit" value="post">Post</button>--%>
+    <%--                                </li>--%>
+    <%--                                <li><a href="#" title="">Cancel</a></li>--%>
+    <%--                            </ul>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                </form>--%>
+    <%--            </div><!--post-project-fields end-->--%>
+    <%--            <a href="#" title=""><i class="la la-times-circle-o"></i></a>--%>
+    <%--        </div><!--post-project end-->--%>
+    <%--    </div><!--post-project-popup end-->--%>
+
+
+</div><!--theme-layout end-->
 <jsp:include page="layout/footerScript.jsp"/>
+<script type="text/javascript">
+    $(function(){
+
+        $(".addlike").click(function(){
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitLikes(postId)
+        })
+
+        function ajaxSubmitLikes(postId) {
+
+
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/addlike",
+                data: JSON.stringify(postId),
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                    $("."+postId+"-likes").text(likeIncrement);
+                    console.log("likeIncrement", likeIncrement);
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+
+        $(".post-comment").submit(function(e){
+            e.preventDefault();
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitComments(postId)
+        })
+
+        function ajaxSubmitComments(postId) {
+            console.log("PostID", postId);
+            var text = $("."+postId + "-text").val();
+            console.log("text", text);
+            var commentData = { "postId": postId, "text": text };
+            $.ajax({
+                type: "POST",
+                // contentType: "application/json",
+                url: "/addComment",
+                // data: JSON.stringify(commentData),
+                data: commentData,
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    // To increase comment count
+                    var commentIncrement = parseInt($("."+postId+"-comments").html()) + 1;
+                    $("."+postId+"-comments").text(commentIncrement);
+                    console.log("commentIncrement", commentIncrement);
+
+                    //To prepend comment
+                    $("."+postId+"-commentlist").prepend("<li>"+ text +"</li>");
+
+                    $("."+postId+"-text").val("");
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+    })
+</script>
+
+
+<script>
+    // !function (d, s, id) {
+    //     var js, fjs = d.getElementsByTagName(s)[0];
+    //     if (!d.getElementById(id)) {
+    //         js = d.createElement(s);
+    //         js.id = id;
+    //         js.src = 'https://weatherwidget.io/js/widget.min.js';
+    //         fjs.parentNode.insertBefore(js, fjs);
+    //     }
+    // }(document, 'script', 'weatherwidget-io-js');
+</script>
+
 </body>
+
 </html>
