@@ -37,85 +37,13 @@
                                    href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i
                                         class="fa fa-lock"></i>Change Password</a>
 
-                                <%--<a class="nav-item nav-link" id="security" data-toggle="tab" href="#security-login"
-                                   role="tab" aria-controls="security-login" aria-selected="false"><i
-                                        class="fa fa-user-secret"></i>Security and Login</a>--%>
-                                <%-- <a class="nav-item nav-link" id="nav-privacy-tab" data-toggle="tab" href="#privacy"
-                                    role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
-                                 <a class="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab" href="#blockking"
-                                    role="tab" aria-controls="blockking" aria-selected="false"><i
-                                         class="fa fa-cc-diners-club"></i>Blocking</a>
-                                 <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
-                                    href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
-                                    aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>--%>
+
                             </div>
                         </div><!--acc-leftbar end-->
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content" id="nav-tabContent">
-                            <%--                            <div class="tab-pane fade " id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">--%>
-                            <%--                               --%>
-                            <%--                            </div>--%>
-                            <%--                            <div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">--%>
-                            <%--                                <div class="acc-setting">--%>
-                            <%--                                    <h3>Profile Status</h3>--%>
-                            <%--                                    <div class="profile-bx-details">--%>
-                            <%--                                        <div class="row">--%>
-                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-                            <%--                                                <div class="profile-bx-info">--%>
-                            <%--                                                    <div class="pro-bx">--%>
-                            <%--                                                        <img src="images/pro-icon1.png" alt="">--%>
-                            <%--                                                        <div class="bx-info">--%>
-                            <%--                                                            <h3>$5,145</h3>--%>
-                            <%--                                                            <h5>Total Income</h5>--%>
-                            <%--                                                        </div><!--bx-info end-->--%>
-                            <%--                                                    </div><!--pro-bx end-->--%>
-                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-                            <%--                                                </div><!--profile-bx-info end-->--%>
-                            <%--                                            </div>--%>
-                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-                            <%--                                                <div class="profile-bx-info">--%>
-                            <%--                                                    <div class="pro-bx">--%>
-                            <%--                                                        <img src="images/pro-icon2.png" alt="">--%>
-                            <%--                                                        <div class="bx-info">--%>
-                            <%--                                                            <h3>$4,745</h3>--%>
-                            <%--                                                            <h5>Widthraw</h5>--%>
-                            <%--                                                        </div><!--bx-info end-->--%>
-                            <%--                                                    </div><!--pro-bx end-->--%>
-                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-                            <%--                                                </div><!--profile-bx-info end-->--%>
-                            <%--                                            </div>--%>
-                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-                            <%--                                                <div class="profile-bx-info">--%>
-                            <%--                                                    <div class="pro-bx">--%>
-                            <%--                                                        <img src="images/pro-icon3.png" alt="">--%>
-                            <%--                                                        <div class="bx-info">--%>
-                            <%--                                                            <h3>$1,145</h3>--%>
-                            <%--                                                            <h5>Sent</h5>--%>
-                            <%--                                                        </div><!--bx-info end-->--%>
-                            <%--                                                    </div><!--pro-bx end-->--%>
-                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-                            <%--                                                </div><!--profile-bx-info end-->--%>
-                            <%--                                            </div>--%>
-                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-                            <%--                                                <div class="profile-bx-info">--%>
-                            <%--                                                    <div class="pro-bx">--%>
-                            <%--                                                        <img src="images/pro-icon4.png" alt="">--%>
-                            <%--                                                        <div class="bx-info">--%>
-                            <%--                                                            <h3>130</h3>--%>
-                            <%--                                                            <h5>Total Projects</h5>--%>
-                            <%--                                                        </div><!--bx-info end-->--%>
-                            <%--                                                    </div><!--pro-bx end-->--%>
-                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-                            <%--                                                </div><!--profile-bx-info end-->--%>
-                            <%--                                            </div>--%>
-                            <%--                                        </div>--%>
-                            <%--                                    </div><!--profile-bx-details end-->--%>
-                            <%--                                    <div class="pro-work-status">--%>
-                            <%--                                        <!-- <h4>Work Status  -  Last Months Working Status</h4> -->--%>
-                            <%--                                    </div><!--pro-work-status end-->--%>
-                            <%--                                </div><!--acc-setting end-->--%>
-                            <%--                            </div>--%>
+
 
                             <div class="tab-pane fade show active" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
                                 <div class="acc-setting">

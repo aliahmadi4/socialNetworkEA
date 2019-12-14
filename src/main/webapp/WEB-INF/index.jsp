@@ -11,7 +11,28 @@
 <head>
     <jsp:include page="layout/head.jsp"/>
 <%--    <script type="text/javascript" src="<c:url value='/js/scroll.js' />"></script>--%>
-
+<style type="text/css">
+    ul.comments-list li {
+        padding: 10px;
+        margin: 0;
+        list-style: none;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+        display: block;
+        background: white;
+        color: #696868;
+    }
+    .cp-field {
+        float: left;
+        width: 100%;
+        margin-top: 29.4px;
+        padding: 0 0px;
+    }
+    .cp-field input {
+        height: 40px;
+        padding: 0 10px;
+    }
+</style>
 </head>
 
 <body>
@@ -162,8 +183,12 @@
                                             </div>
                                             <div>
                                                 <form class="post-comment" data-id="${post.id}" data-post="${post}">
-                                                    <input type="text" name="text" class="comment-text ${post.id}-text" required   />
-                                                    <input type="submit" class="comment-submit" value="Submit" >
+                                                    <div class="cp-field">
+                                                        <div class="cpp-fiel">
+                                                    <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="write your comment here" required   />
+                                                        </div>
+                                                    </div>
+                                                    <input type="submit" class="comment-submit" value="Submit" style="display: none">
                                                 </form>
                                             </div>
                                             <div class="job-status-bar">
