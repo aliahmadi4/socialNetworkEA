@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +31,20 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
     @Valid
     private Profile profile;
+
+
+    @JsonBackReference
+    @ManyToMany()
+    @JoinTable(name = "user_following",
+            joinColumns = {@JoinColumn(name = "user")},
+            inverseJoinColumns = {@JoinColumn(name = "following")})
+    List<User> following = new ArrayList<>();
+
+    public void addFollowing(User user){
+        following.add(user);
+    }
 }

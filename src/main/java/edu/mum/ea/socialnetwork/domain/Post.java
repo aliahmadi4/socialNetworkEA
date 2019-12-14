@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,6 +38,7 @@ public class Post {
     private Integer commentCount = 0;
     private boolean enabled;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
