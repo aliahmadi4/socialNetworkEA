@@ -5,13 +5,8 @@ import edu.mum.ea.socialnetwork.services.UnhealthyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,16 +20,15 @@ public class UnhealthyWordController {
     }
 
     @PostMapping(value = "/add")
-    public String addUnhealthyWord(@Valid @ModelAttribute("unhealthyWord") UnhealthyWord unhealthyWord,
-                                   BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "/add";
-        }
-        unhealthyWordService.addWord(unhealthyWord.getWord());
-        return "redirect:/wordAdded";
+    public void addUnhealthyWord(@RequestBody String newWord) {
+        unhealthyWordService.addWord(newWord);
     }
 
-    @GetMapping(value={"/", "/wordAdded"})
+    @PostMapping(value = "/delete")
+    public void deleteUnhealthyWord(@RequestBody String newWord) {
+        unhealthyWordService.deleteWord(newWord);
+    }
+    @GetMapping(value = "/")
     public String unhealthyWordList(Model model) {
         List<UnhealthyWord> unhealthyWordList = unhealthyWordService.getUnhealthyWordList();
         model.addAttribute(unhealthyWordList);

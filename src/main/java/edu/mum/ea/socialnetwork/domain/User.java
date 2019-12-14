@@ -1,6 +1,7 @@
 package edu.mum.ea.socialnetwork.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,8 +31,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @JsonBackReference
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @Valid
     private Profile profile;

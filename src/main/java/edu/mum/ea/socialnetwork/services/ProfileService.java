@@ -5,6 +5,9 @@ import edu.mum.ea.socialnetwork.domain.Profile;
 import java.util.List;
 
 public interface ProfileService {
+    Profile save(Profile profile);
+
+    Profile findById(Long id);
     Profile findById(Long id);
 
     List<Profile> findAll();
