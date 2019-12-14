@@ -60,8 +60,10 @@
 <%--                                        </ul>--%>
 <%--                                    </div><!--user_pro_status end-->--%>
                                     <ul class="social_links">
-                                        <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
-                                        <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
+                                        <c:if test="${profile.address.country.length()>2}" >
+                                            <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
+                                            <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
+                                        </c:if>
                                         <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
                                         <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
                                         <c:if test="${currentUser.id==profile.id}">
