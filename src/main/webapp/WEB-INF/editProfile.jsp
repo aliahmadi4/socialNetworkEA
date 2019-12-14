@@ -24,120 +24,239 @@
                     <div class="col-lg-3">
                         <div class="acc-leftbar">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-privcy-tab" data-toggle="tab" href="#privcy"
+                                   role="tab" aria-controls="privacy" aria-selected="true"><i
+                                        class="fa fa-info-circle"></i>Change
+                                    Info</a>
 
-                                <a class="nav-item nav-link active" id="nav-password-tab" data-toggle="tab"
-                                   href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="true"><i
-                                        class="fa fa-lock"></i>Change Password</a>
                                 <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
                                    href="#nav-notification" role="tab" aria-controls="nav-notification"
                                    aria-selected="false"><i class="fa fa-image"></i>Profile Picture</a>
-                                <a class="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab" href="#privcy"
-                                   role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-info-circle"></i>Change
-                                    Info</a>
+
+                                <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
+                                   href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i
+                                        class="fa fa-lock"></i>Change Password</a>
+
                                 <%--<a class="nav-item nav-link" id="security" data-toggle="tab" href="#security-login"
                                    role="tab" aria-controls="security-login" aria-selected="false"><i
                                         class="fa fa-user-secret"></i>Security and Login</a>--%>
-                               <%-- <a class="nav-item nav-link" id="nav-privacy-tab" data-toggle="tab" href="#privacy"
-                                   role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
-                                <a class="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab" href="#blockking"
-                                   role="tab" aria-controls="blockking" aria-selected="false"><i
-                                        class="fa fa-cc-diners-club"></i>Blocking</a>
-                                <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
-                                   href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
-                                   aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>--%>
+                                <%-- <a class="nav-item nav-link" id="nav-privacy-tab" data-toggle="tab" href="#privacy"
+                                    role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
+                                 <a class="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab" href="#blockking"
+                                    role="tab" aria-controls="blockking" aria-selected="false"><i
+                                         class="fa fa-cc-diners-club"></i>Blocking</a>
+                                 <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
+                                    href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
+                                    aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>--%>
                             </div>
                         </div><!--acc-leftbar end-->
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content" id="nav-tabContent">
-<%--                            <div class="tab-pane fade " id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">--%>
-<%--                               --%>
-<%--                            </div>--%>
-<%--                            <div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">--%>
-<%--                                <div class="acc-setting">--%>
-<%--                                    <h3>Profile Status</h3>--%>
-<%--                                    <div class="profile-bx-details">--%>
-<%--                                        <div class="row">--%>
-<%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-<%--                                                <div class="profile-bx-info">--%>
-<%--                                                    <div class="pro-bx">--%>
-<%--                                                        <img src="images/pro-icon1.png" alt="">--%>
-<%--                                                        <div class="bx-info">--%>
-<%--                                                            <h3>$5,145</h3>--%>
-<%--                                                            <h5>Total Income</h5>--%>
-<%--                                                        </div><!--bx-info end-->--%>
-<%--                                                    </div><!--pro-bx end-->--%>
-<%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-<%--                                                </div><!--profile-bx-info end-->--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-<%--                                                <div class="profile-bx-info">--%>
-<%--                                                    <div class="pro-bx">--%>
-<%--                                                        <img src="images/pro-icon2.png" alt="">--%>
-<%--                                                        <div class="bx-info">--%>
-<%--                                                            <h3>$4,745</h3>--%>
-<%--                                                            <h5>Widthraw</h5>--%>
-<%--                                                        </div><!--bx-info end-->--%>
-<%--                                                    </div><!--pro-bx end-->--%>
-<%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-<%--                                                </div><!--profile-bx-info end-->--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-<%--                                                <div class="profile-bx-info">--%>
-<%--                                                    <div class="pro-bx">--%>
-<%--                                                        <img src="images/pro-icon3.png" alt="">--%>
-<%--                                                        <div class="bx-info">--%>
-<%--                                                            <h3>$1,145</h3>--%>
-<%--                                                            <h5>Sent</h5>--%>
-<%--                                                        </div><!--bx-info end-->--%>
-<%--                                                    </div><!--pro-bx end-->--%>
-<%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-<%--                                                </div><!--profile-bx-info end-->--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
-<%--                                                <div class="profile-bx-info">--%>
-<%--                                                    <div class="pro-bx">--%>
-<%--                                                        <img src="images/pro-icon4.png" alt="">--%>
-<%--                                                        <div class="bx-info">--%>
-<%--                                                            <h3>130</h3>--%>
-<%--                                                            <h5>Total Projects</h5>--%>
-<%--                                                        </div><!--bx-info end-->--%>
-<%--                                                    </div><!--pro-bx end-->--%>
-<%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
-<%--                                                </div><!--profile-bx-info end-->--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div><!--profile-bx-details end-->--%>
-<%--                                    <div class="pro-work-status">--%>
-<%--                                        <!-- <h4>Work Status  -  Last Months Working Status</h4> -->--%>
-<%--                                    </div><!--pro-work-status end-->--%>
-<%--                                </div><!--acc-setting end-->--%>
-<%--                            </div>--%>
-                            <div class="tab-pane fade show active" id="nav-password" role="tabpanel"
+                            <%--                            <div class="tab-pane fade " id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">--%>
+                            <%--                               --%>
+                            <%--                            </div>--%>
+                            <%--                            <div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">--%>
+                            <%--                                <div class="acc-setting">--%>
+                            <%--                                    <h3>Profile Status</h3>--%>
+                            <%--                                    <div class="profile-bx-details">--%>
+                            <%--                                        <div class="row">--%>
+                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
+                            <%--                                                <div class="profile-bx-info">--%>
+                            <%--                                                    <div class="pro-bx">--%>
+                            <%--                                                        <img src="images/pro-icon1.png" alt="">--%>
+                            <%--                                                        <div class="bx-info">--%>
+                            <%--                                                            <h3>$5,145</h3>--%>
+                            <%--                                                            <h5>Total Income</h5>--%>
+                            <%--                                                        </div><!--bx-info end-->--%>
+                            <%--                                                    </div><!--pro-bx end-->--%>
+                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
+                            <%--                                                </div><!--profile-bx-info end-->--%>
+                            <%--                                            </div>--%>
+                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
+                            <%--                                                <div class="profile-bx-info">--%>
+                            <%--                                                    <div class="pro-bx">--%>
+                            <%--                                                        <img src="images/pro-icon2.png" alt="">--%>
+                            <%--                                                        <div class="bx-info">--%>
+                            <%--                                                            <h3>$4,745</h3>--%>
+                            <%--                                                            <h5>Widthraw</h5>--%>
+                            <%--                                                        </div><!--bx-info end-->--%>
+                            <%--                                                    </div><!--pro-bx end-->--%>
+                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
+                            <%--                                                </div><!--profile-bx-info end-->--%>
+                            <%--                                            </div>--%>
+                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
+                            <%--                                                <div class="profile-bx-info">--%>
+                            <%--                                                    <div class="pro-bx">--%>
+                            <%--                                                        <img src="images/pro-icon3.png" alt="">--%>
+                            <%--                                                        <div class="bx-info">--%>
+                            <%--                                                            <h3>$1,145</h3>--%>
+                            <%--                                                            <h5>Sent</h5>--%>
+                            <%--                                                        </div><!--bx-info end-->--%>
+                            <%--                                                    </div><!--pro-bx end-->--%>
+                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
+                            <%--                                                </div><!--profile-bx-info end-->--%>
+                            <%--                                            </div>--%>
+                            <%--                                            <div class="col-lg-3 col-md-6 col-sm-12">--%>
+                            <%--                                                <div class="profile-bx-info">--%>
+                            <%--                                                    <div class="pro-bx">--%>
+                            <%--                                                        <img src="images/pro-icon4.png" alt="">--%>
+                            <%--                                                        <div class="bx-info">--%>
+                            <%--                                                            <h3>130</h3>--%>
+                            <%--                                                            <h5>Total Projects</h5>--%>
+                            <%--                                                        </div><!--bx-info end-->--%>
+                            <%--                                                    </div><!--pro-bx end-->--%>
+                            <%--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>--%>
+                            <%--                                                </div><!--profile-bx-info end-->--%>
+                            <%--                                            </div>--%>
+                            <%--                                        </div>--%>
+                            <%--                                    </div><!--profile-bx-details end-->--%>
+                            <%--                                    <div class="pro-work-status">--%>
+                            <%--                                        <!-- <h4>Work Status  -  Last Months Working Status</h4> -->--%>
+                            <%--                                    </div><!--pro-work-status end-->--%>
+                            <%--                                </div><!--acc-setting end-->--%>
+                            <%--                            </div>--%>
+
+                            <div class="tab-pane fade show active" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
+                                <div class="acc-setting">
+                                    <h3 style="margin-left: 10px">Change Info</h3>
+                                    <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
+
+                                    <form:form method="post" action="/profile" modelAttribute="profile">
+
+
+                                        <div class="cp-field">
+                                            <h5>First Name</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="firstName" id="firstName"
+                                                            value="${currentUser.firstName}"/>
+                                                <form:errors path="firstName" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Last Name</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="lastName" id="lastName"
+                                                            value="${currentUser.lastName}"/>
+                                                <form:errors path="lastName" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Occupation</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="occupation" id="occupation"
+                                                            value="${currentUser.occupation}"/>
+                                                <form:errors path="occupation" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Email</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="email" path="email" id="email"
+                                                            value="${currentUser.email}"/>
+                                                <form:errors path="email" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Country</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="address.country" id="country"
+                                                            value="${currentUser.address.country}"/>
+                                                <form:errors path="address.country" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>State</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="address.state" id="state"
+                                                            value="${currentUser.address.state}"/>
+                                                <form:errors path="address.state" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>City</h5>
+                                            <div class="cpp-fiel">
+                                                <form:input type="text" path="address.city" id="city"
+                                                            value="${currentUser.address.city}"/>
+                                                <form:errors path="address.city" cssStyle="color : red;"/>
+                                                <i class="fa fa-lock"></i>
+                                            </div>
+                                        </div>
+
+                                        <form:input type="hidden" path="id" id="id" value="${currentUser.id}"/>
+                                        <form:errors path="id" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth"
+                                                    value="${currentUser.dateOfBirth}"/>
+                                        <form:errors path="dateOfBirth" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="joinDate" id="joinDate"
+                                                    value="${currentUser.joinDate}"/>
+                                        <form:errors path="joinDate" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="gender" id="gender"
+                                                    value="${currentUser.gender}" readonly="true"/>
+                                        <form:errors path="gender" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="noOfDisapprovedPosts" id="noOfUnhealthyPosts"
+                                                    value="${currentUser.noOfDisapprovedPosts}"/>
+                                        <form:errors path="noOfDisapprovedPosts" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="profilePhoto" id="profilePhoto"
+                                                    value="${currentUser.profilePhoto}"/>
+                                        <form:errors path="profilePhoto" cssStyle="color : red;"/>
+
+                                        <form:input type="hidden" path="address.id" id="profilePhoto"
+                                                    value="${currentUser.address.id}"/>
+                                        <form:errors path="address.id" cssStyle="color : red;"/>
+
+
+                                        <div class="save-stngs pd2">
+                                            <ul>
+                                                <li>
+                                                    <button type="submit">Save</button>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <!--save-stngs end-->
+
+                                    </form:form>
+                                </div><!--acc-setting end-->
+                            </div>
+                            <div class="tab-pane fade" id="nav-password" role="tabpanel"
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
                                     <h3 style="margin-left: 10px">Account Setting</h3>
                                     <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
                                     <form method="POST" action="<c:url value='/profile/changePassword' />">
-<%--                                        <div class="cp-field">--%>
-<%--                                            <h5>Old Password</h5>--%>
-<%--                                            <div class="cpp-fiel">--%>
-<%--                                                <input type="text" name="old-password" id="old-password"--%>
-<%--                                                       placeholder="Old Password" required>--%>
-<%--                                                <i class="fa fa-lock"></i>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
+                                        <%--                                        <div class="cp-field">--%>
+                                        <%--                                            <h5>Old Password</h5>--%>
+                                        <%--                                            <div class="cpp-fiel">--%>
+                                        <%--                                                <input type="text" name="old-password" id="old-password"--%>
+                                        <%--                                                       placeholder="Old Password" required>--%>
+                                        <%--                                                <i class="fa fa-lock"></i>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </div>--%>
                                         <div class="cp-field">
                                             <h5>New Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="new-password" id="new-password" placeholder="New Password">
+                                                <input type="text" name="new-password" id="new-password"
+                                                       placeholder="New Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Repeat Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="repeat-password" id="repeat-password" placeholder="Repeat Password">
+                                                <input type="text" name="repeat-password" id="repeat-password"
+                                                       placeholder="Repeat Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -181,110 +300,6 @@
 
                                 </div><!--acc-setting end-->
                             </div>
-
-
-                            <div class="tab-pane fade" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
-                                <div class="acc-setting">
-                                    <h3 style="margin-left: 10px">Change Info</h3>
-                                    <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
-
-                                    <form:form method="post" action="/profile" modelAttribute="profile">
-
-
-                                        <div class="cp-field">
-                                            <h5>First Name</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="firstName" id="firstName" value="${currentUser.firstName}" />
-                                                <form:errors path="firstName" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>Last Name</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="lastName" id="lastName" value="${currentUser.lastName}" />
-                                                <form:errors path="lastName" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>Occupation</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="occupation" id="occupation" value="${currentUser.occupation}" />
-                                                <form:errors path="occupation" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>Email</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="email" path="email" id="email" value="${currentUser.email}" />
-                                                <form:errors path="email" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>Country</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="address.country" id="country" value="${currentUser.address.country}" />
-                                                <form:errors path="address.country" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>State</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="address.state" id="state" value="${currentUser.address.state}" />
-                                                <form:errors path="address.state" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cp-field">
-                                            <h5>City</h5>
-                                            <div class="cpp-fiel">
-                                                <form:input type="text" path="address.city" id="city" value="${currentUser.address.city}" />
-                                                <form:errors path="address.city" cssStyle="color : red;" />
-                                                <i class="fa fa-lock"></i>
-                                            </div>
-                                        </div>
-
-                                        <form:input type="hidden" path="id" id="id" value="${currentUser.id}" />
-                                        <form:errors path="id" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="dateOfBirth" id="dateOfBirth" value="${currentUser.dateOfBirth}" />
-                                        <form:errors path="dateOfBirth" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="joinDate" id="joinDate" value="${currentUser.joinDate}" />
-                                        <form:errors path="joinDate" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="gender" id="gender" value="${currentUser.gender}" readonly="true"/>
-                                        <form:errors path="gender" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="noOfDisapprovedPosts" id="noOfUnhealthyPosts" value="${currentUser.noOfDisapprovedPosts}" />
-                                        <form:errors path="noOfDisapprovedPosts" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="profilePhoto" id="profilePhoto" value="${currentUser.profilePhoto}" />
-                                        <form:errors path="profilePhoto" cssStyle="color : red;" />
-
-                                        <form:input type="hidden" path="address.id" id="profilePhoto" value="${currentUser.address.id}" />
-                                        <form:errors path="address.id" cssStyle="color : red;" />
-
-
-
-
-                                        <div class="save-stngs pd2">
-                                            <ul>
-                                                <li>
-                                                    <button type="submit">Save</button>
-                                                </li>
-
-                                            </ul>
-                                        </div><!--save-stngs end-->
-
-                                    </form:form>
-                                </div><!--acc-setting end-->
-                            </div>
-
 
 
                             <%--<div class="tab-pane fade" id="security-login" role="tabpanel" aria-labelledby="security">
