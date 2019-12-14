@@ -8,7 +8,7 @@ public interface ProfileService {
     Profile save(Profile profile);
 
     Profile findById(Long id);
-    Profile findById(Long id);
+
 
     List<Profile> findAll();
 
