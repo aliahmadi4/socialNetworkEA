@@ -4,6 +4,9 @@ import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.repository.PostRepository;
 import edu.mum.ea.socialnetwork.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findAllPostForSpecificUser(Long id) {
        return postRepository.findAllPostForSpecificUser(id);
+    }
+
+    @Override
+    public Page<Post> allPostsPaged(int pageNo){
+        return postRepository.findAll(PageRequest.of(pageNo, 5, Sort.by("creationDate")));
     }
 
 }

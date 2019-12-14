@@ -6,10 +6,12 @@ import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 import java.security.Principal;
 import java.util.List;
@@ -33,8 +35,12 @@ public class HomeController {
     @GetMapping("/")
     public String post(@ModelAttribute("addPost") Post post, Model model) {
         List<Post> allPost = postService.findPost();
+        Page<Post> posts = postService.allPostsPaged(1);
+        for(Post p: posts){
+            System.out.println("p: "+ p);
+        }
         model.addAttribute("allPost", allPost);
-        System.out.println("POST PAGE: " + allPost.size());
+//        System.out.println("POST PAGE: " + allPost.size());
 
         return "index";
     }

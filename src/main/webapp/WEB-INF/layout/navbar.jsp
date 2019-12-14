@@ -51,8 +51,15 @@
 
                     <div class="user-account">
                         <div class="user-info" style="width: 150px">
+<c:choose>
+        <c:when test="${currentUser.profilePhoto.length()>4}" >
+        <img src="<c:url value='/media/profile/${currentUser.profilePhoto}'/>" alt="ss" height="40px" width="40px">
+        </c:when>
 
-        <img src="<c:url value='/media/profile/${currentUser.profilePhoto.length()>4 ? currentUser.profilePhoto : "user.jpg"}'/>" alt="ss" height="40px" width="40px">
+        <c:otherwise>
+            <img src="<c:url value='/images/user.jpg'/>" alt="ss" height="40px" width="40px">
+        </c:otherwise>
+</c:choose>
                                 <a href="#" title=""><security:authentication property="principal.username"/></a>
                                 <i class="la la-sort-down"></i>
                                 </div>
