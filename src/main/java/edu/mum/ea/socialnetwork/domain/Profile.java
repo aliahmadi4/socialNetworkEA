@@ -6,13 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Getter
@@ -46,18 +44,30 @@ public class Profile {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
+
+
+
     private Integer noOfDisapprovedPosts = 0;
     @JsonBackReference
     @OneToOne(mappedBy = "profile")
     private User user;
 
-    @OneToOne
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @Transient
-    private MultipartFile image;
 
     private String profilePhoto;
+
+    @Size(min = 3, max = 30)
+    private String occupation;
+
+
+
+
+
+
+
 
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,
                    @NotBlank String lastName, @NotNull @Past LocalDate dateOfBirth, LocalDate joinDate) {

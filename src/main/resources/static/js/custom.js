@@ -18,23 +18,23 @@ $(document).ready(function(){
 
     });
 
-    $("#saveInfo").click(function (event) {
-        event.preventDefault();
-        let firstName = $("#firstName").val();
-        let lastName = $("#lastName").val();
-        let description = $("#description").val();
-        let email = $("#email").val();
-
-        let domain = document.URL;
-        let url = domain.replace("view/user/editProfile.jsp","");
-        url = url + "changeInfo";
-
-        $.post(url, {"firstName": firstName, "lastName": lastName, "description": description, "email": email})
-            .then(function (response) {
-                alert(response);
-            })
-
-    });
+    // $("#saveInfo").click(function (event) {
+    //     event.preventDefault();
+    //     let firstName = $("#firstName").val();
+    //     let lastName = $("#lastName").val();
+    //     let description = $("#description").val();
+    //     let email = $("#email").val();
+    //
+    //     let domain = document.URL;
+    //     let url = domain.replace("view/user/editProfile.jsp","");
+    //     url = url + "changeInfo";
+    //
+    //     $.post(url, {"firstName": firstName, "lastName": lastName, "description": description, "email": email})
+    //         .then(function (response) {
+    //             alert(response);
+    //         })
+    //
+    // });
 
     $("#follow").on('click', 'span', function () {
 

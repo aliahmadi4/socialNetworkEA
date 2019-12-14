@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+
     @Override
     public User findUserById(Long id) {
         return userRepository.getOne(id);
@@ -59,4 +60,16 @@ public class UserServiceImpl implements UserService {
                 () -> new UsernameNotFoundException("Username:" + username + " not found!"));
         return user;
     }
+
+    @Override
+    public User rawSave(User user){
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
+
+
 }

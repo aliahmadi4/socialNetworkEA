@@ -6,7 +6,28 @@
     <jsp:include page="layout/head.jsp"/>
 </head>
 
-
+<style type="text/css">
+    ul.comments-list li {
+        padding: 10px;
+        margin: 0;
+        list-style: none;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+        display: block;
+        background: white;
+        color: #696868;
+    }
+    .cp-field {
+        float: left;
+        width: 100%;
+        margin-top: 29.4px;
+        padding: 0 0px;
+    }
+    .cp-field input {
+        height: 40px;
+        padding: 0 10px;
+    }
+</style>
 <body>
 
 
@@ -19,7 +40,7 @@
         <div class="add-pic-box">
             <div class="container">
                 <div class="row no-gutters">
-                    <c:if test="${loginedUser.userId}==${user.userId}">
+                    <c:if test="${currentUser.id}==${profile.id}">
                         <div class="col-lg-12 col-sm-12">
                             <input type="file" id="file">
                             <label for="file">Change Image</label>
@@ -41,7 +62,14 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="/media/images/profile/${profile.profilePhoto.length()>4 ? profile.profilePhoto : "media/images/user.jpg"}" alt="">
+                                        <c:choose>
+                                            <c:when test="${profile.profilePhoto.length()>4}">
+                                                <img src="/media/profile/${profile.profilePhoto}" alt="">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="<c:url value='/images/user.jpg'/>" alt="">
+                                            </c:otherwise>
+                                        </c:choose>
                                         <%--<div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="profilePic">
                                             <label for="file"><i class="fas fa-camera"></i></label>
@@ -60,12 +88,14 @@
 <%--                                        </ul>--%>
 <%--                                    </div><!--user_pro_status end-->--%>
                                     <ul class="social_links">
-                                        <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
-                                        <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
+                                        <c:if test="${profile.address.country.length()>2}" >
+                                            <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
+                                            <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
+                                        </c:if>
                                         <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
                                         <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
-                                        <c:if test="${loginedUser.userId==user.userId}">
-                                        <li><a href="editProfile">Edit Profile</a></li>
+                                        <c:if test="${currentUser.id==profile.id}">
+                                        <li><a href="/profile/editProfile">Edit Profile</a></li>
                                         </c:if>
 
 
@@ -79,7 +109,7 @@
                                 <div class="user-tab-sec rewivew">
                                     <h3>${profile.firstName} ${profile.lastName}</h3>
                                     <div class="star-descp">
-                                        <span>${user.description}</span>
+                                        <span>${profile.occupation}</span>
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -115,36 +145,86 @@
                                 </div>
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
-										<c:forEach var="i" items="${posts}">
-											<div class="post-bar">
-												<div class="post_topbar">
-													<div class="usy-dt">
-														<img src="<c:url value='/images/profile/${i.user.profilePic.length()>4 ? i.user.profilePic : "user.jpg"}'/>" alt="" width="45px" height="45px">
-														<div class="usy-name">
-															<h3>${i.user.firstName} ${i.user.lastName}</h3>
-															<span><img src="../../images/clock.png" alt="">${i.user.description}</span>
-														</div>
-													</div>
+                                        <c:forEach var="post" items="${posts}">
+                                            <div class="post-bar">
 
-												</div>
-												<div class="epi-sec">
+                                                <div class="post_topbar">
+                                                    <div class="usy-dt">
+                                                        <c:choose>
+                                                            <c:when test="${post.user.profile.profilePhoto.length()>4}">
+                                                                <img src="/media/profile/${post.user.profile.profilePhoto}" alt="" width="45px" height="45px">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <img src="<c:url value='/images/user.jpg'/>" alt="" width="45px" height="45px">
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <div class="usy-name">
+                                                            <a href="<c:url value='/profile/${post.user.id}' />">
+                                                                <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>
+                                                            <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${post.creationDate}"/></span>
+                                                        </div>
+                                                    </div>
 
-													&nbsp
-												</div>
-												<div class="job_descp">
+                                                </div>
+                                                <div class="epi-sec">
 
-													<p>${i.description}</p>
+                                                    &nbsp
+                                                </div>
+                                                <div class="job_descp">
 
-												</div>
-												<c:if test="${i.postPic.length() >3}" >
-													<div class="job_descp">
-														<img src="<c:url value='/images/post/${i.postPic}' />"/>
-													</div>
-												</c:if>
+                                                    <p>${post.text}</p>
 
-											</div>
-											<!--post-bar end-->
-										</c:forEach>
+                                                </div>
+                                                <c:if test="${post.photo.length() >3}">
+                                                    <div class="job_descp">
+                                                        <img src="<c:url value='/media/post/${post.photo}' />"/>
+                                                    </div>
+                                                </c:if>
+
+                                                <c:if test="${post.video.length() >3}">
+                                                    <div class="job_descp">
+
+                                                        <video width="100%" controls>
+                                                            <source src="/media/post/${post.video}" type="video/mp4">
+                                                            Your browser does not support HTML5 video.
+                                                        </video>
+                                                    </div>
+
+
+                                                </c:if>
+                                                <div class="job-status-bar">
+                                                    <ul class="like-com">
+                                                        <li>
+                                                            <a href="#"><i class="fas fa-heart"></i> Like ${post.likeCount}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" ><i class="fas fa-comment-alt"></i> Comments ${post.commentCount}</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                                <div>
+                                                    <form class="post-comment" data-id="${post.id}" data-post="${post}">
+                                                        <div class="cp-field">
+                                                            <div class="cpp-fiel">
+                                                                <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="write your comment here" required   />
+                                                            </div>
+                                                        </div>
+                                                        <input type="submit" class="comment-submit" value="Submit" style="display: none">
+                                                    </form>
+                                                </div>
+                                                <div class="job-status-bar">
+                                                    <ul class="comments-list ${post.id}-commentlist">
+                                                        <c:forEach items="${post.comments}" var="comment">
+
+                                                            <li> ${comment.text}</li>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <!--post-bar end-->
+                                        </c:forEach>
 <%--                                        <div class="process-comm">--%>
 <%--                                            <div class="spinner">--%>
 <%--                                                <div class="bounce1"></div>--%>
@@ -1348,44 +1428,22 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="right-sidebar">
-                                <c:if test="${loginedUser.userId==user.userId}">
+                                <c:if test="${currentUser.id==profile.id}">
                                 <div class="message-btn">
-                                    <a href="<c:url value='/editProfile'/>" title=""><i class="fas fa-cog"></i>
+                                    <a href="<c:url value='/profile/editProfile'/>" title=""><i class="fas fa-cog"></i>
                                         Edit Profile</a>
                                 </div>
                                 </c:if>
                                 <div class="widget widget-portfolio">
                                     <div class="wd-heady">
-                                        <h3>My Portfolio</h3>
-                                        <img src="images/photo-icon.png" alt="">
+                                        <h3>About Me</h3>
+                                        <img src="/images/photo-icon.png" alt="">
                                     </div>
                                     <div class="pf-gallery">
-                                        <ul>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery1.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery2.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery3.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery4.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery5.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery6.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery7.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery8.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery9.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery10.png"
-                                                                          alt=""></a></li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery11.png"
-                                                                          alt=""></a></li>
-                                            <li><a href="#" title=""><img src="images/resources/pf-gallery12.png"
-                                                                          alt=""></a></li>
-                                        </ul>
+                                        <div>
+                                            <p>My name is ${profile.firstName} ${profile.lastName} but you can call me ${profile.firstName}. If you want to contact me please dont hesitate to email me by ${profile.email}</p>
+                                        </div>
+
                                     </div><!--pf-gallery end-->
                                 </div><!--widget-portfolio end-->
                             </div><!--right-sidebar end-->
@@ -1549,13 +1607,90 @@
 
 </div><!--theme-layout end-->
 
+<jsp:include page="layout/footerScript.jsp"/>
+<script type="text/javascript">
+    $(function(){
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/flatpickr.min.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+        $(".addlike").click(function(){
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitLikes(postId)
+        })
+
+        function ajaxSubmitLikes(postId) {
+
+
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/addlike",
+                data: JSON.stringify(postId),
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                    $("."+postId+"-likes").text(likeIncrement);
+                    console.log("likeIncrement", likeIncrement);
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+
+        $(".post-comment").submit(function(e){
+            e.preventDefault();
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitComments(postId)
+        })
+
+        function ajaxSubmitComments(postId) {
+            console.log("PostID", postId);
+            var text = $("."+postId + "-text").val();
+            console.log("text", text);
+            var commentData = { "postId": postId, "text": text };
+            $.ajax({
+                type: "POST",
+                // contentType: "application/json",
+                url: "/addComment",
+                // data: JSON.stringify(commentData),
+                data: commentData,
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    // To increase comment count
+                    var commentIncrement = parseInt($("."+postId+"-comments").html()) + 1;
+                    $("."+postId+"-comments").text(commentIncrement);
+                    console.log("commentIncrement", commentIncrement);
+
+                    //To prepend comment
+                    $("."+postId+"-commentlist").prepend("<li>"+ text +"</li>");
+
+                    $("."+postId+"-text").val("");
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+    })
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/my-profile-feed.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:23:00 GMT -->

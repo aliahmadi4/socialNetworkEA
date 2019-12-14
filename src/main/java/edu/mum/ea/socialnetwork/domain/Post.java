@@ -1,5 +1,6 @@
 package edu.mum.ea.socialnetwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class Post {
     private boolean unhealthy = false;
     private boolean enabled;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
