@@ -11,4 +11,6 @@ public interface PostService {
 
     Post findPostById(Long id);
 
+    List<Post> findAllPostForSpecificUser(Long id);
+
 }

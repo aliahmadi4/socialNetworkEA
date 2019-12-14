@@ -26,4 +26,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.getOne(id);
     }
 
+    @Override
+    public List<Post> findAllPostForSpecificUser(Long id) {
+       return postRepository.findAllPostForSpecificUser(id);
+    }
+
 }

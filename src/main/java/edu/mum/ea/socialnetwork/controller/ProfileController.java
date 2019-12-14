@@ -48,7 +48,7 @@ public class ProfileController {
         Profile profile = profileService.findById(id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("profile", profile);
-        List<Post> posts = postService.findPost();
+        List<Post> posts = postService.findAllPostForSpecificUser(id);
         mav.addObject("posts", posts);
         mav.setViewName("profile");
         return mav;

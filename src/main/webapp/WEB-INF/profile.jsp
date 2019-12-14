@@ -6,7 +6,28 @@
     <jsp:include page="layout/head.jsp"/>
 </head>
 
-
+<style type="text/css">
+    ul.comments-list li {
+        padding: 10px;
+        margin: 0;
+        list-style: none;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+        display: block;
+        background: white;
+        color: #696868;
+    }
+    .cp-field {
+        float: left;
+        width: 100%;
+        margin-top: 29.4px;
+        padding: 0 0px;
+    }
+    .cp-field input {
+        height: 40px;
+        padding: 0 10px;
+    }
+</style>
 <body>
 
 
@@ -117,17 +138,17 @@
                                 </div>
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
-                                        <c:forEach var="i" items="${posts}">
+                                        <c:forEach var="post" items="${posts}">
                                             <div class="post-bar">
 
                                                 <div class="post_topbar">
                                                     <div class="usy-dt">
-                                                        <img src="<c:url value='/media/profile/${i.user.profile.profilePhoto.length()>4 ? i.user.profile.profilePhoto : "user.jpg"}'/>"
+                                                        <img src="<c:url value='/media/profile/${post.user.profile.profilePhoto.length()>4 ? post.user.profile.profilePhoto : "user.jpg"}'/>"
                                                              alt="" width="45px" height="45px">
                                                         <div class="usy-name">
-                                                            <a href="<c:url value='/profile/${i.user.id}' />">
-                                                                <h3>${i.user.profile.firstName} ${i.user.profile.lastName}</h3></a>
-                                                            <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${i.creationDate}"/></span>
+                                                            <a href="<c:url value='/profile/${post.user.id}' />">
+                                                                <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>
+                                                            <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${post.creationDate}"/></span>
                                                         </div>
                                                     </div>
 
@@ -138,20 +159,20 @@
                                                 </div>
                                                 <div class="job_descp">
 
-                                                    <p>${i.text}</p>
+                                                    <p>${post.text}</p>
 
                                                 </div>
-                                                <c:if test="${i.photo.length() >3}">
+                                                <c:if test="${post.photo.length() >3}">
                                                     <div class="job_descp">
-                                                        <img src="<c:url value='/media/post/${i.photo}' />"/>
+                                                        <img src="<c:url value='/media/post/${post.photo}' />"/>
                                                     </div>
                                                 </c:if>
 
-                                                <c:if test="${i.video.length() >3}">
+                                                <c:if test="${post.video.length() >3}">
                                                     <div class="job_descp">
-                                                            <%--                                                    <img src="<c:url value='/media/post/${i.video}' />"/>--%>
+
                                                         <video width="100%" controls>
-                                                            <source src="/media/post/${i.video}" type="video/mp4">
+                                                            <source src="/media/post/${post.video}" type="video/mp4">
                                                             Your browser does not support HTML5 video.
                                                         </video>
                                                     </div>
@@ -161,24 +182,31 @@
                                                 <div class="job-status-bar">
                                                     <ul class="like-com">
                                                         <li>
-                                                            <a href="#"><i class="fas fa-heart"></i> Like ${i.likeCount}</a>
+                                                            <a href="#"><i class="fas fa-heart"></i> Like ${post.likeCount}</a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" ><i class="fas fa-comment-alt"></i> Comments ${i.commentCount}</a>
+                                                            <a href="#" ><i class="fas fa-comment-alt"></i> Comments ${post.commentCount}</a>
                                                         </li>
                                                     </ul>
 
                                                 </div>
                                                 <div>
                                                     <form class="post-comment" data-id="${post.id}" data-post="${post}">
-                                                        <input type="text" name="text" class="comment-text ${post.id}-text" required   />
-                                                        <input type="submit" class="comment-submit" value="Submit" >
+                                                        <div class="cp-field">
+                                                            <div class="cpp-fiel">
+                                                                <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="write your comment here" required   />
+                                                            </div>
+                                                        </div>
+                                                        <input type="submit" class="comment-submit" value="Submit" style="display: none">
                                                     </form>
                                                 </div>
                                                 <div class="job-status-bar">
-                                                    <c:forEach items="${i.comments}" var="comment">
-                                                        <li> ${comment.text}</li>
-                                                    </c:forEach>
+                                                    <ul class="comments-list ${post.id}-commentlist">
+                                                        <c:forEach items="${post.comments}" var="comment">
+
+                                                            <li> ${comment.text}</li>
+                                                        </c:forEach>
+                                                    </ul>
                                                 </div>
                                             </div>
 
@@ -1567,6 +1595,89 @@
 </div><!--theme-layout end-->
 
 <jsp:include page="layout/footerScript.jsp"/>
+<script type="text/javascript">
+    $(function(){
+
+        $(".addlike").click(function(){
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitLikes(postId)
+        })
+
+        function ajaxSubmitLikes(postId) {
+
+
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/addlike",
+                data: JSON.stringify(postId),
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                    $("."+postId+"-likes").text(likeIncrement);
+                    console.log("likeIncrement", likeIncrement);
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+
+        $(".post-comment").submit(function(e){
+            e.preventDefault();
+            var postId = $(this).data("id");
+            var post = $(this).data("post");
+            // alert("Like me: " + post);
+            ajaxSubmitComments(postId)
+        })
+
+        function ajaxSubmitComments(postId) {
+            console.log("PostID", postId);
+            var text = $("."+postId + "-text").val();
+            console.log("text", text);
+            var commentData = { "postId": postId, "text": text };
+            $.ajax({
+                type: "POST",
+                // contentType: "application/json",
+                url: "/addComment",
+                // data: JSON.stringify(commentData),
+                data: commentData,
+                dataType: 'json',
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                success: function (data) {
+                    // alert("success");
+                    console.log("SUCCESS : ", data);
+
+                    // To increase comment count
+                    var commentIncrement = parseInt($("."+postId+"-comments").html()) + 1;
+                    $("."+postId+"-comments").text(commentIncrement);
+                    console.log("commentIncrement", commentIncrement);
+
+                    //To prepend comment
+                    $("."+postId+"-commentlist").prepend("<li>"+ text +"</li>");
+
+                    $("."+postId+"-text").val("");
+
+                },
+                error: function (e) {
+                    alert("Really sorry, something went wrong. Please try later")
+                    console.log("ERROR : ", e);
+                }
+            });
+
+        }
+    })
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/my-profile-feed.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:23:00 GMT -->
