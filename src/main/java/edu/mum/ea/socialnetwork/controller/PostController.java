@@ -32,9 +32,14 @@ public class PostController {
     UserService userService;
 
     @GetMapping(value = "/post")
-    public String post(@ModelAttribute("addPost") Post post, Model model) {
+    public String post(@ModelAttribute("addPost") Post post, Model model, Principal principal) {
         List<Post> allPost = postService.findPost();
+
+        //To get user ID
+        User currentUser = userService.findUserByName(principal.getName());
+
         model.addAttribute("allPost", allPost);
+        model.addAttribute("userId", currentUser.getId());
         System.out.println("POST PAGE: " + allPost.size());
 
         return "post";

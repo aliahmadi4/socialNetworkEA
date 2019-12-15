@@ -9,6 +9,7 @@ import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.Set;
 
 @RestController
 public class LikeController {
@@ -22,7 +23,7 @@ public class LikeController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/addlike")
+    @PostMapping(value = "/like")
     public Likes addLike(@RequestBody Long id, Principal principal) {
         System.out.println("I am inside addLike method" + id);
 
@@ -35,6 +36,21 @@ public class LikeController {
         likes.setUser(currentUser);
         likes.addPost(post);
         return likeService.save(likes);
+
+    }
+
+
+    @DeleteMapping(value = "/like")
+    public Likes removeLike(@RequestParam Long likeId, @RequestParam Long postId, Principal principal) {
+        System.out.println("I am inside addLike method likeId: " + likeId);
+        System.out.println("I am inside addLike method postId: " + postId);
+        Likes like = likeService.find(likeId);
+
+        Post post = postService.findPostById(postId);
+        post.removeLike(like);
+
+        likeService.remove(like);
+        return like;
 
     }
 
