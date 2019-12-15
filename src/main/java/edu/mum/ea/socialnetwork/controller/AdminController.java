@@ -1,42 +1,61 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Role;
+import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+import java.util.Locale;
+
+@RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
 
     private AdminService adminService;
+    private MessageSource messageSource;
 
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, MessageSource messageSource) {
         this.adminService = adminService;
+        this.messageSource = messageSource;
     }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("/deactivatedUsers")
-    public String getDeactivatedUsers(Model model) {
-        model.addAttribute("userList", adminService.getDeactivatedUsers());
-        return "userList";
+    public ModelAndView getDeactivatedUsers() {
+        ModelAndView mav = new ModelAndView();
+        List<User> users = adminService.getDeactivatedUsers();
+        mav.addObject("userList", adminService.getDeactivatedUsers());
+        mav.setViewName("userList");
+        return mav;
     }
 
     @Secured("ROLE_ADMIN")
-    @PostMapping("/activateUser")
-    public void activateUsers(@RequestBody Long userId) {
-        adminService.activateUser(userId);
+    @PostMapping("/toggleUser")
+    public String toggleUser(@RequestBody Long userId) {
+        adminService.toggleUser(userId);
+        if (adminService.userIsEnabled(userId)) {
+            return messageSource.getMessage("UserList.Disable", null, LocaleContextHolder.getLocale());
+        }
+        return messageSource.getMessage("UserList.Enable", null, LocaleContextHolder.getLocale());
     }
 
     @GetMapping("/manageUserRoles")
     @Secured("ROLE_ADMIN")
-    public String getUsers(Model model) {
-        model.addAttribute("userList", adminService.getUsers());
-        return "userList";
+    public ModelAndView getUsers() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userList", adminService.getUsers());
+        mav.setViewName("userList");
+        return mav;
     }
 
     @Secured("ROLE_ADMIN")
@@ -47,9 +66,11 @@ public class AdminController {
 
     @Secured({"ROLE_ADMIN", "ROLE_CONTENT_MANAGER"})
     @GetMapping("/unhealthyPosts")
-    public String getUnhealthyPosts(Model model) {
-        model.addAttribute("postList", adminService.getUnhealthyPosts());
-        return "unhealthyPosts";
+    public ModelAndView getUnhealthyPosts(Model model) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("postList", adminService.getUnhealthyPosts());
+        mav.setViewName("unhealthyPosts");
+        return mav;
     }
 
     @Secured({"ROLE_ADMIN", "ROLE_CONTENT_MANAGER"})

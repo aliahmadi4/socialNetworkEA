@@ -5,10 +5,12 @@ import edu.mum.ea.socialnetwork.repository.UnhealthyWordRepository;
 import edu.mum.ea.socialnetwork.services.UnhealthyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UnhealthyWordsServiceImpl implements UnhealthyWordService {
 
     private UnhealthyWordRepository unhealthyWordRepository;

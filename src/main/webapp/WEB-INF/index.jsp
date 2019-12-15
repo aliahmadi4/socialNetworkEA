@@ -94,19 +94,19 @@
                                     </div><!--sd-title end-->
                                     <div id="follow" class="suggestions-list">
 
-                                        <c:forEach var="u" items="${userList}">
-                                            <div class="suggestion-usd">
-                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"
-                                                     alt=""
-                                                     width="45px" height="45px">
-                                                <div class="sgt-text">
-                                                    <h4>${u.firstName}</h4>
-                                                    <span>${u.lastName}</span>
-                                                </div>
-                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>
+<%--                                        <c:forEach var="u" items="${userList}">--%>
+<%--                                            <div class="suggestion-usd">--%>
+<%--                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"--%>
+<%--                                                     alt=""--%>
+<%--                                                     width="45px" height="45px">--%>
+<%--                                                <div class="sgt-text">--%>
+<%--                                                    <h4>${u.firstName}</h4>--%>
+<%--                                                    <span>${u.lastName}</span>--%>
+<%--                                                </div>--%>
+<%--                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>--%>
 
-                                            </div>
-                                        </c:forEach>
+<%--                                            </div>--%>
+<%--                                        </c:forEach>--%>
 
                                     </div><!--suggestions-list end-->
                                 </div><!--suggestions end-->

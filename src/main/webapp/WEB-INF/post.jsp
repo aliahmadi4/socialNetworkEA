@@ -6,7 +6,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:csrfMetaTags />
 <html>
-
+<head>
+    <jsp:include page="layout/head.jsp"/>
+</head>
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:26 GMT -->
 <head>
     <meta charset="UTF-8">

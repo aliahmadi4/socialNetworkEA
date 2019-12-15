@@ -1,8 +1,8 @@
-$(document).ready(function () {
+$(function () {
 
-    $(".activateUser").click(function () {
+    $(".toggleUser").click(function () {
         let userId = $(this).data("id");
-        enableUser(userId);
+        toggleUser(userId);
     });
 
     $(".setUserRole").click(function () {
@@ -35,18 +35,19 @@ $(document).ready(function () {
         deleteUnhealthyWord(word);
     });
 
-    function enableUser(userId) {
+    function toggleUser(userId) {
         $.ajax({
             type: "POST",
-            url: "/admin/activateUser",
+            url: "/admin/toggleUser",
             contentType: "application/json",
             data: JSON.stringify(userId),
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function (data) {
-                alert("User activated successfully");
+                $('#' +${user.id} +'-CurrentEnabled').text(data);
+                alert("User status changed successfully.");
             },
             error: function (error) {
-                alert("Unable to activate user.");
+                alert("Unable to change user status.");
             }
         });
     }
@@ -65,7 +66,8 @@ $(document).ready(function () {
             }
             ,
             success: function (data) {
-                alert(newUserRole + "role set to " + userId + " successfully.");
+                $('#' +${user.id} +'-CurrentRole').text(newUserRole);
+                alert(newUserRole + "role assigned to " + userId + " successfully.");
             }
             ,
             error: function (error) {
@@ -124,4 +126,4 @@ $(document).ready(function () {
             }
         });
     }
-});
+})
