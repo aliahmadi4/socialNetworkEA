@@ -242,6 +242,7 @@
 
 
                                 </div><!--posts-section end-->
+                                <div class="load-area" data-id="${currentUser.id}" ></div>
                                 <div class="process-comm">
                                     <button class="btn btn-danger" id="loadmore">Load more</button>
                                 </div>
@@ -372,6 +373,11 @@
     });
 </script>
 <jsp:include page="layout/footerScript.jsp"/>
+
+//for loading more posts
+<script src="/js/loadmore.js" type="text/javascript"></script>
+
+
 <script type="text/javascript">
     $(function(){
 
@@ -411,6 +417,7 @@
         // }
 
         $(".addlike").click(function(){
+            alert("hoy")
             var postId = $(this).data("id");
             var post = $(this).data("post");
             // alert("Like me: " + post);
@@ -517,89 +524,7 @@
 
         }
 
-        let page =0;
-        $("#loadmore").click(function () {
-            page +=1;
-            loadMorePost(page);
-        })
 
-        function loadMorePost(page){
-            console.log(page);
-            $.ajax({
-                type: "GET",
-                url: "/"+page,
-                dataType: 'json',
-                success: function(data){
-                    // alert(data.content[0].text)
-                    let result = [];
-                    $(data.content).each(function(index, post){
-    '<div class="post-bar">'+
-
-    '<div class="post_topbar">'+
-        '<div class="usy-dt">'+
-            '<img src="/media/profile/' + post.user.profile.profilePhoto + '" alt="" width="45px" height="45px">'+
-            '<div class="usy-name">'+
-            '<a href="/profile/'+ post.user.id + '" />'+
-            '<h3>'+post.user.profile.firstName+' '+post.user.profile.lastName+'</h3></a>'+
-            '<span><img src="/images/clock.png" alt="">'+post.creationDate+'"/></span>'+
-            '</div>'+
-            '</div>'+
-        '</div>'+
-        '<div class="epi-sec">'+
-        '&nbsp'+
-        '</div>'+
-        '<div class="job_descp">'+
-        '<p>'+post.text+'</p>'+
-        '</div>'+
-        '<div class="job_descp">'+
-        '<img src="/media/post/'+post.photo+' "/>'+
-        '</div>'+
-        '<div class="job_descp">'+
-        '<video width="100%" controls>'+
-        '<source src="/media/post/'+post.video+'" type="video/mp4">'+
-        'Your browser does not support HTML5 video.'+
-        '</video>'+
-        '</div>'+
-
-        '<div class="job-status-bar">'+
-        '<ul class="like-com">'+
-        '<li>'+
-
-        '<a href="javascript:;" class="addlike" data-id="'+post.id+' data-post='+post+'">'+
-        '<i class="fas fa-heart"></i>'+
-        '<span class="'+post.id+'-likes">'+post.likeCount+'</span> Like'+
-        '</a>'+
-        '</li>'+
-        '<li>'+
-        '<a href="javascript:;" class="addcomment " data-id="'+post.id+' data-post='+post+'"><i class="fas fa-comment-alt"></i><span class="'+post.id+'-comments">'+post.commentCount+'</span> Comments</a>'+
-
-        '</li>'+
-        '</ul>'+
-
-        '</div>'+
-        '<div>'+
-        '<form class="post-comment" data-id="'+post.id+' data-post="'+post+'">'+
-
-        '<div class="cp-field">'+
-        '<div class="cpp-fiel">'+
-        '<input type="text" name="text" class="comment-text '+post.id+'-text" placeholder="write your comment here" required   />'+
-        '</div>'+
-        '</div>'+
-        '<input type="submit" class="comment-submit" value="Submit" style="display: none">'+
-        '</form>'+
-        '</div>'+
-        '<div class="job-status-bar">'+
-        '<ul class="comments-list '+post.id+'-commentlist">'+
-
-        '</ul>'+
-        '</div>'+
-    '</div>'
-                    })
-                    console.log(result);
-                    // $(".posts-section").append(result)
-                }
-            })
-        }
     })
 </script>
 

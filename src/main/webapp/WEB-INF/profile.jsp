@@ -276,6 +276,11 @@
 </div><!--theme-layout end-->
 
 <jsp:include page="layout/footerScript.jsp"/>
+
+//for loading more posts
+<script src="/js/loadmore.js" type="text/javascript"></script>
+
+
 <script type="text/javascript">
 
     $(function() {
