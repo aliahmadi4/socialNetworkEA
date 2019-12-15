@@ -7,7 +7,7 @@
 <html>
 <head>
     <jsp:include page="layout/head.jsp"/>
-
+    <script type="text/javascript" src="/js/postAndUserManagement_Aser.js"></script>
 </head>
 
 
@@ -105,7 +105,7 @@
 
 
 <jsp:include page="layout/footerScript.jsp"/>
-<script type="text/javascript" src="/js/postAndUserManagement_Aser.js"/>
+
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/editProfile.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:26 GMT -->
