@@ -138,7 +138,7 @@
                                 </div><!--post-topbar end-->
                                 <div class="posts-section">
 
-                                    <c:forEach var="post" items="${allPost}">
+                                    <c:forEach var="post" items="${allPost.content}">
                                         <div class="post-bar">
 
                                             <div class="post_topbar">
@@ -189,7 +189,10 @@
                                                 <ul class="like-com">
                                                     <li>
 
-                                                        <a href="javascript:;" class="addlike" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                                        <a href="javascript:;" class="addlike" data-id="${post.id}" data-post="${post}">
+                                                            <i class="fas fa-heart"></i>
+                                                            <span class="${post.id}-likes">${post.likeCount}</span> Like
+                                                        </a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
@@ -222,16 +225,20 @@
                                     </c:forEach>
 
 
-                                    <div class="process-comm">
-                                        <div class="spinner">
-                                            <div class="bounce1"></div>
-                                            <div class="bounce2"></div>
-                                            <div class="bounce3"></div>
-                                        </div>
-                                    </div><!--process-comm end-->
+
+<%--                                    <div class="process-comm">--%>
+<%--                                        <div class="spinner">--%>
+<%--                                            <div class="bounce1"></div>--%>
+<%--                                            <div class="bounce2"></div>--%>
+<%--                                            <div class="bounce3"></div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
 
 
                                 </div><!--posts-section end-->
+                                <div class="process-comm">
+                                    <button class="btn btn-danger" id="loadmore">Load more</button>
+                                </div>
                             </div><!--main-ws-sec end-->
                         </div>
 
@@ -306,61 +313,6 @@
             <a href="#" title=""><i class="la la-times-circle-o"></i></a>
         </div><!--post-project end-->
     </div><!--post-project-popup end-->
-
-
-    <%--    <div class="post-popup job_post">--%>
-    <%--        <div class="post-project">--%>
-    <%--            <h3>Post a job</h3>--%>
-    <%--            <div class="post-project-fields">--%>
-    <%--                <form>--%>
-    <%--                    <div class="row">--%>
-    <%--                        <div class="col-lg-12">--%>
-    <%--                            <input type="text" name="title" placeholder="Title">--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-12">--%>
-    <%--                            <div class="inp-field">--%>
-    <%--                                <select>--%>
-    <%--                                    <option>Category</option>--%>
-    <%--                                    <option>Category 1</option>--%>
-    <%--                                    <option>Category 2</option>--%>
-    <%--                                    <option>Category 3</option>--%>
-    <%--                                </select>--%>
-    <%--                            </div>--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-12">--%>
-    <%--                            <input type="text" name="skills" placeholder="Skills">--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-6">--%>
-    <%--                            <div class="price-br">--%>
-    <%--                                <input type="text" name="price1" placeholder="Price">--%>
-    <%--                                <i class="la la-dollar"></i>--%>
-    <%--                            </div>--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-6">--%>
-    <%--                            <div class="inp-field">--%>
-    <%--                                <select>--%>
-    <%--                                    <option>Full Time</option>--%>
-    <%--                                    <option>Half time</option>--%>
-    <%--                                </select>--%>
-    <%--                            </div>--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-12">--%>
-    <%--                            <textarea name="description" placeholder="Description"></textarea>--%>
-    <%--                        </div>--%>
-    <%--                        <div class="col-lg-12">--%>
-    <%--                            <ul>--%>
-    <%--                                <li>--%>
-    <%--                                    <button class="active" type="submit" value="post">Post</button>--%>
-    <%--                                </li>--%>
-    <%--                                <li><a href="#" title="">Cancel</a></li>--%>
-    <%--                            </ul>--%>
-    <%--                        </div>--%>
-    <%--                    </div>--%>
-    <%--                </form>--%>
-    <%--            </div><!--post-project-fields end-->--%>
-    <%--            <a href="#" title=""><i class="la la-times-circle-o"></i></a>--%>
-    <%--        </div><!--post-project end-->--%>
-    <%--    </div><!--post-project-popup end-->--%>
 
 
 </div><!--theme-layout end-->
@@ -494,6 +446,90 @@
                 }
             });
 
+        }
+
+        let page =0;
+        $("#loadmore").click(function () {
+            page +=1;
+            loadMorePost(page);
+        })
+
+        function loadMorePost(page){
+            console.log(page);
+            $.ajax({
+                type: "GET",
+                url: "/"+page,
+                dataType: 'json',
+                success: function(data){
+                    // alert(data.content[0].text)
+                    let result = [];
+                    $(data.content).each(function(index, post){
+    '<div class="post-bar">'+
+
+    '<div class="post_topbar">'+
+        '<div class="usy-dt">'+
+            '<img src="/media/profile/' + post.user.profile.profilePhoto + '" alt="" width="45px" height="45px">'+
+            '<div class="usy-name">'+
+            '<a href="/profile/'+ post.user.id + '" />'+
+            '<h3>'+post.user.profile.firstName+' '+post.user.profile.lastName+'</h3></a>'+
+            '<span><img src="/images/clock.png" alt="">'+post.creationDate+'"/></span>'+
+            '</div>'+
+            '</div>'+
+        '</div>'+
+        '<div class="epi-sec">'+
+        '&nbsp'+
+        '</div>'+
+        '<div class="job_descp">'+
+        '<p>'+post.text+'</p>'+
+        '</div>'+
+        '<div class="job_descp">'+
+        '<img src="/media/post/'+post.photo+' "/>'+
+        '</div>'+
+        '<div class="job_descp">'+
+        '<video width="100%" controls>'+
+        '<source src="/media/post/'+post.video+'" type="video/mp4">'+
+        'Your browser does not support HTML5 video.'+
+        '</video>'+
+        '</div>'+
+
+        '<div class="job-status-bar">'+
+        '<ul class="like-com">'+
+        '<li>'+
+
+        '<a href="javascript:;" class="addlike" data-id="'+post.id+' data-post='+post+'">'+
+        '<i class="fas fa-heart"></i>'+
+        '<span class="'+post.id+'-likes">'+post.likeCount+'</span> Like'+
+        '</a>'+
+        '</li>'+
+        '<li>'+
+        '<a href="javascript:;" class="addcomment " data-id="'+post.id+' data-post='+post+'"><i class="fas fa-comment-alt"></i><span class="'+post.id+'-comments">'+post.commentCount+'</span> Comments</a>'+
+
+        '</li>'+
+        '</ul>'+
+
+        '</div>'+
+        '<div>'+
+        '<form class="post-comment" data-id="'+post.id+' data-post="'+post+'">'+
+
+        '<div class="cp-field">'+
+        '<div class="cpp-fiel">'+
+        '<input type="text" name="text" class="comment-text '+post.id+'-text" placeholder="write your comment here" required   />'+
+        '</div>'+
+        '</div>'+
+        '<input type="submit" class="comment-submit" value="Submit" style="display: none">'+
+        '</form>'+
+        '</div>'+
+        '<div class="job-status-bar">'+
+        '<ul class="comments-list '+post.id+'-commentlist">'+
+
+        '</ul>'+
+        '</div>'+
+    '</div>'
+                    })
+                    console.log(result);
+                    // $(".posts-section").append(result)
+                }
+            })
         }
     })
 </script>

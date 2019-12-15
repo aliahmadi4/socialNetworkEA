@@ -35,7 +35,8 @@ public class Post {
     private boolean unhealthy = false;
     private boolean enabled;
 
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
