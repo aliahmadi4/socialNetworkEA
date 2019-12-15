@@ -27,7 +27,7 @@ public class User {
     @NotBlank
     private String password;
 
-    private boolean enabled;
+    private boolean enabled=true;
 
     @Enumerated(EnumType.STRING)
     private Role role;

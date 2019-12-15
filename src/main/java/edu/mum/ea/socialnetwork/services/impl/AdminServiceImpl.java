@@ -1,5 +1,7 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
+import java.util.List;
+
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
@@ -7,11 +9,12 @@ import edu.mum.ea.socialnetwork.repository.PostRepository;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class AdminServiceImpl implements AdminService {
 
     private UserRepository userRepository;
@@ -30,17 +33,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<User> getDeactivatedUsers() {
-        return userRepository.findUsersByEnabled(false);
+        return userRepository.findUsersByEnabledIs(false);
     }
 
     @Override
-    public void activateUser(Long userId) {
-        userRepository.setUserEnabled(userId, true);
-    }
-
-    @Override
-    public void deactivateUser(Long userId) {
-        userRepository.setUserEnabled(userId, false);
+    public void toggleUser(Long userId) {
+        User user = userRepository.getOne(userId);
+        userRepository.setUserEnabled(userId, !user.isEnabled());
     }
 
     @Override
@@ -48,11 +47,6 @@ public class AdminServiceImpl implements AdminService {
         User user = userRepository.getOne(userId);
         user.setRole(role);
         userRepository.save(user);
-    }
-
-    @Override
-    public void setNoOfUnhealthyPosts(Long userId, Integer num) {
-        userRepository.setNumberOfDisapprovedPosts(userId, num);
     }
 
     @Override
@@ -66,13 +60,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public boolean userIsEnabled(Long userId) {
+        return userRepository.getOne(userId).isEnabled();
+    }
+
+    @Override
     public void setPostUnhealthy(Long postId, boolean isUnhealthy) {
         postRepository.setPostUnhealthy(postId, isUnhealthy);
     }
 
     @Override
     public List<Post> getUnhealthyPosts() {
-        return postRepository.findAllByUnhealthy();
+        return postRepository.findAllByUnhealthy(true);
     }
 
     @Override

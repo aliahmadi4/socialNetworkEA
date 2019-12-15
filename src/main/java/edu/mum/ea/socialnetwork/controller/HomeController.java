@@ -52,11 +52,11 @@ public class HomeController {
 
 
 
-
-    @GetMapping("/error")
-    public String showErrorPage(){
-        return "error";
-    }
+//
+//    @GetMapping("/error")
+//    public String showErrorPage(){
+//        return "error";
+//    }
 
     @GetMapping("/index")
     public String showIndex(){
