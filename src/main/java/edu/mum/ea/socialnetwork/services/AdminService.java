@@ -12,17 +12,15 @@ public interface AdminService {
 
     List<User> getDeactivatedUsers();
 
-    void activateUser(Long userId);
-
-    void deactivateUser(Long userId);
+    void toggleUser(Long userId);
 
     void setUserRole(Long userId, Role role);
-
-    void setNoOfUnhealthyPosts(Long userId, Integer num);
 
     void setNumberOfDisapprovedPosts(Long userId, Integer noOfDisapprovedPosts);
 
     void setUserEnabled(Long userId, boolean isEnabled);
+
+    boolean userIsEnabled(Long userId);
 
     void setPostUnhealthy(Long postId, boolean isUnhealthy);
 

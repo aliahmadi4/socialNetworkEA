@@ -37,10 +37,11 @@ public class ContentManagement {
         }
     }
 
-    @After("execution(* edu.mum.ea.socialnetwork.controller.AdminController.disapprovePost(..))")
+    @After("execution(* edu.mum.ea.socialnetwork.controller.AdminController.processPost(..))")
     public void handleUnhealthyPost(JoinPoint jp) {
         Long postId = (Long) jp.getArgs()[0];
-        adminService.setPostEnabled(postId, false);
+        boolean isApproved = (boolean)jp.getArgs()[1];
+        adminService.setPostEnabled(postId, isApproved);
         Post post = postService.findPostById(postId);
         User user = post.getUser();
         Long userId = user.getId();
