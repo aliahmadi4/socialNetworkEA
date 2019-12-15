@@ -32,6 +32,8 @@
         height: 40px;
         padding: 0 10px;
     }
+
+
 </style>
 </head>
 
@@ -188,8 +190,15 @@
                                             <div class="job-status-bar">
                                                 <ul class="like-com">
                                                     <li>
-
-                                                        <a href="javascript:;" class="addlike" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                                        <c:set var="count" value="${0}" />
+                                                        <c:set var="likeid" value="${0}" />
+                                                        <c:forEach items="${post.likes}" var="like">
+                                                            <c:if test = "${like.user.id == currentUser.id}">
+                                                                <c:set var="count" value="${count+1}" />
+                                                                <c:set var="likeid" value="${like.id}" />
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        <a href="javascript:;" class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
@@ -417,31 +426,94 @@
 <script type="text/javascript">
     $(function(){
 
+        // $(".addlike").click(function(){
+        //     var postId = $(this).data("id");
+        //     var post = $(this).data("post");
+        //     // alert("Like me: " + post);
+        //     ajaxSubmitLikes(postId)
+        // })
+        //
+        // function ajaxSubmitLikes(postId) {
+        //
+        //
+        //
+        //     $.ajax({
+        //         type: "POST",
+        //         contentType: "application/json",
+        //         url: "/addlike",
+        //         data: JSON.stringify(postId),
+        //         dataType: 'json',
+        //         headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+        //         success: function (data) {
+        //             // alert("success");
+        //             console.log("SUCCESS : ", data);
+        //
+        //             var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+        //             $("."+postId+"-likes").text(likeIncrement);
+        //             console.log("likeIncrement", likeIncrement);
+        //
+        //         },
+        //         error: function (e) {
+        //             alert("Really sorry, something went wrong. Please try later")
+        //             console.log("ERROR : ", e);
+        //         }
+        //     });
+        //
+        // }
+
         $(".addlike").click(function(){
             var postId = $(this).data("id");
             var post = $(this).data("post");
             // alert("Like me: " + post);
-            ajaxSubmitLikes(postId)
+            var isActive = $(this).hasClass("active");
+            console.log($(this).hasClass("active"));
+
+            ajaxSubmitLikes(postId, isActive)
         })
 
-        function ajaxSubmitLikes(postId) {
+        function ajaxSubmitLikes(postId, isActive) {
 
+            var type = isActive ? 'DELETE' : 'POST';
+            var finalId = JSON.stringify(postId);
+            var contentType = "application/json";
+            if(type == "DELETE"){
+                var likeId = $("."+postId+"-likes-wrap").data("likeid");
+                finalId = { "likeId": likeId, "postId": postId };
+                contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            }
 
+            console.log("POST/LIKE ID is: ", postId);
 
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/addlike",
-                data: JSON.stringify(postId),
+                type: type,
+                contentType: contentType,
+                url: '/like',
+                data: finalId,
                 dataType: 'json',
                 headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
                 success: function (data) {
                     // alert("success");
                     console.log("SUCCESS : ", data);
+                    console.log("type", type);
+                    console.log("isActive", isActive);
 
-                    var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                    var type = isActive ? 'DELETE' : 'POST';
+                    if(type == "POST"){
+                        var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                        $("."+postId+"-likes-wrap").data("likeid", data.id);
+                        console.log("likeIncrement value inside POST Condition", likeIncrement);
+                    } else {
+                        var likeIncrement = parseInt($("."+postId+"-likes").html()) - 1;
+                        console.log("likeIncrement value inside DELETE Condition", likeIncrement);
+                    }
+
                     $("."+postId+"-likes").text(likeIncrement);
-                    console.log("likeIncrement", likeIncrement);
+                    console.log("likeIncrement value", likeIncrement);
+                    if(!$("."+postId+"-likes-wrap").hasClass("active")){
+                        $("."+postId+"-likes-wrap").addClass("active");
+                    }else {
+                        $("."+postId+"-likes-wrap").removeClass("active");
+                    }
 
                 },
                 error: function (e) {
