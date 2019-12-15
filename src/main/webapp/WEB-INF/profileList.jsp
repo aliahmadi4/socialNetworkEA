@@ -23,12 +23,13 @@
 
 <body>
 	<div class="wrapper">
+		<jsp:include page="layout/navbar.jsp"/>
 		<section class="companies-info">
 			<div class="container">
 				<div class="company-title">
 					<div id="search_bar" class="search-bar">
 						<form>
-							<input id="search" type="text" name="search" placeholder="Search...">
+							<input id="search" type="text" name="search" placeholder="Search User ...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div>
@@ -41,7 +42,14 @@
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="company_profile_info">
 								<div class="company-up-info">
-									<img src="/media/profile/<c:out value="${i.profilePhoto}"/>" alt="profile photo">
+									<c:choose>
+										<c:when test="${i.profilePhoto.length()>4}">
+											<img src="/media/profile/${i.profilePhoto}" alt="">
+										</c:when>
+										<c:otherwise>
+											<img src="<c:url value='/images/user.jpg'/>" alt="">
+										</c:otherwise>
+									</c:choose>
 									<h3><c:out value="${i.firstName}  ${i.lastName}" /></h3>
 									<h4>${i.occupation}</h4>
 									<ul>
@@ -54,46 +62,13 @@
 						</c:forEach>
 					</div>
 
-
-
-
-
-					<div class="process-comm">
-						<div class="spinner">
-							<div class="bounce1"></div>
-							<div class="bounce2"></div>
-							<div class="bounce3"></div>
-						</div>
-					</div><!--process-comm end-->
 				</div>
 			</div>
 		</section><!--companies-info end-->
-		<footer>
-			<div class="footy-sec mn no-margin">
-				<div class="container">
-					<ul>
-						<li><a href="help-center.html" title="">Help Center</a></li>
-						<li><a href="about.html" title="">About</a></li>
-						<li><a href="#" title="">Privacy Policy</a></li>
-						<li><a href="#" title="">Community Guidelines</a></li>
-						<li><a href="#" title="">Cookies Policy</a></li>
-						<li><a href="#" title="">Career</a></li>
-						<li><a href="forum.html" title="">Forum</a></li>
-						<li><a href="#" title="">Language</a></li>
-						<li><a href="#" title="">Copyright Policy</a></li>
-					</ul>
-					<p><img src="images/copy-icon2.png" alt="">Copyright 2019</p>
-					<img class="fl-rgt" src="images/logo2.png" alt="">
-				</div>
-			</div>
-		</footer>
+
 	</div><!--theme-layout end-->
 
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/popper.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+
 	<script>
 		//	this function is for following other users
 		$(function(){
@@ -160,21 +135,40 @@
 					success: function (data) {
 						let result = [];
 						$(data).each(function (index, value) {
-							result.push(
-								'<div class="col-lg-3 col-md-4 col-sm-6 col-12">' +
-									'<div class="company_profile_info">' +
+							if(value.profilePhoto){
+								result.push(
+										'<div class="col-lg-3 col-md-4 col-sm-6 col-12">' +
+										'<div class="company_profile_info">' +
 										'<div class="company-up-info">' +
-											'<img src="/media/profile/' + value.profilePhoto + '" alt="profile photo">' +
-											'<h3>' + value.firstName + ' ' + value.lastName + '</h3>' +
-											'<h4>' + value.occupation + '</h4>' +
-											'<ul>' +
-												'<li><a href="javascript:" class="follow" id="' + value.id + '">Follow</a></li>' +
-											'</ul>' +
+										'<img src="/media/profile/' + value.profilePhoto + '" alt="profile photo">' +
+										'<h3>' + value.firstName + ' ' + value.lastName + '</h3>' +
+										'<h4>' + value.occupation + '</h4>' +
+										'<ul>' +
+										'<li><a href="javascript:" class="follow" id="' + value.id + '">Follow</a></li>' +
+										'</ul>' +
 										'</div>' +
 										'<a href="/profile/' + value.id + '" class="view-more-pro"> View Profile </a>' +
-									'</div>' +
-								'</div>'
-							)
+										'</div>' +
+										'</div>'
+								)
+							}else{
+								result.push(
+										'<div class="col-lg-3 col-md-4 col-sm-6 col-12">' +
+										'<div class="company_profile_info">' +
+										'<div class="company-up-info">' +
+										'<img src="/images/user.jpg" alt="profile photo">' +
+										'<h3>' + value.firstName + ' ' + value.lastName + '</h3>' +
+										'<h4>' + value.occupation + '</h4>' +
+										'<ul>' +
+										'<li><a href="javascript:" class="follow" id="' + value.id + '">Follow</a></li>' +
+										'</ul>' +
+										'</div>' +
+										'<a href="/profile/' + value.id + '" class="view-more-pro"> View Profile </a>' +
+										'</div>' +
+										'</div>'
+								)
+							}
+
 						});
 						$(".row").html(result);
 					},

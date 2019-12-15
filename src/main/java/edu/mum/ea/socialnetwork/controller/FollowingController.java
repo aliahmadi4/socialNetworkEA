@@ -20,6 +20,13 @@ public class FollowingController {
     @Autowired
     ProfileService profileService;
 
+    @ModelAttribute("currentUser")
+    public Profile profilePic(Principal principal){
+        User user = userService.findUserByName(principal.getName());
+        return user.getProfile();
+    }
+
+
     @PostMapping(value = "/follow")
     public User follow(@RequestBody Long id, Principal principal){
         User user = userService.findUserById(id);

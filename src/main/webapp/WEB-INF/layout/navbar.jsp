@@ -24,8 +24,15 @@
                         </li>
 
                         <li>
-                            <a href="<c:url value='/profile/${currentUser.id}'/>" title="">
+                            <a href="<c:url value='/profileList'/>" title="">
                                 <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
+                                Users
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<c:url value='/profile/${currentUser.id}'/>" title="">
+                                <span><img src="<c:url value='/images'/>/icon7.png" alt=""></span>
                                 Profile
                             </a>
                         </li>
