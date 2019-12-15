@@ -121,26 +121,11 @@
                         <div class="col-lg-6 col-md-8 no-pd">
                             <div class="main-ws-sec">
                                 <div class="post-topbar">
-                                    <div class="user-picy">
-                                        <c:choose>
-                                            <c:when test="${currentUser.profilePhoto.length()>4}">
-                                                <img src="/media/profile/${currentUser.profilePhoto}" alt="" height="50px" width="50px">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img src="<c:url value='/images/user.jpg'/>" alt="" height="50px" width="50px">
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <div class="post-st">
-                                        <ul>
-                                            <li><a class="post_project" href="#" title="">Post</a></li>
-
-                                        </ul>
-                                    </div><!--post-st end-->
+                                    <h1>Search Result</h1>
                                 </div><!--post-topbar end-->
                                 <div class="posts-section">
 
-                                    <c:forEach var="post" items="${allPost.content}">
+                                    <c:forEach var="post" items="${allPost}">
                                         <div class="post-bar">
 
                                             <div class="post_topbar">
@@ -243,9 +228,11 @@
 
                                 </div><!--posts-section end-->
                                 <div class="load-area" data-id="${currentUser.id}" ></div>
+                                <c:if test="${allPost.size()==0}">
                                 <div class="process-comm">
-                                    <button class="btn btn-danger" id="loadmore">Load more</button>
+                                    <button class="btn btn-danger">No Result Found!</button>
                                 </div>
+                                </c:if>
                             </div><!--main-ws-sec end-->
                         </div>
 
@@ -279,47 +266,7 @@
     </main>
 
 
-    <%--Modal--%>
 
-    <div class="post-popup pst-pj">
-        <div class="post-project">
-            <h3>New Post</h3>
-            <div class="post-project-fields">
-                <form:form modelAttribute="addPost" action="post" enctype="multipart/form-data" method="post">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form:textarea path="text" placeholder="Write here"></form:textarea>
-                        </div>
-                        <div class="col-lg-12">
-                            <ul>
-                                <li>
-                                    <button class="active" type="submit" value="post">Post</button>
-                                </li>
-                                <div class="add-pic-box">
-
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-12 col-sm-12">
-                                            <input type="file" name="imageFile" id="image">
-                                            <label for="image">Select Image</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-12 col-sm-12">
-                                            <input type="file" name="videoFile" id="video">
-                                            <label for="video">Select Video</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </form:form>
-            </div><!--post-project-fields end-->
-            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
-        </div><!--post-project end-->
-    </div><!--post-project-popup end-->
 
 
 </div><!--theme-layout end-->

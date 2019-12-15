@@ -1,6 +1,7 @@
 package edu.mum.ea.socialnetwork.controller;
 
 import edu.mum.ea.socialnetwork.domain.Post;
+import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.FileUploadService;
@@ -30,6 +31,13 @@ public class PostController {
 
     @Autowired
     UserService userService;
+
+    @ModelAttribute("currentUser")
+    public Profile profilePic(Principal principal){
+        User user = userService.findUserByName(principal.getName());
+        return user.getProfile();
+    }
+
 
     @GetMapping(value = "/post")
     public String post(@ModelAttribute("addPost") Post post, Model model, Principal principal) {
@@ -84,5 +92,14 @@ public class PostController {
         postService.save(post);
         return "redirect:/";
     }
+
+
+    @GetMapping("/post/search")
+    public String postSearch(@RequestParam("search")String word, Model model){
+        System.out.println(word);
+        model.addAttribute("allPost", postService.searchPosts(word));
+        return "search";
+    }
+
 
 }

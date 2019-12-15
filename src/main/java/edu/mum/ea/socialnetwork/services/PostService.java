@@ -16,4 +16,6 @@ public interface PostService {
 
     Page<Post> allPostsPaged(int pageNo);
 
+    List<Post> searchPosts(String text);
+
 }

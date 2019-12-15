@@ -39,4 +39,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll(PageRequest.of(pageNo, 5, Sort.by("creationDate").descending()));
     }
 
+    @Override
+    public List<Post> searchPosts(String text){
+        return postRepository.findPostsByTextContaining(text);
+    }
+
 }
