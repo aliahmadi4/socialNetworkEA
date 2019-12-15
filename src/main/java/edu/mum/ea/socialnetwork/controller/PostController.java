@@ -82,7 +82,7 @@ public class PostController {
         post.setEnabled(true);
 
         postService.save(post);
-        return "redirect:/post";
+        return "redirect:/";
     }
 
 }

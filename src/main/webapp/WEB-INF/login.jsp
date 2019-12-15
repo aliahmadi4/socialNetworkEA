@@ -44,7 +44,7 @@
                     <div class="col-lg-6">
                         <div class="cmp-info">
                             <div class="cm-logo">
-                                <img style="width: 200px; height: 200px" src="media/images/logo.png" alt="">
+                                <img style="width: 200px; height: 200px" src="/images/logo.png" alt="">
                             </div><!--cm-logo end-->
 <%--                            <img src="images/cm-main-img.png" alt="">--%>
                         </div><!--cmp-info end-->
@@ -63,12 +63,12 @@
                             <div class="sign_in_sec current" id="tab-1">
 
                                 <h3><spring:message code="login.signin" text="Sign in" /></h3>
-                                <security:authorize access="isAnonymous()">
-                                    Anonymous
-                                </security:authorize>
-                                <security:authorize access="isAuthenticated()">
-                                    <security:authentication property="principal.username"/>
-                                </security:authorize>
+<%--                                <security:authorize access="isAnonymous()">--%>
+<%--                                    Anonymous--%>
+<%--                                </security:authorize>--%>
+<%--                                <security:authorize access="isAuthenticated()">--%>
+<%--                                    <security:authentication property="principal.username"/>--%>
+<%--                                </security:authorize>--%>
 <%--                                <form:form method="post" action="login" modelAttribute="login">--%>
 <%--                                    <div class="row">--%>
 <%--                                        <div class="col-lg-12 no-pdd">--%>
@@ -98,10 +98,7 @@
                                 <form method="post" action="login">
                                     <div class="row">
                                         <div class="col-lg-12 no-pdd">
-                                            <c:if test="${param.error!=null}">Error</c:if>
-
-
-                                            <div class="sn-field">
+                                        <div class="sn-field">
                                                 <spring:message code='login.username' text='Username' var="usernamePlaceholder" />
                                                 <input type="text" name="username" placeholder="${usernamePlaceholder}" />
                                                 <i class="la la-user"></i>
@@ -115,6 +112,7 @@
                                                 <i class="la la-lock"></i>
                                             </div>
                                         </div>
+                                        <c:if test="${param.error!=null}"><h3 style="color: red">Authentication Failed!</h3></c:if>
 
 
                                         <div class="col-lg-12 no-pdd">
@@ -269,12 +267,7 @@
 </div><!--theme-layout end-->
 
 
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<jsp:include page="layout/footerScript.jsp"/>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:27 GMT -->

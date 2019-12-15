@@ -30,7 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
+        //with no encoder
+//        return NoOpPasswordEncoder.getInstance();
     }
 
     @Autowired
@@ -38,34 +41,45 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
+
+        //using im memmory
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("{noop}123456").roles("user").and().withUser("admin").password("123").roles("Admin").passwordEncoder(passwordEncoder());
+        //using in
+//        auth.jdbcAuthentication()
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .headers()
-                .frameOptions().sameOrigin()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/css/**", "/fonts/**", "/js/**", "/lib/**", "/vendor/**", "/media/**", "/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
+            .headers()
+            .frameOptions().sameOrigin()
+            .and()
+            .authorizeRequests()
+
+            .antMatchers("/css/**","/fonts/**", "/js/**", "/lib/**", "/vendor/**","/media/**","/images/**" ,"/login/**", "/register/**", "/errorMessages/**", "/messages/**").permitAll()
                 .antMatchers("/", "/index", "/profile/**").hasRole("USER")
-                .antMatchers().hasRole("ADMIN")
+
+            .antMatchers( ).hasRole("ADMIN")
 
 
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .failureUrl("/login?error")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
-                .and()
-                .csrf().disable()
-                .exceptionHandling();
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/")
+            .failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+            .permitAll()
+            .and()
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/login?logout")
+            .permitAll()
+            .and()
+            .csrf().disable()
+            .exceptionHandling()
+                .accessDeniedPage("/denied");
     }
 }
