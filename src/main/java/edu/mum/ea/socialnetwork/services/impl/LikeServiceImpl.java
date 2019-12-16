@@ -17,5 +17,14 @@ public class LikeServiceImpl implements LikeService {
         return likeRepository.save(likes);
     }
 
+    @Override
+    public void remove(Likes likes) {
+        likeRepository.delete(likes);
+    }
+
+    @Override
+    public Likes find(Long id) {
+        return likeRepository.getOne(id);
+    }
 
 }

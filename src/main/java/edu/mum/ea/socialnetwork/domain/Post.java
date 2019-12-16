@@ -9,9 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -35,13 +33,14 @@ public class Post {
     private boolean unhealthy = false;
     private boolean enabled;
 
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<Likes> likes = new ArrayList<Likes>();
+    private Set<Likes> likes = new HashSet<Likes>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.EAGER)
@@ -51,6 +50,11 @@ public class Post {
     public void addLike(Likes like) {
         likes.add(like);
         this.likeCount++;
+    }
+
+    public void removeLike(Likes like) {
+        likes.remove(like);
+        this.likeCount--;
     }
 
     public void addComment(Comments comment) {

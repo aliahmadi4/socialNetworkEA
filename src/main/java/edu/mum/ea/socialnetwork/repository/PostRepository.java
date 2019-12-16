@@ -27,4 +27,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllPostForSpecificUser(@Param("id") Long id);
 
     List<Post>findAllByUserIdOrderByCreationDateDesc(@Param("id") Long id);
+
+    //Search posts
+    List<Post> findPostsByTextContaining(String text);
 }

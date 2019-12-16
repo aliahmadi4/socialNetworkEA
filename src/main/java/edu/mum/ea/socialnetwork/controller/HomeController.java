@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.security.Principal;
@@ -34,15 +33,16 @@ public class HomeController {
 
     @GetMapping("/")
     public String post(@ModelAttribute("addPost") Post post, Model model) {
-        List<Post> allPost = postService.findPost();
-        Page<Post> posts = postService.allPostsPaged(1);
-        for(Post p: posts){
-            System.out.println("p: "+ p);
-        }
-        model.addAttribute("allPost", allPost);
-//        System.out.println("POST PAGE: " + allPost.size());
-
+        Page<Post> posts = postService.allPostsPaged(0);
+        model.addAttribute("allPost", posts);
         return "index";
+    }
+
+    @GetMapping("/{pageNo}")
+    public @ResponseBody Page<Post> getPostsPaged(@PathVariable("pageNo") Integer pageNo){
+        System.out.println("-------------getPostPaged Called=---------------------");
+        Page<Post> posts = postService.allPostsPaged(pageNo);
+        return posts;
     }
 
 

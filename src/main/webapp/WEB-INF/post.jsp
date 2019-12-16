@@ -76,7 +76,16 @@
 
         .addlike {
             margin-right: 10px;
+            color: #4e555b;
         }
+
+        .addlike.active {
+            color: rgb(0, 123, 255);
+        }
+
+        /*.addlike.not-active {*/
+        /*    color: #4e555b;*/
+        /*}*/
         /*.addcomment {*/
         /*    margin-right: 10px;*/
         /*}*/
@@ -131,7 +140,7 @@
                                 </div>
                             </div>
                         </form:form>
-
+                            User Id:
 
                         <c:forEach items="${allPost}" var="post">
                             <div style="clear: both; border-bottom: 1px dashed #ccc; background: #f5f4f4; padding: 10px; margin-top: 10px;" class="${post.id}-wrap">
@@ -149,9 +158,19 @@
                                 </video>
                             </c:if>
                                 <input type="hidden" value="${post}" class="post-data">
+
+
                             <p style="font-size: 10px; overflow: hidden; clear: both;">
                                 <span style="float: left">
-                                    <a href="javascript:;" class="addlike" data-id="${post.id}" data-post="${post}"><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                    <c:set var="count" value="${0}" />
+                                    <c:set var="likeid" value="${0}" />
+                                    <c:forEach items="${post.likes}" var="like">
+                                        <c:if test = "${like.user.id == userId}">
+                                            <c:set var="count" value="${count+1}" />
+                                            <c:set var="likeid" value="${like.id}" />
+                                        </c:if>
+                                    </c:forEach>
+                                    <a href="javascript:;" class="addlike ${post.id}-likes-wrap  ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
                                     <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
                                 </span>
                                 <span style="float: right">Created at:
@@ -199,27 +218,55 @@
             var postId = $(this).data("id");
             var post = $(this).data("post");
             // alert("Like me: " + post);
-            ajaxSubmitLikes(postId)
+            var isActive = $(this).hasClass("active");
+            console.log($(this).hasClass("active"));
+
+            ajaxSubmitLikes(postId, isActive)
         })
 
-        function ajaxSubmitLikes(postId) {
+        function ajaxSubmitLikes(postId, isActive) {
 
+            var type = isActive ? 'DELETE' : 'POST';
+            var finalId = JSON.stringify(postId);
+            var contentType = "application/json";
+            if(type == "DELETE"){
+                var likeId = $("."+postId+"-likes-wrap").data("likeid");
+                finalId = { "likeId": likeId, "postId": postId };
+                contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            }
 
+            console.log("POST/LIKE ID is: ", postId);
 
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/addlike",
-                data: JSON.stringify(postId),
+                type: type,
+                contentType: contentType,
+                url: '/like',
+                data: finalId,
                 dataType: 'json',
                 headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
                 success: function (data) {
                     // alert("success");
                     console.log("SUCCESS : ", data);
+                    console.log("type", type);
+                    console.log("isActive", isActive);
 
-                    var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                    var type = isActive ? 'DELETE' : 'POST';
+                    if(type == "POST"){
+                        var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
+                        $("."+postId+"-likes-wrap").data("likeid", data.id);
+                        console.log("likeIncrement value inside POST Condition", likeIncrement);
+                    } else {
+                        var likeIncrement = parseInt($("."+postId+"-likes").html()) - 1;
+                        console.log("likeIncrement value inside DELETE Condition", likeIncrement);
+                    }
+
                     $("."+postId+"-likes").text(likeIncrement);
-                    console.log("likeIncrement", likeIncrement);
+                    console.log("likeIncrement value", likeIncrement);
+                    if(!$("."+postId+"-likes-wrap").hasClass("active")){
+                        $("."+postId+"-likes-wrap").addClass("active");
+                    }else {
+                        $("."+postId+"-likes-wrap").removeClass("active");
+                    }
 
                 },
                 error: function (e) {
