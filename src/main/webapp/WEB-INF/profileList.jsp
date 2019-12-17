@@ -67,7 +67,7 @@
 		</section><!--companies-info end-->
 
 	</div><!--theme-layout end-->
-
+	<jsp:include page="layout/footerScript.jsp"/>
 
 	<script>
 		//	this function is for following other users
