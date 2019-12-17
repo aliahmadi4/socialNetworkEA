@@ -1,8 +1,10 @@
 package edu.mum.ea.socialnetwork.services.impl;
 
+import edu.mum.ea.socialnetwork.config.RabbitMQDirectConfig;
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.repository.PostRepository;
 import edu.mum.ea.socialnetwork.services.PostService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,17 @@ public class PostServiceImpl implements PostService {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+//    public PostController(RabbitTemplate rabbitTemplate) {
+//        this.rabbitTemplate = rabbitTemplate;
+//    }
+
     public Post save(Post post) {
+
+        // rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, order);
+        rabbitTemplate.convertAndSend(RabbitMQDirectConfig.EXCHANGE, RabbitMQDirectConfig.ROUTING_KEY, post);
         return postRepository.save(post);
     }
 
