@@ -3,6 +3,7 @@ package edu.mum.ea.socialnetwork.controller;
 import edu.mum.ea.socialnetwork.config.RabbitMQDirectConfig;
 import edu.mum.ea.socialnetwork.domain.Messages;
 import edu.mum.ea.socialnetwork.domain.Post;
+import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.FileUploadService;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,6 +34,13 @@ public class PostController {
 
     @Autowired
     UserService userService;
+
+    @ModelAttribute("currentUser")
+    public Profile profilePic(Principal principal){
+        User user = userService.findUserByName(principal.getName());
+        return user.getProfile();
+    }
+
 
 
     @GetMapping(value = "/post")
@@ -87,7 +94,16 @@ public class PostController {
         post.setEnabled(true);
 
         postService.save(post);
-        return "redirect:/post";
+        return "redirect:/";
     }
+
+
+    @GetMapping("/post/search")
+    public String postSearch(@RequestParam("search")String word, Model model){
+        System.out.println(word);
+        model.addAttribute("allPost", postService.searchPosts(word));
+        return "search";
+    }
+
 
 }

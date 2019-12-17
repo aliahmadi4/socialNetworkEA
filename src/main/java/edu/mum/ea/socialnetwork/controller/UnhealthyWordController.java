@@ -3,13 +3,16 @@ package edu.mum.ea.socialnetwork.controller;
 import edu.mum.ea.socialnetwork.domain.UnhealthyWord;
 import edu.mum.ea.socialnetwork.services.UnhealthyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
+@Secured({"ADMIN", "CONTENT_MANAGER"})
 @RequestMapping("/unhealthyWords")
 public class UnhealthyWordController {
     private UnhealthyWordService unhealthyWordService;
@@ -28,11 +31,13 @@ public class UnhealthyWordController {
     public void deleteUnhealthyWord(@RequestBody String newWord) {
         unhealthyWordService.deleteWord(newWord);
     }
+
     @GetMapping(value = "/")
-    public String unhealthyWordList(Model model) {
-        List<UnhealthyWord> unhealthyWordList = unhealthyWordService.getUnhealthyWordList();
-        model.addAttribute(unhealthyWordList);
-        return "/unhealthyWords";
+    public ModelAndView unhealthyWordList(Model model) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("unhealthyWordList", unhealthyWordService.getUnhealthyWordList());
+        mav.setViewName("unhealthyWords");
+        return mav;
     }
 
     @Autowired

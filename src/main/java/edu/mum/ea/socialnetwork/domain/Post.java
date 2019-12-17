@@ -32,10 +32,11 @@ public class Post implements Serializable {
     private Integer likeCount = 0;
     private Integer commentCount = 0;
     private boolean unhealthy = false;
-    private boolean enabled;
     private boolean notifyAllFollowers = true;
+    private boolean enabled = true;
 
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 

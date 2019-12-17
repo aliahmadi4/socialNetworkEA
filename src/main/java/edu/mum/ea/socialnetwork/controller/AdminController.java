@@ -44,9 +44,9 @@ public class AdminController {
     public String toggleUser(@RequestBody Long userId) {
         adminService.toggleUser(userId);
         if (adminService.userIsEnabled(userId)) {
-            return messageSource.getMessage("UserList.Disable", null, LocaleContextHolder.getLocale());
+            return messageSource.getMessage("UserList.Enable", null, LocaleContextHolder.getLocale());
         }
-        return messageSource.getMessage("UserList.Enable", null, LocaleContextHolder.getLocale());
+        return messageSource.getMessage("UserList.Disable", null, LocaleContextHolder.getLocale());
     }
 
     @GetMapping("/manageUserRoles")
@@ -60,8 +60,19 @@ public class AdminController {
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/setUserRole")
-    public void setUserRole(@RequestParam Long userId, @RequestParam Role role) {
+    public String setUserRole(@RequestParam Long userId, @RequestParam Role role) {
         adminService.setUserRole(userId, role);
+        String newRole;
+        if (role == Role.ROLE_ADMIN) {
+            newRole = "UserList.SetAdmin";
+        } else if (role == Role.ROLE_CONTENT_MANAGER) {
+            newRole = "UserList.SetContentManager";
+        } else if (role == Role.ROLE_MARKETING_MANAGER) {
+            newRole = "UserList.SetMarketingManager";
+        } else {
+            newRole = "UserList.SetUser";
+        }
+        return messageSource.getMessage(newRole, null, LocaleContextHolder.getLocale());
     }
 
     @Secured({"ROLE_ADMIN", "ROLE_CONTENT_MANAGER"})
