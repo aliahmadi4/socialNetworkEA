@@ -47,4 +47,5 @@ public class User {
     public void addFollowing(User user){
         following.add(user);
     }
+
 }

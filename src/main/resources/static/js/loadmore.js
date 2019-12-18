@@ -1,4 +1,12 @@
-$(function() {
+$(document).ready(function() {
+
+    $("#fucker").click(function() {
+        alert("oh you clicked")
+    })
+
+    $(document).on("click", "clickme", (function () {
+        alert("shit")
+    }))
 
     let page = 0;
     $("#loadmore").click(function () {
@@ -117,6 +125,8 @@ $(function() {
                         '<div class="job-status-bar">' +
                         '<ul class="comments-list ' + post.id + '-commentlist">' +
                         '</ul>' +
+                        '<button id="fucker">fucker</button>'+
+
                         '</div>';
 
                     result2 += '</div>';
@@ -127,5 +137,9 @@ $(function() {
             }
         })
     }
+
+
+
+
 
 })

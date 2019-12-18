@@ -25,7 +25,7 @@ public class Post {
 
 //    @DateTimeFormat(pattern = "YYYY-MM-dd")
 //    private LocalDate creationDate  = LocalDate.now();
-//    private Date creationDate = new Date();
+    private Date creationDate = new Date();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deletionDate;
     private Integer likeCount = 0;

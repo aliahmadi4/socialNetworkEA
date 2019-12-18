@@ -37,17 +37,26 @@ public class ProfileController {
     PostService postService;
 
     @ModelAttribute("currentUser")
-    public Profile profilePic(Principal principal){
+    public Profile currentUser(Principal principal){
         User user = userService.findUserByName(principal.getName());
         return user.getProfile();
     }
 
     @GetMapping("/profile/{id}")
-    public ModelAndView showProfile(@PathVariable("id")Long id){
+    public ModelAndView showProfile(@PathVariable("id")Long id, Principal principal){
 
         Profile profile = profileService.findById(id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("profile", profile);
+
+        //check if this user is followed or not  0->notFollwed  1=>followed  -1->his/her Profile
+        int follow = 0;
+        if(id==currentUser(principal).getId()) follow=-1;
+        List<User> following = currentUser(principal).getUser().getFollowing();
+        for(User user: following){
+            if(id==user.getId()) follow = 1;
+        }
+        mav.addObject("follow", follow);
         List<Post> posts = postService.findAllPostForSpecificUser(id);
         mav.addObject("posts", posts);
         mav.setViewName("profile");
