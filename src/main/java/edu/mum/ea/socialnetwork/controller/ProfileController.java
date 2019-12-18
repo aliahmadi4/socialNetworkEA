@@ -43,11 +43,14 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/{id}")
-    public ModelAndView showProfile(@PathVariable("id")Long id, Principal principal){
+    public String showProfile(@PathVariable("id")Long id, Principal principal, Model model){
 
         Profile profile = profileService.findById(id);
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("profile", profile);
+
+        if(profile==null){
+            return "redirect:/";
+        }
+        model.addAttribute("profile", profile);
 
         //check if this user is followed or not  0->notFollwed  1=>followed  -1->his/her Profile
         int follow = 0;
@@ -56,11 +59,10 @@ public class ProfileController {
         for(User user: following){
             if(id==user.getId()) follow = 1;
         }
-        mav.addObject("follow", follow);
+        model.addAttribute("follow", follow);
         List<Post> posts = postService.findAllPostForSpecificUser(id);
-        mav.addObject("posts", posts);
-        mav.setViewName("profile");
-        return mav;
+        model.addAttribute("posts", posts);
+        return "profile";
     }
 
     @GetMapping("/profile/editProfile")
