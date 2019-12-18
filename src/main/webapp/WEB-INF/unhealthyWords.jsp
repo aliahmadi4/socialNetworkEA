@@ -17,7 +17,7 @@
             border-radius: 5px;
         }
 
-        .dropbtn a{
+        .dropbtn a {
             color: white;
         }
 
@@ -88,10 +88,10 @@
                 </div>
             </div>
             <c:forEach var="i" items="${unhealthyWordList}">
-                <div class="row">
+                <div class="row" id="listOfWords-${i.word}">
                     <div class="col-lg-2 no-pdd"></div>
-                    <div class="deleteUnhealthyWord col-lg-6 no-pdd tablecell">
-                        <c:out value="${i.word}"/> (<a href="javascript:;"
+                    <div class="col-lg-6 no-pdd tablecell">
+                        <c:out value="${i.word}"/> (<a href="javascript:;" class="deleteUnhealthyWord"
                                                        data-id="${i.word}"><spring:message
                             code="WordList.delete"/></a>)
                     </div>

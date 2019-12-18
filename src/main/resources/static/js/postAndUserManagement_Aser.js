@@ -22,16 +22,16 @@ $(function () {
     });
 
     $("#addUnhealthyWord").click(function () {
-        let word = $('#wordToAdd').text().trim();
+        let word = $('#wordToAdd').val().trim();
         if (word.length > 30 || word.length < 3) {
-            alert("You tried to enter a word that is too long or too small. Please try another word.")
+            alert("You tried to enter a word that is too long or too short. Please try another word.")
         } else {
             addUnhealthyWord(word);
         }
     });
 
-    $(".deleteUnhealthyWord").click(function () {
-        let word = $.data("word");
+    $('.deleteUnhealthyWord').click(function () {
+        let word = $(this).data("id");
         deleteUnhealthyWord(word);
     });
 
@@ -105,7 +105,7 @@ $(function () {
             type: "POST",
             url: "/unhealthyWords/add",
             contentType: "application/json",
-            data: JSON.stringify(word),
+            data: word,
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function () {
                 alert("New unhealthy word (" + word + ") added successfully.");
@@ -121,10 +121,11 @@ $(function () {
             type: "POST",
             url: "/unhealthyWords/delete",
             contentType: "application/json",
-            data: JSON.stringify(word),
+            data: word,
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function () {
                 alert("Unhealthy word (" + word + ") was deleted successfully.");
+                $('#listOfWords-' + word).remove();
             },
             error: function () {
                 alert("Unable to delete this word from unhealthy word list.");
