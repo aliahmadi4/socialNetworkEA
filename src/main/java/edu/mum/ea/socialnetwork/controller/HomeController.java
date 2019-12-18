@@ -1,8 +1,10 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.domain.Notification;
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
+import edu.mum.ea.socialnetwork.services.NotificationService;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class HomeController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    NotificationService notificationService;
+
 
     @ModelAttribute("currentUser")
     public Profile profilePic(Principal principal){
@@ -32,7 +37,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String post(@ModelAttribute("addPost") Post post, Model model) {
+    public String post(@ModelAttribute("addPost") Post post, Model model, Principal principal) {
         Page<Post> posts = postService.allPostsPaged(0);
         if(posts.isEmpty()){
             model.addAttribute("nextPage", -1);
@@ -41,7 +46,13 @@ public class HomeController {
         }else{
             model.addAttribute("nextPage", 1);
         }
+
         model.addAttribute("allPost", posts);
+
+        User user = userService.findUserByName(principal.getName());
+        List<Notification> notifications = notificationService.findNotificationByUserId(user.getId());
+        System.out.println("All Notifications"+ notifications.size());
+        model.addAttribute("notifications", notifications);
         return "index";
     }
 
