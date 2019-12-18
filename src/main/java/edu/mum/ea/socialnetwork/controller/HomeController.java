@@ -4,10 +4,7 @@ import edu.mum.ea.socialnetwork.domain.Notification;
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
-import edu.mum.ea.socialnetwork.services.NotificationService;
-import edu.mum.ea.socialnetwork.services.PostService;
-import edu.mum.ea.socialnetwork.services.ProfileService;
-import edu.mum.ea.socialnetwork.services.UserService;
+import edu.mum.ea.socialnetwork.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,9 @@ public class HomeController {
 
     @Autowired
     NotificationService notificationService;
+
+    @Autowired
+    AdvertisementService advertisementService;
 
 
     @ModelAttribute("currentUser")
@@ -60,6 +60,10 @@ public class HomeController {
         List<Notification> notifications = notificationService.findNotificationByUserId(user.getId());
         System.out.println("All Notifications"+ notifications.size());
         model.addAttribute("notifications", notifications);
+
+
+        model.addAttribute("ads", advertisementService.getAdList());
+
         return "index";
     }
 

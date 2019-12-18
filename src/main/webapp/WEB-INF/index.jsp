@@ -296,18 +296,23 @@
                         <div class="col-lg-3 pd-right-none no-pd">
                             <div class="right-sidebar">
 
-                                <div class="widget widget-ads">
-                                    <div>${ads.adsTitle}</div>
-                                    <img src="${ads.imageURL}"/>
-                                </div><!--widget-jobs end-->
-                                <div class="widget widget-weather">
-                                    <a style="width: 200px; margin-left: auto; margin-right: auto"
-                                       class="weatherwidget-io" href="https://forecast7.com/en/41d01n91d96/fairfield/"
-                                       data-label_1="FAIRFIELD"
-                                       data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated"
-                                       data-theme="clear">FAIRFIELD
-                                        WEATHER</a>
-                                </div><!--widget-about end-->
+
+
+                                <div class="widget widget-portfolio">
+                                    <div class="wd-heady">
+                                        <h3>Advertisement</h3>
+                                        <img src="/images/photo-icon.png" alt="">
+                                    </div>
+                                    <div class="pf-gallery">
+<c:forEach items="${ads}" var="ad">
+                                        <div>
+                                            <p>${ad.text}</p>
+                                        </div>
+</c:forEach>
+
+                                    </div><!--pf-gallery end-->
+                                </div><!--widget-portfolio end-->
+
                             </div><!--right-sidebar end-->
                         </div>
 
@@ -330,20 +335,10 @@
                         <div class="col-lg-12">
                             <form:textarea path="text" placeholder="Write here"></form:textarea>
                         </div>
-
                         <div class="col-lg-12">
-
-                            <div class="toggle-btn" style="top: 0;left: 52px;">
-                                <div class="custom-control custom-switch">
-                                    <form:checkbox  cssClass="custom-control-input" path="notifyAllFollowers" id="notifyAllFollowers" />
-                                    <label class="custom-control-label" for="notifyAllFollowers">Notify all users</label>
-                                </div>
-                            </div>
-                            <br><br>
                             <ul>
-
                                 <li>
-                                    <button class="active" type="submit" value="post" style="position: relative; z-index:1">Post</button>
+                                    <button class="active" type="submit" value="post">Post</button>
                                 </li>
                                 <div class="add-pic-box">
 
