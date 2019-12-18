@@ -41,4 +41,8 @@ public class ProfileServiceImpl implements ProfileService {
     public List<Profile> unfollowedUsers(Long id) {
         return profileRepository.unfollowedUsers(id);
     }
+
+//    public void delete(){
+//
+//    }
 }
