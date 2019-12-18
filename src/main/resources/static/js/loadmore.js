@@ -125,7 +125,6 @@ $(document).ready(function() {
                         '<div class="job-status-bar">' +
                         '<ul class="comments-list ' + post.id + '-commentlist">' +
                         '</ul>' +
-                        '<button id="fucker">fucker</button>'+
 
                         '</div>';
 
