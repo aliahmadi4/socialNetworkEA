@@ -44,9 +44,6 @@ public class Profile {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 
-
-
-
     private Integer noOfDisapprovedPosts = 0;
     @JsonBackReference
     @OneToOne(mappedBy = "profile")
@@ -61,12 +58,6 @@ public class Profile {
 
     @Size(min = 3, max = 30)
     private String occupation;
-
-
-
-
-
-
 
 
     public Profile(@NotNull String gender, @NotBlank @Email String email, @NotBlank String firstName,

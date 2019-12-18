@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/deactivatedUsers", "/admin/manageUserRoles").hasRole("ADMIN")
                 .antMatchers("/unhealthyWords/**").hasAnyRole("ADMIN", "CONTENT_MANAGER")
                 .antMatchers("/admin/unhealthyPosts").hasAnyRole("ADMIN", "CONTENT_MANAGER")
-                .antMatchers("/", "/logout", "/profile/**").hasAnyRole("ADMIN", "USER", "MARKETING_MANAGER")
+                .antMatchers("/", "/logout", "/profile/**").hasAnyRole("ADMIN", "USER", "MARKETING_MANAGER", "CONTENT_MANAGER")
 
 
                 .anyRequest().authenticated()
