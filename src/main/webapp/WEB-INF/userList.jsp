@@ -87,7 +87,7 @@
             </div>
             <div class="col-lg-2 no-pdd"></div>
         </div>
-        <form:form modelAttribute="userList" action="post" method="post">
+        <form:form modelAttribute="userList" method="post">
             <c:forEach var="user" items="${userList}" varStatus="userIndex">
                 <div class="row justify-content-md-center table-bordered" id="${userIndex.index}">
                     <div class="col-lg-3 no-pdd tablecell">

@@ -1,4 +1,4 @@
-package edu.mum.ea.socialnetwork.services.impl;
+package edu.mum.ea.socialnetwork.services;
 
 import edu.mum.ea.socialnetwork.domain.User;
 

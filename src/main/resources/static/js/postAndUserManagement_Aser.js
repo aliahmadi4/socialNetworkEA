@@ -22,15 +22,15 @@ $(function () {
     });
 
     $("#addUnhealthyWord").click(function () {
-        let word = $.data("word").trim();
-        if (!word || word.length > 30 || word.length < 3) {
+        let word = $('#wordToAdd').text().trim();
+        if (word.length > 30 || word.length < 3) {
             alert("You tried to enter a word that is too long or too small. Please try another word.")
         } else {
             addUnhealthyWord(word);
         }
     });
 
-    $("#deleteUnhealthyWord").click(function () {
+    $(".deleteUnhealthyWord").click(function () {
         let word = $.data("word");
         deleteUnhealthyWord(word);
     });

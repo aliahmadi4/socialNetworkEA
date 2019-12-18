@@ -17,6 +17,10 @@
             border-radius: 5px;
         }
 
+        .dropbtn a{
+            color: white;
+        }
+
         .tablecell {
             padding: 16px;
             font-size: 16px;
@@ -74,24 +78,27 @@
             <h1><spring:message code="WordList.header"/>
         </div>
     </div>
-<%--    <div class="container">--%>
-<%--        <form:form modelAttribute="unhealthyWordList" action="post" method="post">--%>
-<%--            <div class="row justify-content-md-center table-bordered">--%>
-<%--                <div class="form-control-plaintext col-lg-4 no-pdd">--%>
-<%--                    <form:input path="word" placeholder="Enter a new word and click 'Add new...'"/>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div>--%>
-<%--                <select id="wordList" multiple size=20 class="form-control-plaintext col-lg-4 no-pdd">--%>
-<%--                    <c:forEach var="i" items="${unhealthyWords}" varStatus="wordIndex">--%>
-<%--                        <option><c:out value="${i.word}"/> (<a href="<c:url value=""/>"><spring:message--%>
-<%--                                code="WordList.delete"/></a>)--%>
-<%--                        </option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </div>--%>
-<%--        </form:form>--%>
-<%--    </div>--%>
+    <div class="container">
+        <form:form modelAttribute="unhealthyWordList" action="unhealthyWords/add" method="post">
+            <div class="row justify-content-md-center table-bordered col-lg-12">
+                <input id="wordToAdd" type="text" placeholder="Enter a new word and click 'Add new word'"
+                       class="table-dark tablecell col-lg-4 no-pdd"/>
+                <div id="addUnhealthyWord" class="justify-content-md-center dropbtn col-lg-2">
+                    <a href="javascript:;"><spring:message code="WordList.add"/></a>
+                </div>
+            </div>
+            <c:forEach var="i" items="${unhealthyWordList}">
+                <div class="row">
+                    <div class="col-lg-2 no-pdd"></div>
+                    <div class="deleteUnhealthyWord col-lg-6 no-pdd tablecell">
+                        <c:out value="${i.word}"/> (<a href="javascript:;"
+                                                       data-id="${i.word}"><spring:message
+                            code="WordList.delete"/></a>)
+                    </div>
+                </div>
+            </c:forEach>
+        </form:form>
+    </div>
 </div><!--theme-layout end-->
 <jsp:include page="layout/footerScript.jsp"/>
 </body>

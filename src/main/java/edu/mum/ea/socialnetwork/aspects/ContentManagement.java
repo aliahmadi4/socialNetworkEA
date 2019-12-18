@@ -5,7 +5,7 @@ import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.UnhealthyWordService;
-import edu.mum.ea.socialnetwork.services.impl.MailService;
+import edu.mum.ea.socialnetwork.services.MailService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.Year;
 
 @Aspect
 @Component
@@ -52,8 +51,10 @@ public class ContentManagement {
             Post post = postService.findPostById(postId);
             User user = post.getUser();
             Long userId = user.getId();
+            //1. Update No. of dispproved posts for the user of the currently disapproved post
             Integer noOfDisapprovedPosts = user.getProfile().getNoOfDisapprovedPosts() + 1;
             adminService.setNumberOfDisapprovedPosts(userId, noOfDisapprovedPosts);
+            //2. Deactivate malicious user:
             if (noOfDisapprovedPosts >= 20) {
                 adminService.setUserEnabled(userId, false);
                 // Prepare email to send to deactivated user:
@@ -67,6 +68,7 @@ public class ContentManagement {
                         "Best regards,\n\n" +
                         "ASAL Social Network team \n\n\n\n" +
                         "(c) Copyright ASAL Social Network " + LocalDate.now().getYear();
+                //3. Send deactivation notification:
                 mailService.sendEmail(user, emailSubject, emailBody);
             }
         }
