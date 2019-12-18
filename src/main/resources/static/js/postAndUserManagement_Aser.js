@@ -12,12 +12,12 @@ $(function () {
     });
 
     $(".approvePost").click(function () {
-        let postId = $.data("id");
+        let postId = $(this).data("id");
         setPostEnabled(postId, true);
     });
 
     $(".disapprovePost").click(function () {
-        let postId = $.data("id");
+        let postId = $(this).data("id");
         setPostEnabled(postId, false);
     });
 
@@ -44,13 +44,13 @@ $(function () {
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function (data) {
                 $('#' + userId + '-Enable').text(data);
-                if ($('#' + userId + '-CurrentEnabled').text() == "Yes") {
+                if ($('#' + userId + '-CurrentEnabled').text() === "Yes") {
                     $('#' + userId + '-CurrentEnabled').text("No")
                 } else {
                     $('#' + userId + '-CurrentEnabled').text("Yes")
                 }
             },
-            error: function (error) {
+            error: function () {
                 alert("Unable to change user status.");
             }
         });
@@ -67,13 +67,11 @@ $(function () {
             headers: {
                 "X-CSRF-TOKEN":
                     $("meta[name='_csrf']").attr("content")
-            }
-            ,
+            },
             success: function (data) {
                 $('#' + userId + '-CurrentRole').text(data);
-            }
-            ,
-            error: function (error) {
+            },
+            error: function () {
                 alert("Unable to update user role.");
             }
         })
@@ -88,12 +86,16 @@ $(function () {
                 "postId": postId,
                 "isApproved": isEnabled
             },
-            headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-            success: function (data) {
-                alert("Post approved.");
+            headers: {
+                "X-CSRF-TOKEN":
+                    $("meta[name='_csrf']").attr("content")
             },
-            error: function (error) {
-                alert("Post not processed.");
+            success: function () {
+                $('#PostNo-' + postId).remove();
+            },
+            error: function (xhr, status) {
+                var err = eval("(Error: " + xhr.responseText + ". Server returned " + status + ")");
+                alert(err);
             }
         });
     }
@@ -105,10 +107,10 @@ $(function () {
             contentType: "application/json",
             data: JSON.stringify(word),
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-            success: function (data) {
+            success: function () {
                 alert("New unhealthy word (" + word + ") added successfully.");
             },
-            error: function (error) {
+            error: function () {
                 alert("Unable to add this word to unhealthy word list.");
             }
         });
@@ -121,12 +123,12 @@ $(function () {
             contentType: "application/json",
             data: JSON.stringify(word),
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-            success: function (data) {
+            success: function () {
                 alert("Unhealthy word (" + word + ") was deleted successfully.");
             },
-            error: function (error) {
+            error: function () {
                 alert("Unable to delete this word from unhealthy word list.");
             }
         });
     }
-})
+});

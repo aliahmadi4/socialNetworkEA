@@ -3,9 +3,11 @@ package edu.mum.ea.socialnetwork.services.impl;
 import java.util.List;
 
 import edu.mum.ea.socialnetwork.domain.Post;
+import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.Role;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.repository.PostRepository;
+import edu.mum.ea.socialnetwork.repository.ProfileRepository;
 import edu.mum.ea.socialnetwork.repository.UserRepository;
 import edu.mum.ea.socialnetwork.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class AdminServiceImpl implements AdminService {
 
     private UserRepository userRepository;
+    private ProfileRepository profileRepository;
     private PostRepository postRepository;
 
     @Autowired
-    public AdminServiceImpl(UserRepository userRepository, PostRepository postRepository) {
+    public AdminServiceImpl(UserRepository userRepository, ProfileRepository profileRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
         this.postRepository = postRepository;
     }
 
@@ -51,7 +55,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void setNumberOfDisapprovedPosts(Long userId, Integer noOfDisapprovedPosts) {
-        userRepository.setNumberOfDisapprovedPosts(userId, noOfDisapprovedPosts);
+        Profile profile = profileRepository.getByUserId(userId);
+        profileRepository.setNumberOfDisapprovedPosts(profile.getId(), noOfDisapprovedPosts);
     }
 
     @Override

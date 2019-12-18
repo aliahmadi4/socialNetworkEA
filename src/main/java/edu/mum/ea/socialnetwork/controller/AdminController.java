@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,8 @@ public class AdminController {
         if (adminService.userIsEnabled(userId)) {
             return messageSource.getMessage("UserList.Enable", null, LocaleContextHolder.getLocale());
         }
+        // reset counter of disapproved posts because user will be re-enabled.
+        adminService.setNumberOfDisapprovedPosts(userId,0);
         return messageSource.getMessage("UserList.Disable", null, LocaleContextHolder.getLocale());
     }
 
@@ -86,7 +89,9 @@ public class AdminController {
 
     @Secured({"ROLE_ADMIN", "ROLE_CONTENT_MANAGER"})
     @PostMapping("/postApproval")
+    @ResponseStatus(value = HttpStatus.OK)
     public void processPost(@RequestParam Long postId, @RequestParam boolean isApproved) {
+        adminService.setPostUnhealthy(postId, false); //post has been already procesed and doesn't need to appear on UI anymore.
         adminService.setPostEnabled(postId, isApproved);
     }
 }
