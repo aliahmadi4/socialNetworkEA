@@ -6,8 +6,8 @@ $(function () {
     });
 
     $(".setUserRole").click(function () {
-        let userId = $.data("id");
-        let newRole = $.data("role");
+        let userId = $(this).data("id");
+        let newRole = $(this).data("role");
         setUserRole(userId, newRole);
     });
 
@@ -43,8 +43,12 @@ $(function () {
             data: JSON.stringify(userId),
             headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
             success: function (data) {
-                $('#' +${user.id} +'-CurrentEnabled').text(data);
-                alert("User status changed successfully.");
+                $('#' + userId + '-Enable').text(data);
+                if ($('#' + userId + '-CurrentEnabled').text() == "Yes") {
+                    $('#' + userId + '-CurrentEnabled').text("No")
+                } else {
+                    $('#' + userId + '-CurrentEnabled').text("Yes")
+                }
             },
             error: function (error) {
                 alert("Unable to change user status.");
@@ -66,8 +70,7 @@ $(function () {
             }
             ,
             success: function (data) {
-                $('#' +${user.id} +'-CurrentRole').text(newUserRole);
-                alert(newUserRole + "role assigned to " + userId + " successfully.");
+                $('#' + userId + '-CurrentRole').text(data);
             }
             ,
             error: function (error) {

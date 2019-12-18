@@ -7,57 +7,113 @@
 <html>
 <head>
     <jsp:include page="layout/head.jsp"/>
-    <script type="text/javascript" src="/js/postAndUserManagement_Aser.js"></script>
+    <style type="text/css">
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .tablecell {
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .tableheadercell {
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            text-align: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            border-radius: 5px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
-
-
 <body>
-
 <div class="wrapper">
     <jsp:include page="layout/navbar.jsp"/>
     <div class="container">
-        <div class="pb-2 mt-4 mb-2 border-bottom">
+        <div class="tableheadercell">
             <h1><spring:message code="UserList.header"/>
         </div>
     </div>
-    <div>
-        <div class="row column-header">
-            <div class="col-lg-2 no-pdd">
+    <div class="container">
+        <div class="row justify-content-md-center table-dark tableheadercell">
+            <div class="col-lg-3 no-pdd">
                 <spring:message code="UserList.username"/>
             </div>
-            <div class="col-lg-1 no-pdd">
+            <div class="col-lg-2 no-pdd">
                 <spring:message code="UserList.Enabled"/>
             </div>
             <div class="col-lg-2 no-pdd">
                 <spring:message code="UserList.Role"/>
             </div>
-            <div class="col-lg-7 no-pdd">
-                <spring:message code="UserList.newRole"/>
-            </div>
+            <div class="col-lg-2 no-pdd"></div>
         </div>
         <form:form modelAttribute="userList" action="post" method="post">
             <c:forEach var="user" items="${userList}" varStatus="userIndex">
-                <div class="row" id="${userIndex.index}">
-                    <div class="col-lg-2 no-pdd">
+                <div class="row justify-content-md-center table-bordered" id="${userIndex.index}">
+                    <div class="col-lg-3 no-pdd tablecell">
                             ${user.username} (${user.profile.firstName} ${user.profile.lastName})
                     </div>
-                    <div class="col-lg-1 no-pdd">
+                    <div class="col-lg-2 no-pdd tablecell">
                         <c:choose>
                             <c:when test="${user.enabled==true}">
-                                <c:out value="Yes"/> | <a href="javascript:;" class="toggleUser" data-id="${user.id}"
-                                                          id="${user.id}-CurrentEnabled">
+                                <span id="${user.id}-CurrentEnabled">
+                                    <c:out value="Yes"/>
+                                </span> (<a href="javascript:;" class="toggleUser" data-id="${user.id}"
+                                id="${user.id}-Enable">
                                 <spring:message code="UserList.Disable"/>
-                            </a>
+                                </a>)
                             </c:when>
                             <c:otherwise>
-                                <c:out value="No"/> | <a href="javascript:;" class="toggleUser" data-id="${user.id}"
-                                                         id="${user.id}-CurrentEnabled">
+                                <span id="${user.id}-CurrentEnabled">
+                                    <c:out value="No"/>
+                                </span> (<a href="javascript:;" class="toggleUser" data-id="${user.id}"
+                                id="${user.id}-Enable">
                                 <spring:message code="UserList.Enable"/>
-                            </a>
+                                </a>)
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <div class="col-lg-2 no-pdd" id="${user.id}-CurrentRole">
+                    <div class="col-lg-2 no-pdd tablecell" id="${user.id}-CurrentRole">
                         <c:choose>
                             <c:when test="${user.role=='ROLE_ADMIN'}">
                                 <spring:message code="UserList.SetAdmin"/>
@@ -73,40 +129,33 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <div class="col-lg-1 no-pdd">
-                        <a href="javascript:;" class="setUserRole" data-id="${user.id}"
-                           data-role="ROLE_ADMIN">
-                            <spring:message code="UserList.SetAdmin"/>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 no-pdd">
-                        <a href="javascript:;" class="setUserRole" data-id="${user.id}"
-                           data-role="ROLE_CONTENT_MANAGER">
-                            <spring:message code="UserList.SetContentManager"/>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 no-pdd">
-                        <a href="javascript:;" class="setUserRole" data-id="${user.id}"
-                           data-role="ROLE_MARKETING_MANAGER">
-                            <spring:message code="UserList.SetMarketingManager"/>
-                        </a>
-                    </div>
-                    <div class="col-lg-1 no-pdd">
-                        <a href="javascript:;" class="setUserRole" data-id="${user.id}"
-                           data-role="ROLE_USER">
-                            <spring:message code="UserList.SetUser"/>
-                        </a>
+                    <div class="dropdown col-lg-2 no-pdd">
+                        <button class="dropbtn"><spring:message code="UserList.SetRole"/></button>
+                        <div class="dropdown-content">
+                            <a href="javascript:;" class="setUserRole" data-id="${user.id}"
+                               data-role="ROLE_ADMIN">
+                                <spring:message code="UserList.SetAdmin"/>
+                            </a>
+                            <a href="javascript:;" class="setUserRole" data-id="${user.id}"
+                               data-role="ROLE_CONTENT_MANAGER">
+                                <spring:message code="UserList.SetContentManager"/>
+                            </a>
+                            <a href="javascript:;" class="setUserRole" data-id="${user.id}"
+                               data-role="ROLE_MARKETING_MANAGER">
+                                <spring:message code="UserList.SetMarketingManager"/>
+                            </a>
+                            <a href="javascript:;" class="setUserRole" data-id="${user.id}"
+                               data-role="ROLE_USER">
+                                <spring:message code="UserList.SetUser"/>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </c:forEach>
         </form:form>
     </div>
 </div><!--theme-layout end-->
-
-
 <jsp:include page="layout/footerScript.jsp"/>
-
 </body>
-
-<!-- Mirrored from gambolthemes.net/workwise-new/editProfile.jsp by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Sep 2019 14:25:26 GMT -->
+<script type="text/javascript" src="/js/postAndUserManagement_Aser.js"></script>
 </html>

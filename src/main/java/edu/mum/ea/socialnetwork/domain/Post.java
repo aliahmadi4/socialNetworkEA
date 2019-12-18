@@ -31,7 +31,7 @@ public class Post {
     private Integer likeCount = 0;
     private Integer commentCount = 0;
     private boolean unhealthy = false;
-    private boolean enabled;
+    private boolean enabled = true;
 
 //    @JsonBackReference
     @JsonManagedReference
