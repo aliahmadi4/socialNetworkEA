@@ -83,18 +83,18 @@
         </div>
         <form:form modelAttribute="postList" action="post" method="post">
             <c:forEach var="post" items="${postList}" varStatus="postIndex">
-                <div class="row justify-content-md-center table-bordered" id="PostNo-${postIndex.index}">
+                <div class="row justify-content-md-center table-bordered" id="PostNo-${post.id}">
                     <div class="col-lg-10 no-pdd tablecell">
                             ${post.text}
                     </div>
                     <div class="dropdown col-lg-1 no-pdd">
                         <button class="dropbtn"><spring:message code="PostList.Decision"/></button>
                         <div class="dropdown-content">
-                            <a href="javascript:;" class="processPost" data-id="${post.id}"
+                            <a href="javascript:;" class="approvePost" data-id="${post.id}"
                                data-enable='true'>
                                 <spring:message code="Yes"/>
                             </a>
-                            <a href="javascript:;" class="processPost" data-id="${post.id}"
+                            <a href="javascript:;" class="disapprovePost" data-id="${post.id}"
                                data-enable='false'>
                                 <spring:message code="No"/>
                             </a>
