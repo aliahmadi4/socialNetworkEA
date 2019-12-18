@@ -82,14 +82,16 @@
                                             <span>155</span>
                                         </li>--%>
                                         <li>
-                                            <a href="<c:url value='/profile/myProfile' />" title="">View Profile</a>
+                                            <a href="<c:url value='/profile/myProfile' />" title="">
+                                                <spring:message code="profileList.viewProfile" text="View Profile" />
+                                            </a>
                                         </li>
                                     </ul>
                                 </div><!--user-data end-->
 
                                 <div class="suggestions full-width">
                                     <div class="sd-title">
-                                        <h3>Suggestions</h3>
+                                        <h3><spring:message code="profileList.suggestion" text="Suggestion"/> </h3>
                                         <%--                                        <i class="la la-ellipsis-v"></i>--%>
                                     </div><!--sd-title end-->
                                     <div id="follow" class="suggestions-list">
@@ -121,7 +123,7 @@
                         <div class="col-lg-6 col-md-8 no-pd">
                             <div class="main-ws-sec">
                                 <div class="post-topbar">
-                                    <h1>Search Result</h1>
+                                    <h1><spring:message code="profileList.searchResult" text="Search Result"/> </h1>
                                 </div><!--post-topbar end-->
                                 <div class="posts-section">
 
@@ -166,7 +168,7 @@
 <%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
                                                     <video width="100%" controls>
                                                         <source src="/media/post/${post.video}" type="video/mp4">
-                                                        Your browser does not support HTML5 video.
+                                                        <spring:message code="index.video" text="Your browser does not support HTML5 video."/>
                                                     </video>
                                                 </div>
 
@@ -230,7 +232,7 @@
                                 <div class="load-area" data-id="${currentUser.id}" ></div>
                                 <c:if test="${allPost.size()==0}">
                                 <div class="process-comm">
-                                    <button class="btn btn-danger">No Result Found!</button>
+                                    <button class="btn btn-danger"><spring:message code="profileList.noresult" text="No Result Found!"/> </button>
                                 </div>
                                 </c:if>
                             </div><!--main-ws-sec end-->
@@ -321,7 +323,7 @@
 </script>
 <jsp:include page="layout/footerScript.jsp"/>
 
-//for loading more posts
+<%--//for loading more posts--%>
 <script src="/js/loadmore.js" type="text/javascript"></script>
 
 

@@ -107,6 +107,8 @@ public class ProfileController {
         return "redirect:/profile/myProfile";
     }
 
+
+
     @GetMapping("/profile/myProfile")
     public String showMyProfile(Model model,Principal principal){
         User me = userService.findUserByName(principal.getName());
@@ -144,4 +146,20 @@ public class ProfileController {
     }
 
 
+    // following GetMapping functions are use for changing language because after changing the language we do a get
+    // request and if we don't have this get mapping method it will throw 400 error
+    @GetMapping("/profile")
+    public String redirectToProfile(@Valid @ModelAttribute Profile profile, BindingResult bindingResult, Principal principal) {
+        return "editProfile";
+    }
+
+    @GetMapping("/profile/profilePhotoUpload")
+    public String redirectToPhotoUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Principal principal) {
+        return "editProfile";
+    }
+
+    @GetMapping("/profile/changePassword")
+    public String redirectToChangePass(@ModelAttribute Profile profile, @RequestParam("new-password") String password, @RequestParam("repeat-password") String repeat, Model model, Principal principal) {
+        return "editProfile";
+    }
 }

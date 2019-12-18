@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 
 <head>
@@ -67,10 +70,9 @@
                     <c:if test="${currentUser.id}==${profile.id}">
                         <div class="col-lg-12 col-sm-12">
                             <input type="file" id="file">
-                            <label for="file">Change Image</label>
+                            <label for="file"><spring:message code="profile.changeImg" text="Change Image"/> </label>
                         </div>
                     </c:if>
-
                 </div>
             </div>
         </div>
@@ -125,13 +127,13 @@
                                     </div><!--user_pro_status end-->
                                     <ul class="social_links">
                                         <c:if test="${profile.address.country.length()>2}" >
-                                            <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
-                                            <li><i class="la la-globe"></i> Lives in <b>${profile.address.state}, ${profile.address.city}</b></li>
+                                            <li><i class="la la-globe"></i><spring:message code="profile.from" text="From"/>  <b>${profile.address.country}</b></li>
+                                            <li><i class="la la-globe"></i> <spring:message code="profile.livesIn" text="Lives in"/> <b>${profile.address.state}, ${profile.address.city}</b></li>
                                         </c:if>
-                                        <li><i class="la la-globe"></i> Gender <b>${profile.gender}</b></li>
-                                        <li><i class="la la-globe"></i> Email <b>${profile.email}</b></li>
+                                        <li><i class="la la-globe"></i> <spring:message code="profile.gender" text="Gender"/> <b>${profile.gender}</b></li>
+                                        <li><i class="la la-globe"></i> <spring:message code="profile.email" text="Email"/> <b>${profile.email}</b></li>
                                         <c:if test="${currentUser.id==profile.id}">
-                                        <li><a href="/profile/editProfile">Edit Profile</a></li>
+                                        <li><a href="/profile/editProfile"><spring:message code="profile.editProfile" text="Edit Profile"/> </a></li>
                                         </c:if>
 
 
@@ -222,7 +224,7 @@
                                                             <%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
                                                         <video width="100%" controls>
                                                             <source src="/media/post/${post.video}" type="video/mp4">
-                                                            Your browser does not support HTML5 video.
+                                                            <spring:message code="index.video" text="Your browser does not support HTML5 video."/>
                                                         </video>
                                                     </div>
 
@@ -239,10 +241,10 @@
                                                                     <c:set var="likeid" value="${like.id}" />
                                                                 </c:if>
                                                             </c:forEach>
-                                                            <a href="javascript:;" class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                                            <a href="javascript:;" class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> <spring:message code="index.like" text="Like"/> </a>
                                                         </li>
                                                         <li>
-                                                            <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
+                                                            <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> <spring:message code="index.comment" text="Comments"/> </a>
 
                                                         </li>
                                                     </ul>
@@ -261,7 +263,6 @@
                                                 <div class="job-status-bar">
                                                     <ul class="comments-list ${post.id}-commentlist">
                                                         <c:forEach items="${post.comments}" var="comment">
-
                                                             <li> ${comment.text}</li>
                                                         </c:forEach>
                                                     </ul>
@@ -281,17 +282,17 @@
                                 <c:if test="${currentUser.id==profile.id}">
                                 <div class="message-btn">
                                     <a href="<c:url value='/profile/editProfile'/>" title=""><i class="fas fa-cog"></i>
-                                        Edit Profile</a>
+                                        <spring:message code="profile.editProfile" text="Edit Profile"/> </a>
                                 </div>
                                 </c:if>
                                 <div class="widget widget-portfolio">
                                     <div class="wd-heady">
-                                        <h3>About Me</h3>
+                                        <h3><spring:message code="editProfile.about" text="About Me"/> </h3>
                                         <img src="/images/photo-icon.png" alt="">
                                     </div>
                                     <div class="pf-gallery">
                                         <div>
-                                            <p>My name is ${profile.firstName} ${profile.lastName} but you can call me ${profile.firstName}. If you want to contact me please dont hesitate to email me by ${profile.email}</p>
+                                            <p><spring:message code="profile.myName" text="My name is"/> ${profile.firstName} ${profile.lastName} <spring:message code="profile.msg1" text="but you can call me"/> ${profile.firstName}. <spring:message code="profile.msg2" text="If you want to contact me please dont hesitate to email me by"/> ${profile.email}</p>
                                         </div>
 
                                     </div><!--pf-gallery end-->
@@ -313,7 +314,7 @@
 
 <jsp:include page="layout/footerScript.jsp"/>
 
-//for loading more posts
+<%--//for loading more posts--%>
 <script src="/js/loadmore.js" type="text/javascript"></script>
 <script src="/js/followUnfollow.js" type="text/javascript"></script>
 

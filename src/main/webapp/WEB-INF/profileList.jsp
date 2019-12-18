@@ -53,10 +53,14 @@
 									<h3><c:out value="${i.firstName}  ${i.lastName}" /></h3>
 									<h4>${i.occupation}</h4>
 									<ul>
-										<li><a href="javascript:" class="follow" id="<c:out value="${i.id}" />">Follow</a></li>
+										<li><a href="javascript:" class="follow" id="<c:out value="${i.id}" />">
+											<spring:message code="profileList.follow" text="Follow"/>
+										</a></li>
 									</ul>
 								</div>
-								<a href="<c:url value="/profile/${i.id}" />" title="" class="view-more-pro">View Profile</a>
+								<a href="<c:url value="/profile/${i.id}" />" title="" class="view-more-pro">
+									<spring:message code="profileList.viewProfile" text="View Profile"/>
+								</a>
 							</div><!--company_profile_info end-->
 						</div>
 						</c:forEach>

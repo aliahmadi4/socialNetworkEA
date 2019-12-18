@@ -114,7 +114,7 @@
 
                         <form:form modelAttribute="addPost" action="post" enctype="multipart/form-data" method="post" >
                             <div class="row" style="border: 1px solid #ccc; background: #f9f9f9; padding: 10px; margin-top: 15px;">
-                                <h1>Add text</h1>
+                                <h1><spring:message code="post.addText" text="Add text"/> </h1>
                                 <div class="col-lg-12 no-pdd">
                                     <div class="sn-field">
                                         <form:input path="text" style="width: 100%" required="true" />
@@ -124,25 +124,29 @@
 
                                 <div class="col-lg-12 no-pdd">
                                     <div class="sn-field">
-                                        Image Upload: <input type="file" name="imageFile" />
+                                        <spring:message code="post.uploadImg" text="Image Upload:"/>
+                                        <input type="file" name="imageFile" />
                                     </div><!--sn-field end-->
                                 </div>
 
                                 <div class="col-lg-12 no-pdd">
                                     <div class="sn-field">
-                                        Video Upload: <input type="file" name="videoFile" />
+                                        <spring:message code="post.videoUpload" text="Video Upload:"/>
+                                        <input type="file" name="videoFile" />
                                     </div><!--sn-field end-->
                                 </div>
 
-                                <input type="checkbox" name="notifyAllFollowers" checked="true" />Notify all users <br><br>
-
+                                <input type="checkbox" name="notifyAllFollowers" checked="true" />
+                                <spring:message code="post.notify" text="Notify all users" /><br><br>
 
                                 <div class="col-lg-12 no-pdd">
-                                    <button type="submit" value="submit" style="padding: 10px; background: #4267b2; color: #fff">Add Post</button>
+                                    <button type="submit" value="submit" style="padding: 10px; background: #4267b2; color: #fff">
+                                        <spring:message code="post.addPost" text="Add Post"/>
+                                    </button>
                                 </div>
                             </div>
                         </form:form>
-                            User Id:
+                            <spring:message code="post.userId" text="User Id:"/>
 
                         <c:forEach items="${allPost}" var="post">
                             <div style="clear: both; border-bottom: 1px dashed #ccc; background: #f5f4f4; padding: 10px; margin-top: 10px;" class="${post.id}-wrap">
@@ -156,7 +160,7 @@
                             <c:if test="${post.video.length() > 0}">
                                 <video width="100%" controls>
                                     <source src="/media/post/${post.video}" type="video/mp4">
-                                    Your browser does not support HTML5 video.
+                                    <spring:message code="index.video" text="Your browser does not support HTML5 video."/>
                                 </video>
                             </c:if>
                                 <input type="hidden" value="${post}" class="post-data">
@@ -172,10 +176,10 @@
                                             <c:set var="likeid" value="${like.id}" />
                                         </c:if>
                                     </c:forEach>
-                                    <a href="javascript:;" class="addlike ${post.id}-likes-wrap  ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
-                                    <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
+                                    <a href="javascript:;" class="addlike ${post.id}-likes-wrap  ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><span class="${post.id}-likes">${post.likeCount}</span> <spring:message code="index.like" text="Like"/></a>
+                                    <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><span class="${post.id}-comments">${post.commentCount}</span> <spring:message code="index.comment" text="Comments" /></a>
                                 </span>
-                                <span style="float: right">Created at:
+                                <span style="float: right"><spring:message code="post.createAt" text="Created at:"/>
                                 <fmt:formatDate dateStyle="long" value="${post.creationDate}"  />
 
                                 </span></p>

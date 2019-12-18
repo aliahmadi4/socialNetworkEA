@@ -90,14 +90,16 @@
                                             <span>155</span>
                                         </li>--%>
                                         <li>
-                                            <a href="<c:url value='/profile/myProfile' />" title="">View Profile</a>
+                                            <a href="<c:url value='/profile/myProfile' />" title="">
+                                                <spring:message code="index.viewProfile" text="View Profile" />
+                                            </a>
                                         </li>
                                     </ul>
                                 </div><!--user-data end-->
 
                                 <div class="suggestions full-width">
                                     <div class="sd-title">
-                                        <h3>Suggestions</h3>
+                                        <h3><spring:message code="index.suggestions" text="Suggestions"/> </h3>
                                         <%--                                        <i class="la la-ellipsis-v"></i>--%>
                                     </div><!--sd-title end-->
                                     <div id="follow" class="suggestions-list">
@@ -118,7 +120,9 @@
                                                     <span>${user.lastName}</span>
                                                 </div>
 <%--                                                <span data-id="${user.id}"><i class="la la-plus"></i></span>--%>
-                                                <span><a href="javascript:" id="${user.id}" class="follow">Follow</a></span>
+                                                <span><a href="javascript:" id="${user.id}" class="follow">
+                                                    <spring:message code="index.follow" text="Follow"/>
+                                                </a></span>
 
                                             </div>
                                         </c:forEach>
@@ -150,8 +154,11 @@
                                     </div>
                                     <div class="post-st">
                                         <ul>
-                                            <li><a class="post_project" href="#" title="">Post</a></li>
-
+                                            <li>
+                                                <a class="post_project" href="#" title="">
+                                                    <spring:message code="index.post" text="Post"/>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div><!--post-st end-->
                                 </div><!--post-topbar end-->
@@ -159,7 +166,6 @@
 
                                     <c:forEach var="post" items="${allPost.content}">
                                         <div class="post-bar">
-
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
                                                     <c:choose>
@@ -180,29 +186,24 @@
                                                                 dateStyle="long" value="${post.creationDate}"/></span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <div class="epi-sec">
-
                                                 &nbsp
                                             </div>
                                             <div class="job_descp">
-
                                                 <p>${post.text}</p>
-
                                             </div>
                                             <c:if test="${post.photo.length() >3}">
                                                 <div class="job_descp">
                                                     <img src="<c:url value='/media/post/${post.photo}' />"/>
                                                 </div>
                                             </c:if>
-
                                             <c:if test="${post.video.length() >3}">
                                                 <div class="job_descp">
                                                         <%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
                                                     <video width="100%" controls>
                                                         <source src="/media/post/${post.video}" type="video/mp4">
-                                                        Your browser does not support HTML5 video.
+                                                        <spring:message code="index.video" text="Your browser does not support HTML5 video."/>
                                                     </video>
                                                 </div>
 
@@ -219,18 +220,10 @@
                                                                 <c:set var="likeid" value="${like.id}"/>
                                                             </c:if>
                                                         </c:forEach>
-                                                        <a href="javascript:;"
-                                                           class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}"
-                                                           data-likeid="${likeid}" data-id="${post.id}"
-                                                           data-post="${post}"><i class="fas fa-heart"></i><span
-                                                                class="${post.id}-likes">${post.likeCount}</span>
-                                                            Like</a>
+                                                        <a href="javascript:;" class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> <spring:message code="index.like" text="Like"/></a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:;" class="addcomment " data-id="${post.id}"
-                                                           data-post="${post}"><i class="fas fa-comment-alt"></i><span
-                                                                class="${post.id}-comments">${post.commentCount}</span>
-                                                            Comments</a>
+                                                        <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> <spring:message code="index.comment" text="Comment"/> </a>
 
                                                     </li>
                                                 </ul>
@@ -240,9 +233,8 @@
                                                 <form class="post-comment" data-id="${post.id}" data-post="${post}">
                                                     <div class="cp-field">
                                                         <div class="cpp-fiel">
-                                                            <input type="text" name="text"
-                                                                   class="comment-text ${post.id}-text"
-                                                                   placeholder="write your comment here" required/>
+                                                            <spring:message code="index.commentPlaceholder" text="write your comment here" var="commentPlaceholder"/>
+                                                    <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="${commentPlaceholder}" required   />
                                                         </div>
                                                     </div>
                                                     <input type="submit" class="comment-submit" value="Submit"
@@ -252,7 +244,6 @@
                                             <div class="job-status-bar">
                                                 <ul class="comments-list ${post.id}-commentlist">
                                                     <c:forEach items="${post.comments}" var="comment">
-
                                                         <li> ${comment.text}</li>
                                                     </c:forEach>
                                                 </ul>
@@ -283,7 +274,7 @@
                                 </c:if>
                                 <c:if test="${nextPage==1}">
                                     <div class="process-comm">
-                                        <button class="btn btn-danger" id="loadmore">Load more</button>
+                                        <button class="btn btn-danger" id="loadmore"><spring:message code="index.loadMore" text="Load More"/></button>
                                     </div>
                                 </c:if>
                             </div><!--main-ws-sec end-->
@@ -315,8 +306,6 @@
 
                             </div><!--right-sidebar end-->
                         </div>
-
-
                     </div>
                 </div><!-- main-section-data end-->
             </div>
@@ -328,31 +317,42 @@
 
     <div class="post-popup pst-pj">
         <div class="post-project">
-            <h3>New Post</h3>
+            <h3><spring:message code="index.newPost" text="New Post"/> </h3>
             <div class="post-project-fields">
                 <form:form modelAttribute="addPost" action="post" enctype="multipart/form-data" method="post">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form:textarea path="text" placeholder="Write here"></form:textarea>
+                            <spring:message code="index.newPostPlaceholder" text="Write here" var="newPost"/>
+                            <form:textarea path="text" placeholder="${newPost}"></form:textarea>
                         </div>
                         <div class="col-lg-12">
+
+                            <div class="toggle-btn" style="top: 0;left: 52px;">
+                                <div class="custom-control custom-switch">
+                                    <form:checkbox  cssClass="custom-control-input" path="notifyAllFollowers" id="notifyAllFollowers" />
+                                    <label class="custom-control-label" for="notifyAllFollowers">
+                                        <spring:message code="index.notifyAllUser" text="Notify all users"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <br><br>
                             <ul>
                                 <li>
                                     <button class="active" type="submit" value="post">Post</button>
+                                    <button class="active" type="submit" value="post" style="position: relative; z-index:1"><spring:message code="index.post" text="Post"/></button>
                                 </li>
                                 <div class="add-pic-box">
-
                                     <div class="row no-gutters">
                                         <div class="col-lg-12 col-sm-12">
                                             <input type="file" name="imageFile" id="image">
-                                            <label for="image">Select Image</label>
+                                            <label for="image"><spring:message code="index.selectImage" text="Select Image"/> </label>
                                         </div>
                                     </div>
 
                                     <div class="row no-gutters">
                                         <div class="col-lg-12 col-sm-12">
                                             <input type="file" name="videoFile" id="video">
-                                            <label for="video">Select Video</label>
+                                            <label for="video"><spring:message code="index.selectVideo" text="Select Video"/> </label>
                                         </div>
                                     </div>
 
@@ -375,6 +375,10 @@
 
 
 <jsp:include page="layout/footerScript.jsp"/>
+
+<%--//for loading more posts--%>
+<script src="/js/loadmore.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
     $(function () {
@@ -520,10 +524,7 @@
                     console.log("ERROR : ", e);
                 }
             });
-
         }
-
-
     })
 </script>
 

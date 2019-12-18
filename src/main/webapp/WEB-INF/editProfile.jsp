@@ -25,17 +25,19 @@
                         <div class="acc-leftbar">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-privcy-tab" data-toggle="tab" href="#privcy"
-                                   role="tab" aria-controls="privacy" aria-selected="true"><i
-                                        class="fa fa-info-circle"></i>Change
-                                    Info</a>
+                                   role="tab" aria-controls="privacy" aria-selected="true">
+                                    <i class="fa fa-info-circle"> </i>
+                                    <spring:message code="editProfile.changeInfo" text="Change Info"/> </a>
 
                                 <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
                                    href="#nav-notification" role="tab" aria-controls="nav-notification"
-                                   aria-selected="false"><i class="fa fa-image"></i>Profile Picture</a>
+                                   aria-selected="false"><i class="fa fa-image"></i>
+                                    <spring:message code="editProfile.profilePic" text="Profile Picture" /> </a>
 
                                 <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
                                    href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i
-                                        class="fa fa-lock"></i>Change Password</a>
+                                        class="fa fa-lock"></i>
+                                    <spring:message code="editProfile.changePass" text="Change Password"/> </a>
 
 
                             </div>
@@ -47,14 +49,12 @@
 
                             <div class="tab-pane fade show active" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
                                 <div class="acc-setting">
-                                    <h3 style="margin-left: 10px">Change Info</h3>
+                                    <h3 style="margin-left: 10px"><spring:message code="editProfile.changeInfo" text="Change Info"/> </h3>
                                     <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
 
                                     <form:form method="post" action="/profile" modelAttribute="profile">
-
-
                                         <div class="cp-field">
-                                            <h5>First Name</h5>
+                                            <h5><spring:message code="editProfile.firstName" text="First Name" /></h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="firstName" id="firstName"
                                                             value="${currentUser.firstName}"/>
@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>Last Name</h5>
+                                            <h5><spring:message code="editProfile.lastName" text="Last Name"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="lastName" id="lastName"
                                                             value="${currentUser.lastName}"/>
@@ -72,7 +72,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>Occupation</h5>
+                                            <h5><spring:message code="editProfile.occupation" text="Occupation"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="occupation" id="occupation"
                                                             value="${currentUser.occupation}"/>
@@ -81,7 +81,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>Email</h5>
+                                            <h5><spring:message code="editProfile.email" text="Email"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="email" path="email" id="email"
                                                             value="${currentUser.email}"/>
@@ -90,7 +90,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>Country</h5>
+                                            <h5><spring:message code="editProfile.country" text="Country"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="address.country" id="country"
                                                             value="${currentUser.address.country}"/>
@@ -99,7 +99,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>State</h5>
+                                            <h5><spring:message code="editProfile.state" text="State"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="address.state" id="state"
                                                             value="${currentUser.address.state}"/>
@@ -108,7 +108,7 @@
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>City</h5>
+                                            <h5><spring:message code="editProfile.city" text="City"/> </h5>
                                             <div class="cpp-fiel">
                                                 <form:input type="text" path="address.city" id="city"
                                                             value="${currentUser.address.city}"/>
@@ -148,20 +148,20 @@
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li>
-                                                    <button type="submit">Save</button>
+                                                    <button type="submit">
+                                                        <spring:message code="editProfile.save" text="Save" />
+                                                    </button>
                                                 </li>
-
                                             </ul>
                                         </div>
                                         <!--save-stngs end-->
-
                                     </form:form>
                                 </div><!--acc-setting end-->
                             </div>
                             <div class="tab-pane fade" id="nav-password" role="tabpanel"
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
-                                    <h3 style="margin-left: 10px">Account Setting</h3>
+                                    <h3 style="margin-left: 10px"><spring:message code="editProfile.accountSetting" text="Account Setting"/> </h3>
                                     <h4 style="margin: 10px; color: red" id="errorMsg"></h4>
                                     <form method="POST" action="<c:url value='/profile/changePassword' />">
                                         <%--                                        <div class="cp-field">--%>
@@ -173,18 +173,18 @@
                                         <%--                                            </div>--%>
                                         <%--                                        </div>--%>
                                         <div class="cp-field">
-                                            <h5>New Password</h5>
+                                            <h5><spring:message code="editProfile.newPass" text="New Password" var="newPass"/> </h5>
                                             <div class="cpp-fiel">
                                                 <input type="text" name="new-password" id="new-password"
-                                                       placeholder="New Password">
+                                                       placeholder="${newPass}">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
-                                            <h5>Repeat Password</h5>
+                                            <h5><spring:message code="editProfile.repeatPass" text="Repeat Password" var="repeatPass"/> </h5>
                                             <div class="cpp-fiel">
                                                 <input type="text" name="repeat-password" id="repeat-password"
-                                                       placeholder="Repeat Password">
+                                                       placeholder="${repeatPass}">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -193,7 +193,7 @@
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li>
-                                                    <button type="submit">Change Password
+                                                    <button type="submit"><spring:message code="editProfile.changePass" text="Change Password"/>
                                                     </button>
                                                 </li>
 
@@ -206,7 +206,7 @@
                             <div class="tab-pane fade" id="nav-notification" role="tabpanel"
                                  aria-labelledby="nav-notification-tab">
                                 <div class="acc-setting">
-                                    <h3>Change Profile Picture</h3>
+                                    <h3><spring:message code="editProfile.changeProfilePic" text="Change Profile Picture"/> </h3>
                                     <div class="notifications-list">
                                         <div class="notfication-details">
                                             <form action="<c:url value='/profile/profilePhotoUpload'/>" method="post"
@@ -215,10 +215,10 @@
                                                 <div class="save-stngs pd2">
                                                     <ul>
                                                         <li>
-                                                            <button type="submit">Upload</button>
+                                                            <button type="submit"><spring:message code="editProfile.upload" text="Upload"/> </button>
                                                         </li>
                                                         <li>
-                                                            <button type="#">Cancel</button>
+                                                            <button type="#"><spring:message code="editProfile.cancel" text="Cancel"/> </button>
                                                         </li>
                                                     </ul>
                                                 </div><!--save-stngs end-->
@@ -708,17 +708,17 @@
         <div class="footy-sec mn no-margin">
             <div class="container">
                 <ul>
-                    <li><a href="help-center.html" title="">Help Center</a></li>
-                    <li><a href="about.html" title="">About</a></li>
-                    <li><a href="#" title="">Privacy Policy</a></li>
-                    <li><a href="#" title="">Community Guidelines</a></li>
-                    <li><a href="#" title="">Cookies Policy</a></li>
-                    <li><a href="#" title="">Career</a></li>
-                    <li><a href="forum.html" title="">Forum</a></li>
-                    <li><a href="#" title="">Language</a></li>
-                    <li><a href="#" title="">Copyright Policy</a></li>
+                    <li><a href="help-center.html" title=""><spring:message code="editProfile.helpCenter" text="Help Center"/> </a></li>
+                    <li><a href="about.html" title=""><spring:message code="editProfile.about" text="About" /> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.privacy" text="Privacy Policy" /> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.community" text="Community Guidelines"/> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.cookies" text="Cookies Policy"/> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.career" text="Career" /> </a></li>
+                    <li><a href="forum.html" title=""><spring:message code="editProfile.forum" text="Forum"/> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.language" text="Language"/> </a></li>
+                    <li><a href="#" title=""><spring:message code="editProfile.copyright" text="Copyright Policy" /> </a></li>
                 </ul>
-                <p><img src="images/copy-icon2.png" alt="">Copyright 2019</p>
+                <p><img src="images/copy-icon2.png" alt=""><spring:message code="editProfile.copy" text="Copyright 2019"/> </p>
                 <img class="fl-rgt" src="images/logo2.png" alt="">
             </div>
         </div>

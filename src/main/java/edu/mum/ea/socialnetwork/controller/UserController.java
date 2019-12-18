@@ -44,6 +44,7 @@ public class UserController {
         }
         user.setRole(Role.ROLE_USER);
         userService.save(user);
+        System.out.println("testtttttttttt");
         return "redirect:/login";
     }
 

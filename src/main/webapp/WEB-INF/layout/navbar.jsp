@@ -2,6 +2,10 @@
         <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
         <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
         <header>
+            <div id="language" style="margin-top: 25px; margin-left: 20px; float: left">
+                <a href="?lang=en_US" style="color: white;"><spring:message code="login.lang.en" text="English" /></a> |
+                <a href="?lang=spa" style="color: white"><spring:message code="login.lang.spa" text="Spanish" /></a>
+            </div>
         <div class="container">
         <div class="header-data">
         <div class="logo">
@@ -9,7 +13,8 @@
         </div><!--logo end-->
         <div class="search-bar">
         <form method="get" action="/post/search">
-        <input type="text" name="search" placeholder="Search...">
+            <spring:message code="navebar.search" text="Search" var="search"/>
+        <input type="text" name="search" placeholder="${search}">
         <button type="submit"><i class="la la-search"></i></button>
         </form>
         </div><!--search-bar end-->
@@ -20,21 +25,21 @@
         <li>
         <a href="<c:url value='/'/>" title="">
         <span><img src="<c:url value='/images'/>/icon1.png" alt=""></span>
-        Home
+        <spring:message code="navebar.home" text="Home"/>
         </a>
         </li>
 
         <li>
         <a href="<c:url value='/profileList'/>" title="">
         <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
-        Users
+        <spring:message code="navebar.users" text="Users"/>
         </a>
         </li>
         <c:if test="${notifications.size() > 0}">
         <li>
         <a class="not-box-open" href="javascript:;" title="">
         <span><img src="<c:url value='/images'/>/icon7.png" alt=""></span>
-        Notification
+        <spring:message code="navebar.notification" text="Notification"/>
         </a>
 
         <div class="notification-box noti" id="notification" style="border-bottom: 4px solid #e44d3a">
@@ -59,7 +64,7 @@
         <li>
         <a href="<c:url value='/profile/${currentUser.id}'/>" title="">
         <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
-        Profile
+        <spring:message code="navebar.profile" text="Profile"/>
         </a>
 
         </li>
@@ -105,7 +110,9 @@
 
 
         <div class="menu-btn">
-        <a href="#" title=""><i class="fa fa-bars"></i></a>
+            <a href="#" title="">
+                <i class="fa fa-bars"></i>
+            </a>
         </div><!--menu-btn end-->
 
         <div class="user-account">
@@ -122,15 +129,16 @@
         </c:choose>
         <a href="#" title=""><security:authentication property="principal.username"/></a>
         <i class="la la-sort-down"></i>
+
         </div>
         <div class="user-account-settingss">
 
 
-        <h3>Setting</h3>
+        <h3><spring:message code="navebar.setting" text="Setting"/> </h3>
         <ul class="us-links">
-        <li><a href="<c:url value="/profile/editProfile"/>" title="">Edit Profile</a></li>
+        <li><a href="<c:url value="/profile/editProfile"/>" title=""><spring:message code="navebar.editProfile" text="Edit Profile"/> </a></li>
         </ul>
-        <h3 class="tc"><a href="<c:url value="/logout"/>" title="">Logout</a></h3>
+        <h3 class="tc"><a href="<c:url value="/logout"/>" title=""><spring:message code="navebar.logout" text="Logout"/> </a></h3>
         </div><!--user-account-settingss end-->
         </div>
 

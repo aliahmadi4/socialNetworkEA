@@ -112,7 +112,7 @@
                                                 <i class="la la-lock"></i>
                                             </div>
                                         </div>
-                                        <c:if test="${param.error!=null}"><h3 style="color: red">Authentication Failed!</h3></c:if>
+                                        <c:if test="${param.error!=null}"><h3 style="color: red"><spring:message code="login.error" text="Authentication Failed!"/> </h3></c:if>
 
 
                                         <div class="col-lg-12 no-pdd">
