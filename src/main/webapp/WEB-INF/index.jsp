@@ -5,36 +5,38 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<security:csrfMetaTags />
+<security:csrfMetaTags/>
 <html>
 
 <head>
     <jsp:include page="layout/head.jsp"/>
-<%--    <script type="text/javascript" src="<c:url value='/js/scroll.js' />"></script>--%>
-<style type="text/css">
-    ul.comments-list li {
-        padding: 10px;
-        margin: 0;
-        list-style: none;
-        border-bottom: 1px solid #ddd;
-        font-size: 14px;
-        display: block;
-        background: white;
-        color: #696868;
-    }
-    .cp-field {
-        float: left;
-        width: 100%;
-        margin-top: 29.4px;
-        padding: 0 0px;
-    }
-    .cp-field input {
-        height: 40px;
-        padding: 0 10px;
-    }
+    <%--    <script type="text/javascript" src="<c:url value='/js/scroll.js' />"></script>--%>
+    <style type="text/css">
+        ul.comments-list li {
+            padding: 10px;
+            margin: 0;
+            list-style: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            display: block;
+            background: white;
+            color: #696868;
+        }
+
+        .cp-field {
+            float: left;
+            width: 100%;
+            margin-top: 29.4px;
+            padding: 0 0px;
+        }
+
+        .cp-field input {
+            height: 40px;
+            padding: 0 10px;
+        }
 
 
-</style>
+    </style>
 </head>
 
 <body>
@@ -59,10 +61,12 @@
                                             <div class="usr-pic">
                                                 <c:choose>
                                                     <c:when test="${currentUser.profilePhoto.length()>4}">
-                                                        <img src="/media/profile/${currentUser.profilePhoto}" alt=""  height="120px" width="120px">
+                                                        <img src="/media/profile/${currentUser.profilePhoto}" alt=""
+                                                             height="120px" width="120px">
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <img src="<c:url value='/images/user.jpg'/>" alt=""  height="120px" width="120px">
+                                                        <img src="<c:url value='/images/user.jpg'/>" alt=""
+                                                             height="120px" width="120px">
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
@@ -94,19 +98,19 @@
                                     </div><!--sd-title end-->
                                     <div id="follow" class="suggestions-list">
 
-<%--                                        <c:forEach var="u" items="${userList}">--%>
-<%--                                            <div class="suggestion-usd">--%>
-<%--                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"--%>
-<%--                                                     alt=""--%>
-<%--                                                     width="45px" height="45px">--%>
-<%--                                                <div class="sgt-text">--%>
-<%--                                                    <h4>${u.firstName}</h4>--%>
-<%--                                                    <span>${u.lastName}</span>--%>
-<%--                                                </div>--%>
-<%--                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>--%>
+                                        <%--                                        <c:forEach var="u" items="${userList}">--%>
+                                        <%--                                            <div class="suggestion-usd">--%>
+                                        <%--                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"--%>
+                                        <%--                                                     alt=""--%>
+                                        <%--                                                     width="45px" height="45px">--%>
+                                        <%--                                                <div class="sgt-text">--%>
+                                        <%--                                                    <h4>${u.firstName}</h4>--%>
+                                        <%--                                                    <span>${u.lastName}</span>--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>--%>
 
-<%--                                            </div>--%>
-<%--                                        </c:forEach>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </c:forEach>--%>
 
                                     </div><!--suggestions-list end-->
                                 </div><!--suggestions end-->
@@ -124,10 +128,12 @@
                                     <div class="user-picy">
                                         <c:choose>
                                             <c:when test="${currentUser.profilePhoto.length()>4}">
-                                                <img src="/media/profile/${currentUser.profilePhoto}" alt="" height="50px" width="50px">
+                                                <img src="/media/profile/${currentUser.profilePhoto}" alt=""
+                                                     height="50px" width="50px">
                                             </c:when>
                                             <c:otherwise>
-                                                <img src="<c:url value='/images/user.jpg'/>" alt="" height="50px" width="50px">
+                                                <img src="<c:url value='/images/user.jpg'/>" alt="" height="50px"
+                                                     width="50px">
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
@@ -147,16 +153,20 @@
                                                 <div class="usy-dt">
                                                     <c:choose>
                                                         <c:when test="${post.user.profile.profilePhoto.length()>4}">
-                                                            <img src="/media/profile/${post.user.profile.profilePhoto}" alt="" width="45px" height="45px">
+                                                            <img src="/media/profile/${post.user.profile.profilePhoto}"
+                                                                 alt="" width="45px" height="45px">
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img src="<c:url value='/images/user.jpg'/>" alt="" width="45px" height="45px">
+                                                            <img src="<c:url value='/images/user.jpg'/>" alt=""
+                                                                 width="45px" height="45px">
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <div class="usy-name">
                                                         <a href="<c:url value='/profile/${post.user.id}' />">
-                                                            <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3></a>
-                                                        <span><img src="../../images/clock.png" alt=""><fmt:formatDate dateStyle="long" value="${post.creationDate}"/></span>
+                                                            <h3>${post.user.profile.firstName} ${post.user.profile.lastName}</h3>
+                                                        </a>
+                                                        <span><img src="../../images/clock.png" alt=""><fmt:formatDate
+                                                                dateStyle="long" value="${post.creationDate}"/></span>
                                                     </div>
                                                 </div>
 
@@ -178,7 +188,7 @@
 
                                             <c:if test="${post.video.length() >3}">
                                                 <div class="job_descp">
-<%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
+                                                        <%--                                                    <img src="<c:url value='/media/post/${post.video}' />"/>--%>
                                                     <video width="100%" controls>
                                                         <source src="/media/post/${post.video}" type="video/mp4">
                                                         Your browser does not support HTML5 video.
@@ -190,18 +200,26 @@
                                             <div class="job-status-bar">
                                                 <ul class="like-com">
                                                     <li>
-                                                        <c:set var="count" value="${0}" />
-                                                        <c:set var="likeid" value="${0}" />
+                                                        <c:set var="count" value="${0}"/>
+                                                        <c:set var="likeid" value="${0}"/>
                                                         <c:forEach items="${post.likes}" var="like">
-                                                            <c:if test = "${like.user.id == currentUser.id}">
-                                                                <c:set var="count" value="${count+1}" />
-                                                                <c:set var="likeid" value="${like.id}" />
+                                                            <c:if test="${like.user.id == currentUser.id}">
+                                                                <c:set var="count" value="${count+1}"/>
+                                                                <c:set var="likeid" value="${like.id}"/>
                                                             </c:if>
                                                         </c:forEach>
-                                                        <a href="javascript:;" class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}" data-likeid="${likeid}" data-id="${post.id}" data-post="${post}"><i class="fas fa-heart"></i><span class="${post.id}-likes">${post.likeCount}</span> Like</a>
+                                                        <a href="javascript:;"
+                                                           class="addlike ${post.id}-likes-wrap ${count == 0 ? 'not-active' : 'active'}"
+                                                           data-likeid="${likeid}" data-id="${post.id}"
+                                                           data-post="${post}"><i class="fas fa-heart"></i><span
+                                                                class="${post.id}-likes">${post.likeCount}</span>
+                                                            Like</a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:;" class="addcomment " data-id="${post.id}" data-post="${post}"><i class="fas fa-comment-alt"></i><span class="${post.id}-comments">${post.commentCount}</span> Comments</a>
+                                                        <a href="javascript:;" class="addcomment " data-id="${post.id}"
+                                                           data-post="${post}"><i class="fas fa-comment-alt"></i><span
+                                                                class="${post.id}-comments">${post.commentCount}</span>
+                                                            Comments</a>
 
                                                     </li>
                                                 </ul>
@@ -211,18 +229,21 @@
                                                 <form class="post-comment" data-id="${post.id}" data-post="${post}">
                                                     <div class="cp-field">
                                                         <div class="cpp-fiel">
-                                                    <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="write your comment here" required   />
+                                                            <input type="text" name="text"
+                                                                   class="comment-text ${post.id}-text"
+                                                                   placeholder="write your comment here" required/>
                                                         </div>
                                                     </div>
-                                                    <input type="submit" class="comment-submit" value="Submit" style="display: none">
+                                                    <input type="submit" class="comment-submit" value="Submit"
+                                                           style="display: none">
                                                 </form>
                                             </div>
                                             <div class="job-status-bar">
                                                 <ul class="comments-list ${post.id}-commentlist">
-                                                <c:forEach items="${post.comments}" var="comment">
+                                                    <c:forEach items="${post.comments}" var="comment">
 
-                                                    <li> ${comment.text}</li>
-                                                </c:forEach>
+                                                        <li> ${comment.text}</li>
+                                                    </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -231,21 +252,29 @@
                                     </c:forEach>
 
 
-
-<%--                                    <div class="process-comm">--%>
-<%--                                        <div class="spinner">--%>
-<%--                                            <div class="bounce1"></div>--%>
-<%--                                            <div class="bounce2"></div>--%>
-<%--                                            <div class="bounce3"></div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
+                                    <%--                                    <div class="process-comm">--%>
+                                    <%--                                        <div class="spinner">--%>
+                                    <%--                                            <div class="bounce1"></div>--%>
+                                    <%--                                            <div class="bounce2"></div>--%>
+                                    <%--                                            <div class="bounce3"></div>--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                    </div>--%>
 
 
                                 </div><!--posts-section end-->
-                                <div class="load-area" data-id="${currentUser.id}" ></div>
-                                <div class="process-comm">
-                                    <button class="btn btn-danger" id="loadmore">Load more</button>
-                                </div>
+                                <div class="load-area" data-id="${currentUser.id}"></div>
+
+                                <%--check if there is next page data--%>
+                                <c:if test="${nextPage==-1}">
+                                    <div class="process-comm">
+                                        <h1>No Post yet!</h1>
+                                    </div>
+                                </c:if>
+                                <c:if test="${nextPage==1}">
+                                    <div class="process-comm">
+                                        <button class="btn btn-danger" id="loadmore">Load more</button>
+                                    </div>
+                                </c:if>
                             </div><!--main-ws-sec end-->
                         </div>
 
@@ -322,64 +351,73 @@
     </div><!--post-project-popup end-->
 
 
+
 </div><!--theme-layout end-->
-<script>
-    $(function(){
-        $(".following").click(function(){
-            let userId = $(this).attr('id');
-            let userClass = $(this).attr('class');
-            ajaxSubmitLikes(userId,userClass)
-        });
 
-        function ajaxSubmitLikes(userId,userClass) {
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/follow",
-                data: JSON.stringify(userId),
-                dataType: 'json',
-                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-                success: function (data) {
-                    console.log("SUCCESS : ", data);
-                    $("a#"+userId+"."+userClass).text("Followed");
-                },
-                error: function (e) {
-                    alert("You already follow this user!");
-                }
-            });
-        }
-    });
 
-    $(function unfollow() {
-        $(".unfollowing").click(function () {
-            let userId = $(this).attr('id');
-            let userClass = $(this).attr('class');
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "/unfollow",
-                data: JSON.stringify(userId),
-                dataType: "json",
-                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-                success: function (data) {
-                    console.log("SUCCESS : ", data);
-                    $("a#"+userId+"."+userClass).text("Un-Followed");
-                },
-                error: function (e) {
-                    alert("You are not following this user so you can't un-follow him/her!");
-                }
-            })
-        })
-    });
-</script>
+
+
+
 <jsp:include page="layout/footerScript.jsp"/>
+<%--<script>--%>
+<%--    $(document).ready(function() {--%>
 
-//for loading more posts
-<script src="/js/loadmore.js" type="text/javascript"></script>
+<%--        $(".following").click(function () {--%>
+<%--            let userId = $(this).attr('id');--%>
+<%--            let userClass = $(this).attr('class');--%>
+<%--            ajaxSubmitLikes(userId, userClass)--%>
+<%--        });--%>
+
+<%--        function ajaxSubmitLikes(userId, userClass) {--%>
+<%--            $.ajax({--%>
+<%--                type: "POST",--%>
+<%--                contentType: "application/json",--%>
+<%--                url: "/follow",--%>
+<%--                data: JSON.stringify(userId),--%>
+<%--                dataType: 'json',--%>
+<%--                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},--%>
+<%--                success: function (data) {--%>
+<%--                    console.log("SUCCESS : ", data);--%>
+<%--                    $("a#" + userId + "." + userClass).text("Followed");--%>
+<%--                },--%>
+<%--                error: function (e) {--%>
+<%--                    alert("You already follow this user!");--%>
+<%--                }--%>
+<%--            });--%>
+<%--        }--%>
+<%--    });--%>
+
+<%--    $(function unfollow() {--%>
+<%--        $(".unfollowing").click(function () {--%>
+<%--            let userId = $(this).attr('id');--%>
+<%--            let userClass = $(this).attr('class');--%>
+<%--            $.ajax({--%>
+<%--                type: "POST",--%>
+<%--                contentType: "application/json",--%>
+<%--                url: "/unfollow",--%>
+<%--                data: JSON.stringify(userId),--%>
+<%--                dataType: "json",--%>
+<%--                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},--%>
+<%--                success: function (data) {--%>
+<%--                    console.log("SUCCESS : ", data);--%>
+<%--                    $("a#" + userId + "." + userClass).text("Un-Followed");--%>
+<%--                },--%>
+<%--                error: function (e) {--%>
+<%--                    alert("You are not following this user so you can't un-follow him/her!");--%>
+<%--                }--%>
+<%--            })--%>
+<%--        })--%>
+<%--    });--%>
+<%--</script>--%>
+
+
+
 
 
 <script type="text/javascript">
-    $(function(){
+    $(function () {
+
+
 
         // $(".addlike").click(function(){
         //     var postId = $(this).data("id");
@@ -416,7 +454,7 @@
         //
         // }
 
-        $(".addlike").click(function(){
+        $(".addlike").click(function () {
             var postId = $(this).data("id");
             var post = $(this).data("post");
             // alert("Like me: " + post);
@@ -431,9 +469,9 @@
             var type = isActive ? 'DELETE' : 'POST';
             var finalId = JSON.stringify(postId);
             var contentType = "application/json";
-            if(type == "DELETE"){
-                var likeId = $("."+postId+"-likes-wrap").data("likeid");
-                finalId = { "likeId": likeId, "postId": postId };
+            if (type == "DELETE") {
+                var likeId = $("." + postId + "-likes-wrap").data("likeid");
+                finalId = {"likeId": likeId, "postId": postId};
                 contentType = "application/x-www-form-urlencoded; charset=UTF-8";
             }
 
@@ -453,21 +491,21 @@
                     console.log("isActive", isActive);
 
                     var type = isActive ? 'DELETE' : 'POST';
-                    if(type == "POST"){
-                        var likeIncrement = parseInt($("."+postId+"-likes").html()) + 1;
-                        $("."+postId+"-likes-wrap").data("likeid", data.id);
+                    if (type == "POST") {
+                        var likeIncrement = parseInt($("." + postId + "-likes").html()) + 1;
+                        $("." + postId + "-likes-wrap").data("likeid", data.id);
                         console.log("likeIncrement value inside POST Condition", likeIncrement);
                     } else {
-                        var likeIncrement = parseInt($("."+postId+"-likes").html()) - 1;
+                        var likeIncrement = parseInt($("." + postId + "-likes").html()) - 1;
                         console.log("likeIncrement value inside DELETE Condition", likeIncrement);
                     }
 
-                    $("."+postId+"-likes").text(likeIncrement);
+                    $("." + postId + "-likes").text(likeIncrement);
                     console.log("likeIncrement value", likeIncrement);
-                    if(!$("."+postId+"-likes-wrap").hasClass("active")){
-                        $("."+postId+"-likes-wrap").addClass("active");
-                    }else {
-                        $("."+postId+"-likes-wrap").removeClass("active");
+                    if (!$("." + postId + "-likes-wrap").hasClass("active")) {
+                        $("." + postId + "-likes-wrap").addClass("active");
+                    } else {
+                        $("." + postId + "-likes-wrap").removeClass("active");
                     }
 
                 },
@@ -479,7 +517,7 @@
 
         }
 
-        $(".post-comment").submit(function(e){
+        $(".post-comment").submit(function (e) {
             e.preventDefault();
             var postId = $(this).data("id");
             var post = $(this).data("post");
@@ -489,9 +527,9 @@
 
         function ajaxSubmitComments(postId) {
             console.log("PostID", postId);
-            var text = $("."+postId + "-text").val();
+            var text = $("." + postId + "-text").val();
             console.log("text", text);
-            var commentData = { "postId": postId, "text": text };
+            var commentData = {"postId": postId, "text": text};
             $.ajax({
                 type: "POST",
                 // contentType: "application/json",
@@ -505,14 +543,14 @@
                     console.log("SUCCESS : ", data);
 
                     // To increase comment count
-                    var commentIncrement = parseInt($("."+postId+"-comments").html()) + 1;
-                    $("."+postId+"-comments").text(commentIncrement);
+                    var commentIncrement = parseInt($("." + postId + "-comments").html()) + 1;
+                    $("." + postId + "-comments").text(commentIncrement);
                     console.log("commentIncrement", commentIncrement);
 
                     //To prepend comment
-                    $("."+postId+"-commentlist").prepend("<li>"+ text +"</li>");
+                    $("." + postId + "-commentlist").prepend("<li>" + text + "</li>");
 
-                    $("."+postId+"-text").val("");
+                    $("." + postId + "-text").val("");
 
                 },
                 error: function (e) {
@@ -528,18 +566,8 @@
 </script>
 
 
-<script>
-    // !function (d, s, id) {
-    //     var js, fjs = d.getElementsByTagName(s)[0];
-    //     if (!d.getElementById(id)) {
-    //         js = d.createElement(s);
-    //         js.id = id;
-    //         js.src = 'https://weatherwidget.io/js/widget.min.js';
-    //         fjs.parentNode.insertBefore(js, fjs);
-    //     }
-    // }(document, 'script', 'weatherwidget-io-js');
-</script>
 
+<script src="/js/loadmore.js" type="text/javascript"></script>
 </body>
 
 </html>

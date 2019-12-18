@@ -1,11 +1,14 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.config.RabbitMQDirectConfig;
+import edu.mum.ea.socialnetwork.domain.Messages;
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.PostService;
 import edu.mum.ea.socialnetwork.services.FileUploadService;
 import edu.mum.ea.socialnetwork.services.UserService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +40,7 @@ public class PostController {
         User user = userService.findUserByName(principal.getName());
         return user.getProfile();
     }
+
 
 
     @GetMapping(value = "/post")

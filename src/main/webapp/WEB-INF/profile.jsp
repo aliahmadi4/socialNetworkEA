@@ -75,7 +75,21 @@
                                             <label for="file"><i class="fas fa-camera"></i></label>
                                         </div>--%>
                                     </div><!--user-pro-img end-->
-<%--                                    <div class="user_pro_status">--%>
+                                    <div class="user_pro_status">
+                                        <c:if test="${follow==0}">
+                                            <ul class="flw-hr">
+
+                                                <li><a href="javascript:" title="" class="flww follow" id="${profile.id}">Follow</a></li>
+<%--                                                <li><a href="#" title="" class="hre">Hire</a></li>--%>
+                                            </ul>
+                                        </c:if>
+                                        <c:if test="${follow==1}">
+                                            <ul class="flw-hr">
+
+                                                <li><a href="javascript:" title="" class="flww unfollowing" id="${profile.id}">Unfollow</a></li>
+                                                    <%--                                                <li><a href="#" title="" class="hre">Hire</a></li>--%>
+                                            </ul>
+                                        </c:if>
 <%--                                        <ul class="flw-status">--%>
 <%--                                            <li>--%>
 <%--                                                <span>Following</span>--%>
@@ -86,7 +100,7 @@
 <%--                                                <b>155</b>--%>
 <%--                                            </li>--%>
 <%--                                        </ul>--%>
-<%--                                    </div><!--user_pro_status end-->--%>
+                                    </div><!--user_pro_status end-->
                                     <ul class="social_links">
                                         <c:if test="${profile.address.country.length()>2}" >
                                             <li><i class="la la-globe"></i> From <b>${profile.address.country}</b></li>
@@ -279,7 +293,7 @@
 
 //for loading more posts
 <script src="/js/loadmore.js" type="text/javascript"></script>
-
+<script src="/js/followUnfollow.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 

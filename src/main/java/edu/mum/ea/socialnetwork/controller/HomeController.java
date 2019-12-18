@@ -34,6 +34,13 @@ public class HomeController {
     @GetMapping("/")
     public String post(@ModelAttribute("addPost") Post post, Model model) {
         Page<Post> posts = postService.allPostsPaged(0);
+        if(posts.isEmpty()){
+            model.addAttribute("nextPage", -1);
+        }else if(posts.getContent().size()<5){
+            model.addAttribute("nextPage",0);
+        }else{
+            model.addAttribute("nextPage", 1);
+        }
         model.addAttribute("allPost", posts);
         return "index";
     }

@@ -134,6 +134,8 @@
                                     </div><!--sn-field end-->
                                 </div>
 
+                                <input type="checkbox" name="notifyAllFollowers" checked="true" />Notify all users <br><br>
+
 
                                 <div class="col-lg-12 no-pdd">
                                     <button type="submit" value="submit" style="padding: 10px; background: #4267b2; color: #fff">Add Post</button>
