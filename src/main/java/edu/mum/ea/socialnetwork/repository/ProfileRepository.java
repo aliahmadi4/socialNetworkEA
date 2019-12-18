@@ -2,6 +2,7 @@ package edu.mum.ea.socialnetwork.repository;
 
 import edu.mum.ea.socialnetwork.domain.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,10 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             "profile.id != :id AND profile.id NOT IN (SELECT following FROM  `user_following` WHERE user = :id) " +
             "GROUP BY profile.id", nativeQuery = true)
     List<Profile> unfollowedUsers(@Param("id") Long id);
+
+    public Profile getByUserId(Long userId);
+
+    @Modifying(flushAutomatically = true)
+    @Query("update Profile p set p.noOfDisapprovedPosts = :updatedVal where p.id = :profileId")
+    void setNumberOfDisapprovedPosts(@Param("profileId") Long profileId, @Param("updatedVal") Integer newValue);
 }

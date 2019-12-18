@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -15,7 +16,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Post {
+public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +32,7 @@ public class Post {
     private Integer likeCount = 0;
     private Integer commentCount = 0;
     private boolean unhealthy = false;
+    private boolean notifyAllFollowers = true;
     private boolean enabled = true;
 
 //    @JsonBackReference

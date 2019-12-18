@@ -41,15 +41,16 @@ public class ContentManagement {
     public void handleUnhealthyPost(JoinPoint jp) {
         Long postId = (Long) jp.getArgs()[0];
         boolean isApproved = (boolean)jp.getArgs()[1];
-        adminService.setPostEnabled(postId, isApproved);
-        Post post = postService.findPostById(postId);
-        User user = post.getUser();
-        Long userId = user.getId();
-        Integer noOfDisapprovedPosts = user.getProfile().getNoOfDisapprovedPosts() + 1;
-        adminService.setNumberOfDisapprovedPosts(userId, noOfDisapprovedPosts);
-        if (noOfDisapprovedPosts >= 20) {
-            adminService.setUserEnabled(userId, false);
-            // send email
-        }
+        if(!isApproved)
+        {
+            Post post = postService.findPostById(postId);
+            User user = post.getUser();
+            Long userId = user.getId();
+            Integer noOfDisapprovedPosts = user.getProfile().getNoOfDisapprovedPosts() + 1;
+            adminService.setNumberOfDisapprovedPosts(userId, noOfDisapprovedPosts);
+            if (noOfDisapprovedPosts >= 20) {
+                adminService.setUserEnabled(userId, false);
+                // send email
+            }}
     }
 }

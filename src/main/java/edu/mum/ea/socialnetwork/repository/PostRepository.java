@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByEnabledOrderByCreationDateDesc(boolean enabled);
 
     @Modifying(flushAutomatically = true)
-    @Query("update Post p set p.unhealthy=:isUnhealthy where p.id=:postId")
+    @Query("update Post p set p.unhealthy= :isUnhealthy where p.id= :postId")
     void setPostUnhealthy(@Param("postId") Long postId, @Param("isUnhealthy") boolean isUnhealthy);
 
     List<Post> findAllByUnhealthy(boolean isUnhealthy);
