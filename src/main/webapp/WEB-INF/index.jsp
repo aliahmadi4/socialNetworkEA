@@ -319,10 +319,20 @@
                         <div class="col-lg-12">
                             <form:textarea path="text" placeholder="Write here"></form:textarea>
                         </div>
+
                         <div class="col-lg-12">
+
+                            <div class="toggle-btn" style="top: 0;left: 52px;">
+                                <div class="custom-control custom-switch">
+                                    <form:checkbox  cssClass="custom-control-input" path="notifyAllFollowers" id="notifyAllFollowers" />
+                                    <label class="custom-control-label" for="notifyAllFollowers">Notify all users</label>
+                                </div>
+                            </div>
+                            <br><br>
                             <ul>
+
                                 <li>
-                                    <button class="active" type="submit" value="post">Post</button>
+                                    <button class="active" type="submit" value="post" style="position: relative; z-index:1">Post</button>
                                 </li>
                                 <div class="add-pic-box">
 
