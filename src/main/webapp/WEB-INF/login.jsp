@@ -53,7 +53,7 @@
                         <div class="login-sec">
                             <ul class="sign-control">
                                   <a href="?lang=en_US"><spring:message code="login.lang.en" text="English" /></a> |
-                                  <a href="?lang=fa"><spring:message code="login.lang.fa" text="Persian" /></a>
+                                  <a href="?lang=spa"><spring:message code="login.lang.spa" text="Spanish" /></a>
                             </ul>
 
                             <ul class="sign-control">
