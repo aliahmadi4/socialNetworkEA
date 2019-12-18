@@ -1,12 +1,10 @@
 package edu.mum.ea.socialnetwork.controller;
 
+import edu.mum.ea.socialnetwork.domain.Notification;
 import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
-import edu.mum.ea.socialnetwork.services.PostService;
-import edu.mum.ea.socialnetwork.services.ProfileImageUploadService;
-import edu.mum.ea.socialnetwork.services.ProfileService;
-import edu.mum.ea.socialnetwork.services.UserService;
+import edu.mum.ea.socialnetwork.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +34,9 @@ public class ProfileController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    NotificationService notificationService;
+
     @ModelAttribute("currentUser")
     public Profile currentUser(Principal principal){
         User user = userService.findUserByName(principal.getName());
@@ -62,6 +63,11 @@ public class ProfileController {
         model.addAttribute("follow", follow);
         List<Post> posts = postService.findAllPostForSpecificUser(id);
         model.addAttribute("posts", posts);
+
+        User user = userService.findUserByName(principal.getName());
+        List<Notification> notifications = notificationService.findNotificationByUserId(user.getId());
+        System.out.println("All Notifications"+ notifications.size());
+        model.addAttribute("notifications", notifications);
         return "profile";
     }
 

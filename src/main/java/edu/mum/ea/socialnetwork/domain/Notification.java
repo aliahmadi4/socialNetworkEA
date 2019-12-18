@@ -9,13 +9,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Notification {
+public class Notification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,13 +27,21 @@ public class Notification {
     @DateTimeFormat(pattern = "YYYY-MM-dd")
     private LocalDate creationDate = LocalDate.now();
 
-//    @Valid
-//    @JsonBackReference
-//    @ManyToOne
-//    private User user;
+    @Valid
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST
+            })
+    private User user;
 
     @Valid
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST
+            })
     private Post post;
 }

@@ -81,7 +81,7 @@
             </div>
             <div class="col-lg-1 no-pdd"><spring:message code="PostList.approvePost"/></div>
         </div>
-        <form:form modelAttribute="postList" action="post" method="post">
+        <form:form modelAttribute="postList" method="post">
             <c:forEach var="post" items="${postList}" varStatus="postIndex">
                 <div class="row justify-content-md-center table-bordered" id="PostNo-${post.id}">
                     <div class="col-lg-10 no-pdd tablecell">

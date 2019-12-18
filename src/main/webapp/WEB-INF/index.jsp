@@ -158,7 +158,7 @@
                                 <div class="posts-section">
 
                                     <c:forEach var="post" items="${allPost.content}">
-                                        <div class="post-bar">
+                                        <div class="post-bar>
 
                                             <div class="post_topbar">
                                                 <div class="usy-dt">

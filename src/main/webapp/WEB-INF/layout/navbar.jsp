@@ -30,12 +30,38 @@
         Users
         </a>
         </li>
+        <c:if test="${notifications.size() > 0}">
+        <li>
+        <a class="not-box-open" href="javascript:;" title="">
+        <span><img src="<c:url value='/images'/>/icon7.png" alt=""></span>
+        Notification
+        </a>
+
+        <div class="notification-box noti" id="notification" style="border-bottom: 4px solid #e44d3a">
+            <c:forEach items="${notifications}" var="item">
+            <div class="nott-list">
+                <div class="notfication-details">
+                    <div class="notification-info">
+                        <h3 style="width: 100%;"><a href="/profile/${item.post.user.id}?scrollTo=${item.post.id}" title="" style="text-transform: capitalize;">${item.post.user.profile.firstName} ${item.post.user.profile.lastName}</a> has a new post submitted just now. <br><br></h3>
+                        <span style="left: 10px;">${item.creationDate}</span>
+                    </div>
+                <!--notification-info -->
+                </div>
+            </div>
+            </c:forEach>
+            <!--nott-list end-->
+        </div>
+
+        <!--notification-box end-->
+        </li>
+        </c:if>
 
         <li>
         <a href="<c:url value='/profile/${currentUser.id}'/>" title="">
-        <span><img src="<c:url value='/images'/>/icon7.png" alt=""></span>
+        <span><img src="<c:url value='/images'/>/icon4.png" alt=""></span>
         Profile
         </a>
+
         </li>
 
         <security:authorize access="hasRole('ADMIN')">
@@ -57,11 +83,11 @@
             <spring:message code="Navbar.unhealthyPosts"/>
             </a>
             </li>
-<%--            <li>--%>
-<%--            <a href="<c:url value='/unhealthyWords'/>">--%>
-<%--            <spring:message code="Navbar.unhealthyWords"/>--%>
-<%--            </a>--%>
-<%--            </li>--%>
+            <li>
+            <a href="<c:url value='/unhealthyWords/'/>">
+            <spring:message code="Navbar.unhealthyWords"/>
+            </a>
+            </li>
         </security:authorize>
 
         <%--        <c:if test="${loginedUser.role.equals('ROLE_ADMIN')}">--%>
