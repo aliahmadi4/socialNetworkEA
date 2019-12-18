@@ -411,7 +411,6 @@
 <%--</script>--%>
 
 
-//for loading more posts
 
 
 
