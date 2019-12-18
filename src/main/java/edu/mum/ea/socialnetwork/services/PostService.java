@@ -18,4 +18,6 @@ public interface PostService {
 
     List<Post> searchPosts(String text);
 
+    Page<Post> allFollowingsPostsPaged(Long userId,int pageNo);
+
 }

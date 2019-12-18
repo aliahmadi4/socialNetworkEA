@@ -17,4 +17,6 @@ public interface ProfileService {
 
     // this function return list of profiles that user doesn't follow exclude user's profile itself
     List<Profile> unfollowedUsers(Long id);
+
+    List<Profile> findTop5(Long id);
 }

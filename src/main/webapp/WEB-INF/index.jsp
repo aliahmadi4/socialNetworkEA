@@ -35,6 +35,10 @@
             padding: 0 10px;
         }
 
+        .follow {
+            background-color: white;
+            margin:10px;
+        }
 
     </style>
 </head>
@@ -98,19 +102,26 @@
                                     </div><!--sd-title end-->
                                     <div id="follow" class="suggestions-list">
 
-                                        <%--                                        <c:forEach var="u" items="${userList}">--%>
-                                        <%--                                            <div class="suggestion-usd">--%>
-                                        <%--                                                <img src="<c:url value='/images/profile/${u.profilePic.length()>4 ? u.profilePic : "user.jpg"}'/>"--%>
-                                        <%--                                                     alt=""--%>
-                                        <%--                                                     width="45px" height="45px">--%>
-                                        <%--                                                <div class="sgt-text">--%>
-                                        <%--                                                    <h4>${u.firstName}</h4>--%>
-                                        <%--                                                    <span>${u.lastName}</span>--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                                <span data-id="${u.userId}"><i class="la la-plus"></i></span>--%>
+                                        <c:forEach var="user" items="${suggestions}">
+                                            <div class="suggestion-usd">
+                                                <c:choose>
+                                                    <c:when test="${user.profilePhoto.length()>4}">
+                                                        <img src="/media/profile/${user.profilePhoto}" alt="" height="45px" width="45px">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="<c:url value='/images/user.jpg'/>" alt="" height="45px" width="45px">
+                                                    </c:otherwise>
+                                                </c:choose>
 
-                                        <%--                                            </div>--%>
-                                        <%--                                        </c:forEach>--%>
+                                                <div class="sgt-text">
+                                                    <h4>${user.firstName}</h4>
+                                                    <span>${user.lastName}</span>
+                                                </div>
+<%--                                                <span data-id="${user.id}"><i class="la la-plus"></i></span>--%>
+                                                <span><a href="javascript:" id="${user.id}" class="follow">Follow</a></span>
+
+                                            </div>
+                                        </c:forEach>
 
                                     </div><!--suggestions-list end-->
                                 </div><!--suggestions end-->
@@ -359,60 +370,6 @@
 
 
 <jsp:include page="layout/footerScript.jsp"/>
-<%--<script>--%>
-<%--    $(document).ready(function() {--%>
-
-<%--        $(".following").click(function () {--%>
-<%--            let userId = $(this).attr('id');--%>
-<%--            let userClass = $(this).attr('class');--%>
-<%--            ajaxSubmitLikes(userId, userClass)--%>
-<%--        });--%>
-
-<%--        function ajaxSubmitLikes(userId, userClass) {--%>
-<%--            $.ajax({--%>
-<%--                type: "POST",--%>
-<%--                contentType: "application/json",--%>
-<%--                url: "/follow",--%>
-<%--                data: JSON.stringify(userId),--%>
-<%--                dataType: 'json',--%>
-<%--                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},--%>
-<%--                success: function (data) {--%>
-<%--                    console.log("SUCCESS : ", data);--%>
-<%--                    $("a#" + userId + "." + userClass).text("Followed");--%>
-<%--                },--%>
-<%--                error: function (e) {--%>
-<%--                    alert("You already follow this user!");--%>
-<%--                }--%>
-<%--            });--%>
-<%--        }--%>
-<%--    });--%>
-
-<%--    $(function unfollow() {--%>
-<%--        $(".unfollowing").click(function () {--%>
-<%--            let userId = $(this).attr('id');--%>
-<%--            let userClass = $(this).attr('class');--%>
-<%--            $.ajax({--%>
-<%--                type: "POST",--%>
-<%--                contentType: "application/json",--%>
-<%--                url: "/unfollow",--%>
-<%--                data: JSON.stringify(userId),--%>
-<%--                dataType: "json",--%>
-<%--                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},--%>
-<%--                success: function (data) {--%>
-<%--                    console.log("SUCCESS : ", data);--%>
-<%--                    $("a#" + userId + "." + userClass).text("Un-Followed");--%>
-<%--                },--%>
-<%--                error: function (e) {--%>
-<%--                    alert("You are not following this user so you can't un-follow him/her!");--%>
-<%--                }--%>
-<%--            })--%>
-<%--        })--%>
-<%--    });--%>
-<%--</script>--%>
-
-
-
-
 
 <script type="text/javascript">
     $(function () {
@@ -568,6 +525,7 @@
 
 
 <script src="/js/loadmore.js" type="text/javascript"></script>
+<script src="/js/followUnfollow.js" type="text/javascript"></script>
 </body>
 
 </html>

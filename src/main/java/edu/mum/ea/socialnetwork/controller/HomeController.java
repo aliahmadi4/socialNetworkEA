@@ -4,6 +4,7 @@ import edu.mum.ea.socialnetwork.domain.Post;
 import edu.mum.ea.socialnetwork.domain.Profile;
 import edu.mum.ea.socialnetwork.domain.User;
 import edu.mum.ea.socialnetwork.services.PostService;
+import edu.mum.ea.socialnetwork.services.ProfileService;
 import edu.mum.ea.socialnetwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,16 +25,19 @@ public class HomeController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    ProfileService profileService;
+
 
     @ModelAttribute("currentUser")
-    public Profile profilePic(Principal principal){
+    public Profile currentUser(Principal principal){
         User user = userService.findUserByName(principal.getName());
         return user.getProfile();
     }
 
     @GetMapping("/")
-    public String post(@ModelAttribute("addPost") Post post, Model model) {
-        Page<Post> posts = postService.allPostsPaged(0);
+    public String post(@ModelAttribute("addPost") Post post, Model model, Principal principal) {
+        Page<Post> posts = postService.allFollowingsPostsPaged(currentUser(principal).getId(),0);
         if(posts.isEmpty()){
             model.addAttribute("nextPage", -1);
         }else if(posts.getContent().size()<5){
@@ -42,6 +46,9 @@ public class HomeController {
             model.addAttribute("nextPage", 1);
         }
         model.addAttribute("allPost", posts);
+
+        List<Profile> suggestions = profileService.findTop5(currentUser(principal).getId());
+        model.addAttribute("suggestions", suggestions);
         return "index";
     }
 

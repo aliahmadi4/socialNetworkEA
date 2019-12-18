@@ -78,9 +78,7 @@
                                     <div class="user_pro_status">
                                         <c:if test="${follow==0}">
                                             <ul class="flw-hr">
-
                                                 <li><a href="javascript:" title="" class="flww follow" id="${profile.id}">Follow</a></li>
-<%--                                                <li><a href="#" title="" class="hre">Hire</a></li>--%>
                                             </ul>
                                         </c:if>
                                         <c:if test="${follow==1}">

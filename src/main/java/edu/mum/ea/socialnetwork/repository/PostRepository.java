@@ -1,6 +1,8 @@
 package edu.mum.ea.socialnetwork.repository;
 
 import edu.mum.ea.socialnetwork.domain.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +32,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     //Search posts
     List<Post> findPostsByTextContaining(String text);
+
+//    @Query(value = "select * from `post` ORDER BY ?#{#pageable}", nativeQuery = true)
+//    Page<Post> getAllPostsFromFollowingPaged(Pageable pageable);
+
+    @Query("select p from Post p where p.user.id in (select uf.id from User u join u.following uf where u.id = :id) or p.user.id = :id")
+    Page<Post> getAllPostsFromFollowingPaged2(Long id,Pageable pageable);
+
 }
