@@ -82,11 +82,11 @@
             <spring:message code="Navbar.unhealthyPosts"/>
             </a>
             </li>
-            <%--            <li>--%>
-            <%--            <a href="<c:url value='/unhealthyWords'/>">--%>
-            <%--            <spring:message code="Navbar.unhealthyWords"/>--%>
-            <%--            </a>--%>
-            <%--            </li>--%>
+            <li>
+            <a href="<c:url value='/unhealthyWords/'/>">
+            <spring:message code="Navbar.unhealthyWords"/>
+            </a>
+            </li>
         </security:authorize>
 
         <%--        <c:if test="${loginedUser.role.equals('ROLE_ADMIN')}">--%>

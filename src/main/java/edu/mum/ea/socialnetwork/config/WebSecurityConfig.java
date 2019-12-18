@@ -70,12 +70,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers("/css/**", "/fonts/**", "/js/**", "/lib/**", "/vendor/**", "/media/**", "/images/**", "/login/**", "/register/**", "/errorMessages/**", "/messages/**","/authenticate").permitAll()
+                .antMatchers("/css/**", "/fonts/**", "/js/**", "/lib/**", "/vendor/**", "/media/**", "/images/**", "/login/**", "/register/**", "/errorMessages/**", "/messages/**", "/authenticate").permitAll()
                 .antMatchers().hasRole("USER")
-                .antMatchers("/admin/deactivatedUsers", "/admin/manageUserRoles").hasRole("ADMIN")
+                .antMatchers("/", "/logout", "/profile/**").hasAnyRole("ADMIN", "USER", "MARKETING_MANAGER", "CONTENT_MANAGER")
                 .antMatchers("/unhealthyWords/**").hasAnyRole("ADMIN", "CONTENT_MANAGER")
                 .antMatchers("/admin/unhealthyPosts").hasAnyRole("ADMIN", "CONTENT_MANAGER")
-                .antMatchers("/", "/logout", "/profile/**").hasAnyRole("ADMIN", "USER", "MARKETING_MANAGER")
+                .antMatchers("/admin/deactivatedUsers", "/admin/manageUserRoles").hasRole("ADMIN")
 
 
                 .anyRequest().authenticated()
@@ -86,18 +86,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
-            .permitAll()
-            .and()
-            .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/login?logout")
-            .permitAll()
-            .and()
-            .csrf().disable()
-            .exceptionHandling()
-            .accessDeniedPage("/denied")
-            .and()
-            .sessionManagement();
+                .permitAll()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .csrf().disable()
+                .exceptionHandling()
+                .accessDeniedPage("/denied")
+                .and()
+                .sessionManagement();
 //            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
