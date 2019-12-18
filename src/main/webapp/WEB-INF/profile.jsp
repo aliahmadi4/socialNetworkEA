@@ -27,6 +27,30 @@
         height: 40px;
         padding: 0 10px;
     }
+
+    @-webkit-keyframes change-color {
+        0%   { background-color: #d6301b; }
+        100% { background-color: #ffffff; }
+    }
+    @-moz-keyframes change-color {
+        0%   { background-color: #d6301b; }
+        100% { background-color: #ffffff; }
+    }
+    @-o-keyframes change-color {
+        0%   { background-color: #d6301b; }
+        100% { background-color: #ffffff; }
+    }
+    @keyframes change-color {
+        0%   { background-color: #d6301b; }
+        100% { background-color: #ffffff; }
+    }
+
+    .animated {
+        -webkit-animation: change-color 8s forwards; /* Safari 4+ */
+        -moz-animation:    change-color 8s forwards; /* Fx 5+ */
+        -o-animation:      change-color 8s forwards; /* Opera 12+ */
+        animation:         change-color 8s forwards; /* IE 10+ */
+    }
 </style>
 <body>
 
@@ -160,7 +184,7 @@
                                 <div class="product-feed-tab current" id="feed-dd">
                                     <div class="posts-section">
                                         <c:forEach var="post" items="${posts}">
-                                            <div class="post-bar">
+                                            <div class="post-bar ${post.id}-wrapper">
 
                                                 <div class="post_topbar">
                                                     <div class="usy-dt">
@@ -299,6 +323,19 @@
 
     $(function() {
 
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+
+        var scrollTo = $.urlParam('scrollTo');
+        console.log(scrollTo);
+
+        $("html, body").delay(0).animate({
+            scrollTop: $("."+scrollTo+"-wrapper").offset().top
+        }, 1500);
+
+        $("."+scrollTo+"-wrapper").addClass("animated");
         // $(".addlike").click(function(){
         //     var postId = $(this).data("id");
         //     var post = $(this).data("post");
@@ -440,6 +477,8 @@
             });
         }
     });
+
+
 
 
 </script>

@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
                 System.out.println("User NAme is :" + u.getUsername());
                 Notification notification = new Notification();
                 notification.setPost(post);
-                notification.setUser(post.getUser());
+                notification.setUser(u);
                 notificationService.save(notification);
                 rabbitTemplate.convertAndSend(RabbitMQDirectConfig.EXCHANGE, RabbitMQDirectConfig.ROUTING_KEY, notification);
             });

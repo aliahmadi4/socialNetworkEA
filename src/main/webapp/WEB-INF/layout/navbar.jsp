@@ -42,7 +42,8 @@
             <div class="nott-list">
                 <div class="notfication-details">
                     <div class="notification-info">
-                        <h3><a href="/profile/${item.user.id}" title="" style="text-transform: capitalize;">${item.user.username}</a> has a new post.</h3>
+                        <h3 style="width: 100%;"><a href="/profile/${item.post.user.id}?scrollTo=${item.post.id}" title="" style="text-transform: capitalize;">${item.post.user.profile.firstName} ${item.post.user.profile.lastName}</a> has a new post submitted just now. <br><br></h3>
+                        <span style="left: 10px;">${item.creationDate}</span>
                     </div>
                 <!--notification-info -->
                 </div>
