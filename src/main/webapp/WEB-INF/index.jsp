@@ -338,7 +338,6 @@
                             <br><br>
                             <ul>
                                 <li>
-                                    <button class="active" type="submit" value="post">Post</button>
                                     <button class="active" type="submit" value="post" style="position: relative; z-index:1"><spring:message code="index.post" text="Post"/></button>
                                 </li>
                                 <div class="add-pic-box">

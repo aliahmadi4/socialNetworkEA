@@ -254,7 +254,8 @@
                                                     <form class="post-comment" data-id="${post.id}" data-post="${post}">
                                                         <div class="cp-field">
                                                             <div class="cpp-fiel">
-                                                                <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="write your comment here" required   />
+                                                                <spring:message code="index.commentPlaceholder" text="write your comment here"  var="commentPlaceholder"/>
+                                                                <input type="text" name="text" class="comment-text ${post.id}-text" placeholder="${commentPlaceholder}" required   />
                                                             </div>
                                                         </div>
                                                         <input type="submit" class="comment-submit" value="Submit" style="display: none">
