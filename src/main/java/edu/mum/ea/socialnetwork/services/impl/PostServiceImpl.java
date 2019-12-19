@@ -45,7 +45,7 @@ public class PostServiceImpl implements PostService {
                 notification.setPost(post);
                 notification.setUser(u);
                 notificationService.save(notification);
-                rabbitTemplate.convertAndSend(RabbitMQDirectConfig.EXCHANGE, RabbitMQDirectConfig.ROUTING_KEY, notification);
+             //   rabbitTemplate.convertAndSend(RabbitMQDirectConfig.EXCHANGE, RabbitMQDirectConfig.ROUTING_KEY, notification);
             });
 
 
