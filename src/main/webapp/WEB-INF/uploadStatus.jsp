@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +8,7 @@
 <body>
 <jsp:include page="layout/navbar.jsp"/>
 
-<h1>Spring Boot - Upload Status</h1>
+<h1><spring:message code="upload.title" text="Spring Boot - Upload Status" /> </h1>
 
 <div th:if="${message}">
     <h2 th:text="${message}"/>

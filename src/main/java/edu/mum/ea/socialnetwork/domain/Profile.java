@@ -58,7 +58,6 @@ public class Profile implements Serializable {
     private String profilePhoto;
 
     @Size(min = 3, max = 30)
-    @NotNull
     private String occupation;
 
 

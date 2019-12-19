@@ -196,48 +196,48 @@
                                     </form:form>
                                 </div><!--dff-tab end-->
                                 <div class="dff-tab" id="tab-4">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="text" name="company-name" placeholder="Company Name">
-                                                    <i class="la la-building"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="text" name="country" placeholder="Country">
-                                                    <i class="la la-globe"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="password" name="password" placeholder="Password">
-                                                    <i class="la la-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="password" name="repeat-password" placeholder="Repeat Password">
-                                                    <i class="la la-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="checky-sec st2">
-                                                    <div class="fgt-sec">
-                                                        <input type="checkbox" name="cc" id="c3">
-                                                        <label for="c3">
-                                                            <span></span>
-                                                        </label>
-                                                        <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
-                                                    </div><!--fgt-sec end-->
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <button type="submit" value="submit">Get Started</button>
-                                            </div>
-                                        </div>
-                                    </form>
+<%--                                    <form>--%>
+<%--                                        <div class="row">--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <div class="sn-field">--%>
+<%--                                                    <input type="text" name="company-name" placeholder="Company Name">--%>
+<%--                                                    <i class="la la-building"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <div class="sn-field">--%>
+<%--                                                    <input type="text" name="country" placeholder="Country">--%>
+<%--                                                    <i class="la la-globe"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <div class="sn-field">--%>
+<%--                                                    <input type="password" name="password" placeholder="Password">--%>
+<%--                                                    <i class="la la-lock"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <div class="sn-field">--%>
+<%--                                                    <input type="password" name="repeat-password" placeholder="Repeat Password">--%>
+<%--                                                    <i class="la la-lock"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <div class="checky-sec st2">--%>
+<%--                                                    <div class="fgt-sec">--%>
+<%--                                                        <input type="checkbox" name="cc" id="c3">--%>
+<%--                                                        <label for="c3">--%>
+<%--                                                            <span></span>--%>
+<%--                                                        </label>--%>
+<%--                                                        <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>--%>
+<%--                                                    </div><!--fgt-sec end-->--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-lg-12 no-pdd">--%>
+<%--                                                <button type="submit" value="submit">Get Started</button>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </form>--%>
                                 </div><!--dff-tab end-->
                             </div>
                         </div><!--login-sec end-->

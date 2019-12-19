@@ -92,8 +92,7 @@
                     <div class="col-lg-2 no-pdd"></div>
                     <div class="col-lg-6 no-pdd tablecell">
                         <c:out value="${i.word}"/> (<a href="javascript:;" class="deleteUnhealthyWord"
-                                                       data-id="${i.word}"><spring:message
-                            code="WordList.delete"/></a>)
+                                                       data-id="${i.word}"><spring:message code="WordList.delete"/></a>)
                     </div>
                 </div>
             </c:forEach>

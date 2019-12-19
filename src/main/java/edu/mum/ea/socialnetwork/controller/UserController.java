@@ -40,11 +40,13 @@ public class UserController {
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            System.out.println("if condition tesssssssssssssst");
+            System.out.println(bindingResult.toString());
             return "login";
         }
         user.setRole(Role.ROLE_USER);
         userService.save(user);
-        System.out.println("testtttttttttt");
+        System.out.println("tesssssssssssssst");
         return "redirect:/login";
     }
 

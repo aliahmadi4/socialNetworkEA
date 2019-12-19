@@ -76,7 +76,7 @@
         <div class="save-stngs pd2">
             <ul>
                 <li>
-                    <button type="submit" id="saveInfo">Save</button>
+                    <button type="submit" id="saveInfo"><spring:message code="editProfile.save" text="Save" />  </button>
                 </li>
 
             </ul>

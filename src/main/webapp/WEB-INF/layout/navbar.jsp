@@ -72,25 +72,25 @@
         <security:authorize access="hasRole('ADMIN')">
             <li>
             <a href ="<c:url value='/admin/deactivatedUsers'/>">
-            <spring:message code="Navbar.deactivatedUsers"/>
+            <spring:message code="navbar.deactivatedUsers"/>
             </a>
             </li>
 
             <li>
             <a href="<c:url value='/admin/manageUserRoles'/>">
-            <spring:message code="Navbar.manageRoles"/>
+            <spring:message code="navbar.manageRoles"/>
             </a>
             </li>
         </security:authorize>
         <security:authorize access="hasAnyRole('ADMIN','CONTENT_MANAGER')">
             <li>
             <a href="<c:url value='/admin/unhealthyPosts'/>">
-            <spring:message code="Navbar.unhealthyPosts"/>
+            <spring:message code="navbar.unhealthyPosts"/>
             </a>
             </li>
             <li>
             <a href="<c:url value='/unhealthyWords/'/>">
-            <spring:message code="Navbar.unhealthyWords"/>
+            <spring:message code="navbar.unhealthyWords"/>
             </a>
             </li>
         </security:authorize>
